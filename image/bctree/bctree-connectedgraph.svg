@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" version="1.1" baseProfile="full" viewBox="33.5 33.5 419 399">
+	<g>
+		<g>
+			<path fill="none" d=" M416,342 L386,300" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M354,256 L322,208" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M386,300 L354,256" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M446,136 L396,142" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M264,72 L298,110" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M328,40 L334,88" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M416,70 L380,104" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M40,426 L66,398" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M104,372 L142,344" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M66,398 L104,372" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M182,310 L220,270" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M142,344 L182,310" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M172,258 L220,270" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M220,270 L270,238" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M270,238 L322,208" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M322,208 L340,144" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M312,254 L322,208" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M370,216 L322,208" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M334,88 L340,144" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M380,104 L340,144" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M396,142 L340,144" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M298,110 L340,144" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+	</g>
+	<g>
+		<rect x="411" y="337" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="406" y="342" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">24</text>
+	</g>
+	<g>
+		<rect x="349" y="251" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="344" y="256" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">1</text>
+	</g>
+	<g>
+		<ellipse cx="386" cy="300" rx="3" ry="3" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="376" y="300" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">10</text>
+	</g>
+	<g>
+		<rect x="441" y="131" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="436" y="136" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">20</text>
+	</g>
+	<g>
+		<rect x="259" y="67" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="254" y="72" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">34</text>
+	</g>
+	<g>
+		<rect x="323" y="35" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="318" y="40" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">29</text>
+	</g>
+	<g>
+		<rect x="411" y="65" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="406" y="70" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">17</text>
+	</g>
+	<g>
+		<rect x="35" y="421" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="30" y="426" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">33</text>
+	</g>
+	<g>
+		<rect x="99" y="367" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="94" y="372" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">8</text>
+	</g>
+	<g>
+		<ellipse cx="66" cy="398" rx="3" ry="3" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="56" y="398" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">31</text>
+	</g>
+	<g>
+		<rect x="177" y="305" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="172" y="310" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">10</text>
+	</g>
+	<g>
+		<ellipse cx="142" cy="344" rx="3" ry="3" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="132" y="344" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">15</text>
+	</g>
+	<g>
+		<rect x="167" y="253" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="162" y="258" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">26</text>
+	</g>
+	<g>
+		<ellipse cx="220" cy="270" rx="3" ry="3" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="210" y="270" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">12</text>
+	</g>
+	<g>
+		<rect x="265" y="233" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="260" y="238" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">14</text>
+	</g>
+	<g>
+		<ellipse cx="322" cy="208" rx="3" ry="3" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="312" y="208" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">6</text>
+	</g>
+	<g>
+		<rect x="307" y="249" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="302" y="254" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">14</text>
+	</g>
+	<g>
+		<rect x="365" y="211" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="360" y="216" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">30</text>
+	</g>
+	<g>
+		<rect x="335" y="139" width="10" height="10" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="330" y="144" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">32</text>
+	</g>
+	<g>
+		<ellipse cx="334" cy="88" rx="3" ry="3" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="324" y="88" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">9</text>
+	</g>
+	<g>
+		<ellipse cx="380" cy="104" rx="3" ry="3" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="370" y="104" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">11</text>
+	</g>
+	<g>
+		<ellipse cx="396" cy="142" rx="3" ry="3" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="386" y="142" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">5</text>
+	</g>
+	<g>
+		<ellipse cx="298" cy="110" rx="3" ry="3" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="288" y="110" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">22</text>
+	</g>
+</svg>

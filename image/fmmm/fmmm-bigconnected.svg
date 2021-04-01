@@ -1,0 +1,1355 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" version="1.1" baseProfile="full" viewBox="33.5 33.5 429 393">
+	<g>
+		<g>
+			<path fill="none" d=" M186,260 L206,278" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M186,260 L244,312" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M186,260 L150,306" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M186,260 L176,182" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M186,260 L168,312" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M206,278 L202,184" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M206,278 L286,308" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M206,278 L168,344" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M206,278 L210,334" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M206,278 L146,274" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M206,278 L168,312" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M244,312 L304,314" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M244,312 L252,252" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M244,312 L210,324" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M244,312 L280,328" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M244,312 L264,380" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M304,314 L340,308" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M304,314 L350,346" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M304,314 L244,350" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M304,314 L332,246" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M252,252 L194,282" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M252,252 L266,194" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M252,252 L260,210" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M252,252 L256,224" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M252,252 L312,222" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M252,252 L208,256" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M252,252 L220,248" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M210,324 L280,328" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M210,324 L154,284" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M210,324 L220,284" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M202,184 L224,226" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M202,184 L192,130" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M202,184 L254,144" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M202,184 L168,126" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M202,184 L148,158" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M202,184 L176,182" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M202,184 L266,194" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M202,184 L186,236" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M202,184 L160,138" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M202,184 L238,142" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M280,328 L324,292" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M280,328 L346,302" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M280,328 L240,372" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M280,328 L250,280" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M194,282 L122,272" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M194,282 L150,306" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M194,282 L258,288" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M324,292 L366,266" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M324,292 L272,262" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M324,292 L350,346" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M324,292 L294,236" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M224,226 L200,146" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M224,226 L174,276" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M224,226 L250,280" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M224,226 L288,274" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M192,130 L266,144" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M192,130 L136,130" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M192,130 L128,128" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M192,130 L198,100" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M192,130 L182,90" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M254,144 L224,180" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M254,144 L208,124" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M254,144 L314,144" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M254,144 L300,168" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M340,308 L284,292" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M340,308 L316,264" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M168,126 L136,130" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M168,126 L182,90" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M168,126 L138,84" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M224,180 L282,196" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M224,180 L288,170" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M224,180 L154,208" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M266,144 L330,172" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M266,144 L260,210" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M266,144 L292,88" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M266,144 L222,152" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M136,130 L200,146" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M136,130 L108,86" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M136,130 L126,200" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M136,130 L90,90" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M366,266 L388,318" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M366,266 L312,222" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M128,128 L118,178" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M154,284 L92,308" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M154,284 L206,230" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M154,284 L92,290" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M346,302 L274,316" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M346,302 L402,306" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M346,302 L404,256" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M220,284 L180,230" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M220,284 L274,316" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M388,318 L424,356" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M388,318 L334,318" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M200,146 L190,84" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M200,146 L248,104" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M180,230 L226,264" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M180,230 L146,274" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M180,230 L154,208" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M180,230 L172,160" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M208,124 L176,182" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M208,124 L256,118" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M122,272 L120,310" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M122,272 L174,276" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M122,272 L126,200" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M122,272 L128,326" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M122,272 L62,270" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M122,272 L150,326" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M122,272 L64,284" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M284,292 L322,320" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M284,292 L320,242" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M284,292 L256,224" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M284,292 L244,350" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M284,292 L234,306" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M284,292 L284,332" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M272,262 L320,242" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M272,262 L208,256" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M148,158 L166,198" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M282,196 L294,138" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M282,196 L296,268" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M282,196 L320,242" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M282,196 L322,202" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M282,196 L238,142" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M120,310 L152,254" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M120,310 L128,364" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M294,138 L254,170" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M274,316 L258,288" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M274,316 L264,332" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M274,316 L210,334" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M150,306 L168,344" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M150,306 L182,288" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M288,170 L234,204" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M288,170 L312,222" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M288,170 L346,134" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M350,346 L386,384" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M108,86 L146,56" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M174,276 L176,338" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M226,264 L234,334" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M226,264 L186,218" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M226,264 L278,224" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M314,144 L378,158" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M314,144 L254,170" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M330,172 L332,246" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M330,172 L374,136" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M176,182 L124,148" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M176,182 L222,152" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M300,168 L278,224" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M266,194 L306,156" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M266,194 L322,202" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M198,100 L238,142" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M198,100 L198,48" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M198,100 L172,160" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M296,268 L322,320" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M296,268 L260,210" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M296,268 L264,332" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M296,268 L334,318" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M240,372 L248,410" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M240,372 L174,374" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M240,372 L284,332" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M378,158 L416,198" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M286,308 L320,242" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M286,308 L302,374" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M286,308 L332,350" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M126,200 L186,218" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M152,254 L166,198" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M152,254 L220,248" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M260,210 L254,170" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M260,210 L206,230" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M260,210 L220,248" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M186,236 L256,224" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M186,236 L234,204" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M186,236 L118,278" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M92,308 L42,316" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M92,308 L110,262" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M92,308 L110,352" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M320,242 L378,228" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M320,242 L344,174" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M402,306 L364,308" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M258,288 L316,264" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M256,224 L324,258" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M256,224 L222,152" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M128,364 L168,344" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M128,364 L100,410" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M128,364 L176,338" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M404,256 L456,240" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M404,256 L416,198" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M264,332 L208,346" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M118,178 L166,198" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M118,178 L144,228" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M42,316 L64,284" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M234,204 L166,198" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M234,204 L294,236" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M248,410 L244,350" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M168,344 L244,350" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M168,344 L208,346" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M168,344 L116,324" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M168,344 L110,366" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M168,344 L110,352" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M248,104 L250,48" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M248,104 L312,118" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M248,104 L238,142" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M248,104 L222,152" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M210,334 L150,326" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M312,222 L374,202" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M312,222 L276,274" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M312,222 L260,184" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M182,288 L208,346" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M182,288 L186,218" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M110,262 L128,326" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M110,262 L154,208" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M110,262 L120,216" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M332,246 L288,274" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M332,246 L294,236" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M364,308 L324,258" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M364,308 L332,350" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M364,308 L384,344" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M208,256 L186,218" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M208,256 L234,306" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M208,256 L144,228" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M344,174 L312,118" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M146,274 L116,324" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M146,274 L144,228" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M302,374 L294,420" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M174,374 L128,326" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M234,334 L176,338" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M234,334 L292,360" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M110,366 L128,326" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M110,366 L78,328" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M90,90 L54,64" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M294,420 L264,380" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M256,118 L260,184" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M346,134 L388,102" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M306,156 L254,170" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M306,156 L322,202" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M254,170 L186,218" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M206,230 L260,184" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M182,90 L146,56" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M182,90 L222,152" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M182,90 L172,40" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M186,218 L120,216" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M322,202 L316,264" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M276,274 L284,332" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M276,274 L220,248" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M288,274 L278,224" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M288,274 L284,332" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M288,274 L334,318" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M118,278 L78,328" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M424,356 L384,344" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M384,344 L334,318" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M78,328 L40,354" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+		<g>
+			<path fill="none" d=" M334,318 L292,360" stroke="#FF0000" stroke-width="0.400000px" />
+		</g>
+	</g>
+	<g>
+		<ellipse cx="186" cy="260" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="176" y="260" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">0</text>
+	</g>
+	<g>
+		<ellipse cx="206" cy="278" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="196" y="278" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">1</text>
+	</g>
+	<g>
+		<ellipse cx="244" cy="312" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="234" y="312" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">2</text>
+	</g>
+	<g>
+		<ellipse cx="304" cy="314" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="294" y="314" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">3</text>
+	</g>
+	<g>
+		<ellipse cx="252" cy="252" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="242" y="252" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">4</text>
+	</g>
+	<g>
+		<ellipse cx="210" cy="324" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="200" y="324" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">5</text>
+	</g>
+	<g>
+		<ellipse cx="202" cy="184" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="192" y="184" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">6</text>
+	</g>
+	<g>
+		<ellipse cx="280" cy="328" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="270" y="328" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">7</text>
+	</g>
+	<g>
+		<ellipse cx="194" cy="282" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="184" y="282" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">8</text>
+	</g>
+	<g>
+		<ellipse cx="324" cy="292" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="314" y="292" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">9</text>
+	</g>
+	<g>
+		<ellipse cx="224" cy="226" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="214" y="226" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">10</text>
+	</g>
+	<g>
+		<ellipse cx="192" cy="130" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="182" y="130" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">11</text>
+	</g>
+	<g>
+		<ellipse cx="254" cy="144" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="244" y="144" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">12</text>
+	</g>
+	<g>
+		<ellipse cx="340" cy="308" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="330" y="308" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">13</text>
+	</g>
+	<g>
+		<ellipse cx="168" cy="126" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="158" y="126" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">14</text>
+	</g>
+	<g>
+		<ellipse cx="224" cy="180" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="214" y="180" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">15</text>
+	</g>
+	<g>
+		<ellipse cx="266" cy="144" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="256" y="144" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">16</text>
+	</g>
+	<g>
+		<ellipse cx="136" cy="130" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="126" y="130" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">17</text>
+	</g>
+	<g>
+		<ellipse cx="366" cy="266" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="356" y="266" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">18</text>
+	</g>
+	<g>
+		<ellipse cx="128" cy="128" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="118" y="128" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">19</text>
+	</g>
+	<g>
+		<ellipse cx="154" cy="284" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="144" y="284" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">20</text>
+	</g>
+	<g>
+		<ellipse cx="346" cy="302" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="336" y="302" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">21</text>
+	</g>
+	<g>
+		<ellipse cx="220" cy="284" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="210" y="284" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">22</text>
+	</g>
+	<g>
+		<ellipse cx="388" cy="318" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="378" y="318" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">23</text>
+	</g>
+	<g>
+		<ellipse cx="200" cy="146" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="190" y="146" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">24</text>
+	</g>
+	<g>
+		<ellipse cx="180" cy="230" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="170" y="230" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">25</text>
+	</g>
+	<g>
+		<ellipse cx="208" cy="124" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="198" y="124" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">26</text>
+	</g>
+	<g>
+		<ellipse cx="122" cy="272" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="112" y="272" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">27</text>
+	</g>
+	<g>
+		<ellipse cx="284" cy="292" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="274" y="292" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">28</text>
+	</g>
+	<g>
+		<ellipse cx="272" cy="262" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="262" y="262" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">29</text>
+	</g>
+	<g>
+		<ellipse cx="148" cy="158" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="138" y="158" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">30</text>
+	</g>
+	<g>
+		<ellipse cx="282" cy="196" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="272" y="196" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">31</text>
+	</g>
+	<g>
+		<ellipse cx="120" cy="310" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="110" y="310" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">32</text>
+	</g>
+	<g>
+		<ellipse cx="294" cy="138" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="284" y="138" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">33</text>
+	</g>
+	<g>
+		<ellipse cx="274" cy="316" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="264" y="316" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">34</text>
+	</g>
+	<g>
+		<ellipse cx="150" cy="306" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="140" y="306" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">35</text>
+	</g>
+	<g>
+		<ellipse cx="288" cy="170" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="278" y="170" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">36</text>
+	</g>
+	<g>
+		<ellipse cx="350" cy="346" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="340" y="346" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">37</text>
+	</g>
+	<g>
+		<ellipse cx="108" cy="86" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="98" y="86" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">38</text>
+	</g>
+	<g>
+		<ellipse cx="174" cy="276" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="164" y="276" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">39</text>
+	</g>
+	<g>
+		<ellipse cx="226" cy="264" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="216" y="264" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">40</text>
+	</g>
+	<g>
+		<ellipse cx="314" cy="144" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="304" y="144" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">41</text>
+	</g>
+	<g>
+		<ellipse cx="330" cy="172" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="320" y="172" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">42</text>
+	</g>
+	<g>
+		<ellipse cx="176" cy="182" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="166" y="182" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">43</text>
+	</g>
+	<g>
+		<ellipse cx="300" cy="168" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="290" y="168" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">44</text>
+	</g>
+	<g>
+		<ellipse cx="266" cy="194" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="256" y="194" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">45</text>
+	</g>
+	<g>
+		<ellipse cx="198" cy="100" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="188" y="100" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">46</text>
+	</g>
+	<g>
+		<ellipse cx="296" cy="268" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="286" y="268" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">47</text>
+	</g>
+	<g>
+		<ellipse cx="190" cy="84" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="180" y="84" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">48</text>
+	</g>
+	<g>
+		<ellipse cx="322" cy="320" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="312" y="320" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">49</text>
+	</g>
+	<g>
+		<ellipse cx="240" cy="372" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="230" y="372" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">50</text>
+	</g>
+	<g>
+		<ellipse cx="378" cy="158" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="368" y="158" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">51</text>
+	</g>
+	<g>
+		<ellipse cx="286" cy="308" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="276" y="308" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">52</text>
+	</g>
+	<g>
+		<ellipse cx="126" cy="200" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="116" y="200" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">53</text>
+	</g>
+	<g>
+		<ellipse cx="152" cy="254" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="142" y="254" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">54</text>
+	</g>
+	<g>
+		<ellipse cx="260" cy="210" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="250" y="210" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">55</text>
+	</g>
+	<g>
+		<ellipse cx="186" cy="236" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="176" y="236" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">56</text>
+	</g>
+	<g>
+		<ellipse cx="92" cy="308" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="82" y="308" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">57</text>
+	</g>
+	<g>
+		<ellipse cx="320" cy="242" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="310" y="242" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">58</text>
+	</g>
+	<g>
+		<ellipse cx="402" cy="306" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="392" y="306" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">59</text>
+	</g>
+	<g>
+		<ellipse cx="258" cy="288" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="248" y="288" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">60</text>
+	</g>
+	<g>
+		<ellipse cx="256" cy="224" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="246" y="224" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">61</text>
+	</g>
+	<g>
+		<ellipse cx="128" cy="364" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="118" y="364" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">62</text>
+	</g>
+	<g>
+		<ellipse cx="404" cy="256" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="394" y="256" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">63</text>
+	</g>
+	<g>
+		<ellipse cx="264" cy="332" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="254" y="332" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">64</text>
+	</g>
+	<g>
+		<ellipse cx="118" cy="178" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="108" y="178" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">65</text>
+	</g>
+	<g>
+		<ellipse cx="124" cy="148" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="114" y="148" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">66</text>
+	</g>
+	<g>
+		<ellipse cx="42" cy="316" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="32" y="316" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">67</text>
+	</g>
+	<g>
+		<ellipse cx="234" cy="204" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="224" y="204" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">68</text>
+	</g>
+	<g>
+		<ellipse cx="248" cy="410" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="238" y="410" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">69</text>
+	</g>
+	<g>
+		<ellipse cx="168" cy="344" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="158" y="344" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">70</text>
+	</g>
+	<g>
+		<ellipse cx="248" cy="104" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="238" y="104" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">71</text>
+	</g>
+	<g>
+		<ellipse cx="210" cy="334" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="200" y="334" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">72</text>
+	</g>
+	<g>
+		<ellipse cx="312" cy="222" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="302" y="222" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">73</text>
+	</g>
+	<g>
+		<ellipse cx="244" cy="350" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="234" y="350" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">74</text>
+	</g>
+	<g>
+		<ellipse cx="386" cy="384" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="376" y="384" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">75</text>
+	</g>
+	<g>
+		<ellipse cx="378" cy="228" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="368" y="228" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">76</text>
+	</g>
+	<g>
+		<ellipse cx="182" cy="288" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="172" y="288" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">77</text>
+	</g>
+	<g>
+		<ellipse cx="110" cy="262" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="100" y="262" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">78</text>
+	</g>
+	<g>
+		<ellipse cx="332" cy="246" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="322" y="246" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">79</text>
+	</g>
+	<g>
+		<ellipse cx="364" cy="308" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="354" y="308" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">80</text>
+	</g>
+	<g>
+		<ellipse cx="250" cy="280" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="240" y="280" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">81</text>
+	</g>
+	<g>
+		<ellipse cx="208" cy="256" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="198" y="256" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">82</text>
+	</g>
+	<g>
+		<ellipse cx="324" cy="258" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="314" y="258" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">83</text>
+	</g>
+	<g>
+		<ellipse cx="208" cy="346" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="198" y="346" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">84</text>
+	</g>
+	<g>
+		<ellipse cx="292" cy="88" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="282" y="88" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">85</text>
+	</g>
+	<g>
+		<ellipse cx="344" cy="174" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="334" y="174" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">86</text>
+	</g>
+	<g>
+		<ellipse cx="146" cy="274" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="136" y="274" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">87</text>
+	</g>
+	<g>
+		<ellipse cx="302" cy="374" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="292" y="374" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">88</text>
+	</g>
+	<g>
+		<ellipse cx="174" cy="374" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="164" y="374" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">89</text>
+	</g>
+	<g>
+		<ellipse cx="234" cy="334" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="224" y="334" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">90</text>
+	</g>
+	<g>
+		<ellipse cx="116" cy="324" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="106" y="324" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">91</text>
+	</g>
+	<g>
+		<ellipse cx="166" cy="198" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="156" y="198" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">92</text>
+	</g>
+	<g>
+		<ellipse cx="110" cy="366" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="100" y="366" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">93</text>
+	</g>
+	<g>
+		<ellipse cx="90" cy="90" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="80" y="90" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">94</text>
+	</g>
+	<g>
+		<ellipse cx="294" cy="420" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="284" y="420" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">95</text>
+	</g>
+	<g>
+		<ellipse cx="256" cy="118" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="246" y="118" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">96</text>
+	</g>
+	<g>
+		<ellipse cx="346" cy="134" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="336" y="134" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">97</text>
+	</g>
+	<g>
+		<ellipse cx="374" cy="202" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="364" y="202" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">98</text>
+	</g>
+	<g>
+		<ellipse cx="128" cy="326" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="118" y="326" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">99</text>
+	</g>
+	<g>
+		<ellipse cx="306" cy="156" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="296" y="156" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">100</text>
+	</g>
+	<g>
+		<ellipse cx="168" cy="312" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="158" y="312" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">101</text>
+	</g>
+	<g>
+		<ellipse cx="100" cy="410" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="90" y="410" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">102</text>
+	</g>
+	<g>
+		<ellipse cx="254" cy="170" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="244" y="170" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">103</text>
+	</g>
+	<g>
+		<ellipse cx="62" cy="270" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="52" y="270" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">104</text>
+	</g>
+	<g>
+		<ellipse cx="388" cy="102" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="378" y="102" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">105</text>
+	</g>
+	<g>
+		<ellipse cx="206" cy="230" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="196" y="230" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">106</text>
+	</g>
+	<g>
+		<ellipse cx="250" cy="48" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="240" y="48" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">107</text>
+	</g>
+	<g>
+		<ellipse cx="92" cy="290" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="82" y="290" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">108</text>
+	</g>
+	<g>
+		<ellipse cx="182" cy="90" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="172" y="90" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">109</text>
+	</g>
+	<g>
+		<ellipse cx="186" cy="218" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="176" y="218" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">110</text>
+	</g>
+	<g>
+		<ellipse cx="154" cy="208" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="144" y="208" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">111</text>
+	</g>
+	<g>
+		<ellipse cx="322" cy="202" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="312" y="202" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">112</text>
+	</g>
+	<g>
+		<ellipse cx="456" cy="240" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="446" y="240" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">113</text>
+	</g>
+	<g>
+		<ellipse cx="264" cy="380" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="254" y="380" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">114</text>
+	</g>
+	<g>
+		<ellipse cx="332" cy="350" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="322" y="350" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">115</text>
+	</g>
+	<g>
+		<ellipse cx="276" cy="274" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="266" y="274" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">116</text>
+	</g>
+	<g>
+		<ellipse cx="312" cy="118" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="302" y="118" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">117</text>
+	</g>
+	<g>
+		<ellipse cx="288" cy="274" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="278" y="274" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">118</text>
+	</g>
+	<g>
+		<ellipse cx="150" cy="326" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="140" y="326" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">119</text>
+	</g>
+	<g>
+		<ellipse cx="278" cy="224" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="268" y="224" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">120</text>
+	</g>
+	<g>
+		<ellipse cx="234" cy="306" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="224" y="306" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">121</text>
+	</g>
+	<g>
+		<ellipse cx="284" cy="332" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="274" y="332" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">122</text>
+	</g>
+	<g>
+		<ellipse cx="118" cy="278" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="108" y="278" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">123</text>
+	</g>
+	<g>
+		<ellipse cx="424" cy="356" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="414" y="356" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">124</text>
+	</g>
+	<g>
+		<ellipse cx="316" cy="264" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="306" y="264" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">125</text>
+	</g>
+	<g>
+		<ellipse cx="160" cy="138" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="150" y="138" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">126</text>
+	</g>
+	<g>
+		<ellipse cx="220" cy="248" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="210" y="248" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">127</text>
+	</g>
+	<g>
+		<ellipse cx="384" cy="344" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="374" y="344" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">128</text>
+	</g>
+	<g>
+		<ellipse cx="416" cy="198" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="406" y="198" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">129</text>
+	</g>
+	<g>
+		<ellipse cx="78" cy="328" rx="5" ry="5" fill="#00FF00" stroke-width="1.000000px" stroke="#000000" />
+		<text x="68" y="328" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">130</text>
+	</g>
+	<g>
+		<ellipse cx="146" cy="56" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="136" y="56" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">131</text>
+	</g>
+	<g>
+		<ellipse cx="120" cy="216" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="110" y="216" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">132</text>
+	</g>
+	<g>
+		<ellipse cx="294" cy="236" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="284" y="236" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">133</text>
+	</g>
+	<g>
+		<ellipse cx="238" cy="142" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="228" y="142" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">134</text>
+	</g>
+	<g>
+		<ellipse cx="110" cy="352" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="100" y="352" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">135</text>
+	</g>
+	<g>
+		<ellipse cx="54" cy="64" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="44" y="64" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">136</text>
+	</g>
+	<g>
+		<ellipse cx="222" cy="152" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="212" y="152" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">137</text>
+	</g>
+	<g>
+		<ellipse cx="172" cy="40" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="162" y="40" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">138</text>
+	</g>
+	<g>
+		<ellipse cx="198" cy="48" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="188" y="48" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">139</text>
+	</g>
+	<g>
+		<ellipse cx="176" cy="338" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="166" y="338" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">140</text>
+	</g>
+	<g>
+		<ellipse cx="144" cy="228" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="134" y="228" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">141</text>
+	</g>
+	<g>
+		<ellipse cx="334" cy="318" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="324" y="318" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">142</text>
+	</g>
+	<g>
+		<ellipse cx="138" cy="84" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="128" y="84" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">143</text>
+	</g>
+	<g>
+		<ellipse cx="64" cy="284" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="54" y="284" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">144</text>
+	</g>
+	<g>
+		<ellipse cx="260" cy="184" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="250" y="184" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">145</text>
+	</g>
+	<g>
+		<ellipse cx="172" cy="160" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="162" y="160" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">146</text>
+	</g>
+	<g>
+		<ellipse cx="40" cy="354" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="30" y="354" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">147</text>
+	</g>
+	<g>
+		<ellipse cx="374" cy="136" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="364" y="136" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">148</text>
+	</g>
+	<g>
+		<ellipse cx="292" cy="360" rx="5" ry="5" fill="#FFFFFF" stroke-width="1.000000px" stroke="#000000" />
+		<text x="282" y="360" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="10" fill="#000000">149</text>
+	</g>
+</svg>
