@@ -1,5 +1,6 @@
 #include <ogdf/fileformats/GraphIO.h>
 #include <ogdf/basic/simple_graph_alg.h>
+#include <ogdf/decomposition/BCTree.h>
 #include <string>
 #include <iterator>
 #include <set>
@@ -9,6 +10,20 @@
 using namespace ogdf;
 using namespace std;
 
+/**
+ * chiama connectivityAnalisys(G) e chooseComponentMax(G)
+ */
+Graph connectivity(Graph G)
+{
+    connectivityAnalisys(G);
+    if(!isConnected(G))
+    {
+        G = chooseComponentMax(G);
+        cout << "PRENDO LA COMPONENTE CONNESSA PIU' GRANDE (" << G.numberOfNodes() << " nodi)" << endl;
+    }
+
+    return G;
+}
 
 /**
  * analizza la connettività di un grafo e stampa i risultati.
@@ -21,7 +36,12 @@ int connectivityAnalisys(Graph G)
     List<node> isolated; 
     set<node> bicomp_nodes;  
 
+    //NODI E ARCHI
+    cout << "Il grafo ha " << G.numberOfNodes() << " nodi" << endl;
+    cout << "Il grafo ha " << G.numberOfEdges() << " archi" << endl;
+
     // COMPONENTI CONNESSE
+    cout << " ---- COMPONENTI CONNESSE ----" << endl;
     bool isconn = isConnected(G);
     if (isconn == 0)
         cout <<  "il grafo non è connesso" << endl;
@@ -30,51 +50,24 @@ int connectivityAnalisys(Graph G)
 
     int num = connectedComponents(G, component, &isolated);
     cout << "in totale sono " << num << " componenti connesse" << endl;
-
-    // stampa delle componenti connesse
-    for (int i=0; i<num; i++)
-    {
-        cout << "componente " << i << ": { ";
-        for(node n : G.nodes)
-        {
-            if(component[n]==i)
-                cout << n << ", ";
-        }
-        cout << "}" << endl;
-    }
-
+    
+    num = connectedCompMax(G).size();
+    cout << "la componente connessa piu' grande contiene " << num << " nodi" <<endl;
 
     // COMPONENTI BICONNESSE
+    cout << " ---- COMPONENTI BICONNESSE ----" << endl;
     bool isbiconn = isBiconnected(G);
     if (isbiconn == 0)
         cout <<  "il grafo non è biconnesso" << endl;
     else
         cout <<  "il grafo è biconnesso" << endl;
 
-    int binum = biconnectedComponents(G, bicomponent);
-    cout << "in totale sono " << binum << " componenti biconnesse" << endl;
-    
-    // stampa delle componenti biconnesse
-    for (int i=0; i<binum; i++)
-    {
-        cout << "componente biconnessa " << i << ": { ";
+    num = biconnectedComponents(G, bicomponent);
+    cout << "in totale sono " << num << " componenti biconnesse" << endl;
 
-        // salvo i nodi in un set per evitare ripetizioni
-        for(edge e : G.edges)
-        {
-            if(bicomponent[e]==i)
-            {
-                bicomp_nodes.insert(e->source());
-                bicomp_nodes.insert(e->target());
-            }
-        }
-        for (node n : bicomp_nodes)
-        {
-            cout << n << ", ";
-        }
-        cout << "}" << endl;
-        bicomp_nodes.clear();
-    }
+    //num = biconnectedCompMax(G).size();
+    //cout << "la componente biconnessa piu' grande contiene " << num << " nodi" <<endl;
+    
     return 0;
 }
 
@@ -146,4 +139,42 @@ vector<node> biconnectedCompMax(Graph G)
         
 
     return nodes;
+}
+
+/**
+ * calcola il sottografo costituito dalla componente connessa più grande.
+ * @param G il grafo.
+ * @return il sottografo costituito dalla componente connessa più grande di G.
+ */
+Graph chooseComponentMax(Graph G)
+{
+    NodeArray<int> component = NodeArray<int>(G);
+    set<node> comp_nodes_curr;
+    set<node> comp_nodes_max;
+    vector<node> listAllNodes;
+    int indexCOmpMax = -1;
+
+    int num = connectedComponents(G, component);
+    
+    for (int i=0; i<num; i++)
+    {
+        for(node n : G.nodes)
+            if(component[n]==i)
+                comp_nodes_curr.insert(n);
+
+        if(comp_nodes_curr.size() > comp_nodes_max.size()){
+            comp_nodes_max = comp_nodes_curr;
+            indexCOmpMax = i;
+        }
+        comp_nodes_curr.clear();
+    }
+
+    for (node n : G.nodes)
+        listAllNodes.push_back(n);
+
+    for (node n : listAllNodes)
+        if(component[n] != indexCOmpMax)
+            G.delNode(n);
+
+    return G;
 }
