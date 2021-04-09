@@ -1,10 +1,12 @@
 #include <ogdf/energybased/FMMMLayout.h>
 #include <ogdf/fileformats/GraphIO.h>
 #include <ogdf/decomposition/BCTree.h>
+#include <ogdf/decomposition/DynamicBCTree.h>
 #include <iostream>
 #include "../include/graphAnalisys.h"
  
 using namespace ogdf;
+using namespace std;
 
 /**
  * visualizza il BC-Tree di un grafo utilizzando l'algoritmo fmmm.
@@ -82,4 +84,41 @@ int bctreeVisualization(std::string readPath, std::string writePathGML, std::str
     std::cout << std::endl;
  
     return 0;
+}
+
+/**
+ * restituisce un vettore che contiene i vertici di taglio di G
+ * @param G il grafo.
+ */
+vector<node> cutVertexAnalisys(Graph G)
+{
+    vector<node> cv;
+    BCTree *BC = new BCTree(G);
+
+    for (node n : G.nodes){
+        if (BC->typeOfGNode(n) == BCTree::GNodeType::CutVertex)
+            cv.push_back(n);
+    }
+
+    return cv;
+}
+
+/**
+ * stampa la percentuale di vertici di taglio di G che sono rimasti 
+ * nel k-core di G.
+ * @param cvG il vettore dei vertici di taglio di G.
+ * @param cvkG il vettore dei vertici di taglio del k-core di G.
+ */
+void cvRatio(vector<node> cvG, vector<node> cvkG)
+{
+    int counter = 0;
+    for (node n : cvkG)
+        if (find(cvG.begin(), cvG.end(), n) != cvG.end())
+            counter++;
+
+    double perc = (((double)counter/cvG.size())*100);
+    cout << endl << "E' rimasto il " << perc << "% dei vertici di taglio del grafo iniziale ";
+    cout << "(" << counter << "/" << cvG.size() << ")" << endl;
+
+    return;
 }
