@@ -33,6 +33,6 @@ def graph_for_bc_testing_2():
 def graph_for_bc_testing_3():
     G = gt.Graph()
     G.set_directed(False)
-    G.add_vertex(6)
+    G.add_vertex(5)
     G.add_edge_list([(0, 1), (1, 2), (2, 3), (3, 4)])
     return G
