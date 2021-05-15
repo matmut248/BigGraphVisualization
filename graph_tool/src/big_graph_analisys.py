@@ -6,8 +6,8 @@ core_range = range(2, 6)
 
 def __init__():
     print("\n######### LETTURA DEL GRAFO #########")
-    G = gt.load_graph("../gml/youtube.gml")
-
+    G = gt.load_graph("../gml/webGoogle.gml")
+    cv_map_iterative(G)
     # creo una vpmap che mantiene gli id dei vertici e degli archi
     # per accedere all'id di v : G.vp["vertex id"][v]
     make_properties(G)
@@ -21,6 +21,42 @@ def __init__():
     kval = gt.kcore_decomposition(G)
 
     k_core_iter(G, kval)
+
+#g è il sottografo corrispondente al livello di coreness k
+#cv è la mappa di vertici di taglio del grafo originale
+def map_creator(g, k, cv, cv_map, comp, core2comp_map):
+    for v in g.iter_vertices():
+        if cv[v] == 1:
+            if len(cv_map[v]) == 0 or len(cv_map[v]) == 1 :
+                cv_map[v].append(k)
+            else:
+                max = cv_map[v][1]
+                if k > max:
+                    cv_map[v][1] = k
+        core2comp_map[v].append(comp[v])
+    return cv_map, core2comp_map
+
+# map_iterative(g) crea due VertexPropertyMap:
+# -cv_map indica se un nodo è un cv e in quali livelli di coreness. la chiave è il vertice v
+#   e il valore è un array di interi di lunghezza = 2 che indica il range di k in cui v è un cv
+#   ESEMPIO se cv_map[v] = [0,3] => v è un cut_vertex per livelli di coreness da 0 a 3
+# -core2comp indica a quale componente connessa di quale livello di coreness appartiene un vertice qualsiasi.
+#   la chiave è il vertice v e il valore è un array di interi dove l'iesimo elemento corrisponde al numero
+#   della componente connessa nel core i
+#   ESEMPIO se core2comp[v] = [0,0,2] => v appartiene alla componente connessa #0 quando k=0, alla #0 quando k=1
+#           e alla componente #2 quando k=2
+def map_iterative(g):
+    kval = gt.kcore_decomposition(g)
+    k = 0
+    cv_map = g.new_vp("vector<int>")
+    core2comp_map = g.new_vp("vector<int>")
+    while g.num_vertices() > 0:
+        g = k_core(g, kval, k)
+        comp, _ = gt.label_components(g)
+        _, cv, _ = gt.label_biconnected_components(g)
+        cv_map, core2comp_map = map_creator(g, k, cv, cv_map, comp, core2comp_map)
+        k += 1
+    return cv_map, core2comp_map
 
 
 def make_properties(G):
@@ -60,7 +96,7 @@ def k_core_iter(G, kval):
         print("\n######### ANALISI DEL " + str(i) + "-CORE #########")
 
         kG = k_core(kG, kval, i)
-        if (len(list(kG.vertices())) == 0):
+        if kG.num_vertices() == 0:
             print("Non ci sono più nodi")
             return
 
@@ -103,10 +139,10 @@ def connectivity_analisys(G):
     print("numero di vertici di taglio: " + str(len(list(filter(lambda x: (x == 1), cv)))))
 
 
-start = timeit.default_timer()
-__init__()
-time = timeit.default_timer() - start
-print("\nTEMPO TOTALE DI ESECUZIONE --> " + str(time))
+#start = timeit.default_timer()
+#__init__()
+#time = timeit.default_timer() - start
+#print("\nTEMPO TOTALE DI ESECUZIONE --> " + str(time))
 
 
 def verifica_id_graphView():
