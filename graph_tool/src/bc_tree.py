@@ -1,89 +1,54 @@
 import graph_tool.all as gt
 import numpy as np
 import timeit
+from collections import OrderedDict
 
 class BCTree:
 
-    def __init__(self, g, adj_matrix, all_cv):
-
-        self.num_cv = 0
+    def __init__(self, g, adj_matrix):
 
         self.bctree = gt.Graph()                                #grafo del bctree
-        self.bctree_Bcomp = self.bctree.new_vp("int")           #componenti B
-        self.bctree_Ccomp = self.bctree.new_vp("int")           #componenti C
+        self.bctree.set_directed(False)
+        self.gNode2bcNode = {}                                  #corrispondenza nodi di g con nodi del bctree
+        self.node2isBcomp = self.bctree.new_vp("int")           #componenti B
+        self.node2isCcomp = self.bctree.new_vp("int")           #componenti C
         self.num_Bcomp = 0                                      # numero delle comp B
         self.num_Ccomp = 0                                      # numero delle comp C
 
-        # self.cut_vertices è una mappa bool che vale true se il vertice è un cv nella componente connessa corrente
-        self.cut_vertices = self.init_cv(g, all_cv)
-
         self.init_bctree(g, adj_matrix)
 
+        #self.draw_bctree()
 
     def init_bctree(self, g, adj_matrix):
-        g_cv = gt.GraphView(g, self.cut_vertices)           # sottografo con solo i vertici di taglio
+
         g.set_directed(False)
-        bcomp, _, _ = gt.label_biconnected_components(g)    #componenti biconnesse
-        bcomp_visited = []                                  #componenti biconnesse visitate a partire da un cv
+        bcomp, cv, _ = gt.label_biconnected_components(g)  # componenti biconnesse
+        g_cv = gt.GraphView(g, cv)                      # sottografo con solo i vertici di taglio
+        bcomp2bc_nodes = {}                             # mappatura tra componenti biconnesse di g e nodi del bctree
+        for n_bcomp in bcomp.a:                         #inizializzo bcomp2bc_nodes
+            bcomp2bc_nodes[n_bcomp] = None
 
-        for v in g_cv.vertices():
+        for temp in g_cv.vertices():                    #temp è un cv del grafo iniziale
+            v = self.bctree.add_vertex()                #v è un cv del bctree
+            self.gNode2bcNode[temp] = v                 #temp corrisponde a v
+            self.node2isCcomp[v] = 1
             self.num_Ccomp += 1
-            #adj_on_matrix = adj_matrix[int(v)].indices      #tutte le adiacenze di v nel grafo originale
-            #adjs = np.intersect1d(adj_on_matrix, g.get_vertices(), assume_unique = True)
-            adjs = adj_matrix[int(v)].indices               #adiacenze del vertice di taglio v
-
+            adjs = adj_matrix[int(temp)].indices        #adiacenze del vertice di taglio v
             for adj in adjs:
                 try:
-                    w = g.vertex(adj)                       #prendo il vertice adiacente
+                    w = g.vertex(adj)                   # w è adiacente a temp nel grafo originale
+                    e = g.edge(temp,w)
                 except ValueError:
-                    break
-                e = g.edge(v,w)                             #prendo l'arco
-                if not(bcomp[e] in bcomp_visited):          #se non ho già visitato la componente biconnessa
-                    self.bctree.add_edge(v,w)               #aggiungo l'arco al bctree
-                    if not(self.cut_vertices[adj]):         #aggiorno componenti B e C
-                        self.bctree_Bcomp[adj] = 1
-                        self.num_Bcomp += 1
-                    self.bctree_Ccomp[v] = 1
-                    bcomp_visited.append(bcomp[e])          #etichetto come visitata la comp biconnessa
-            bcomp_visited.clear()                           #svuoto le etichette prima di passare al prossimo cv
+                    continue
+                if bcomp2bc_nodes[bcomp[e]] is None:            #se non ho già visitato la bcomp
+                    new_bcomp_node = self.bctree.add_vertex()   #new_bcomp_node è una componente B del bctree
+                    self.node2isBcomp[new_bcomp_node] = 1
+                    self.num_Bcomp += 1
+                    bcomp2bc_nodes[bcomp[e]] = new_bcomp_node   # new_bcomp_node corrisponde a bcomp[e]
+                else:
+                    new_bcomp_node = self.bctree.vertex(bcomp2bc_nodes[bcomp[e]])   #prendo il nodo corrispondente a bcomp[e]
+                if self.bctree.edge(v, new_bcomp_node) is None:
+                    self.bctree.add_edge(v,new_bcomp_node)      #aggiungo l'arco tra v e new_bcomp_node se manca
+                if cv[w] == 0:
+                    self.gNode2bcNode[w] = new_bcomp_node       # w corrisponde a new_bcomp_node se non è un cv
 
-        #se trovo un arco tra due cv, aggiungo una comp biconnessa nel bctree tra i due:
-        #per come è implementato l'algoritmo, se esiste un arco (s,t) dove sia s che t sono cv,
-        #allora esiste sicuramente anche l'arco (t,s)
-        for (s,t) in self.bctree.iter_edges():
-            e = self.bctree.edge(s,t)
-            rev_e = self.bctree.edge(t, s)
-            if rev_e is not None:
-                self.bctree.remove_edge(e)
-                self.bctree.remove_edge(rev_e)
-                temp = self.bctree.add_vertex()
-                self.bctree.add_edge(s,temp)
-                self.bctree.add_edge(temp,t)
-                self.bctree_Bcomp[temp] = 1
-                self.num_Bcomp += 1
-
-
-    def init_cv(self, g, all_cv):
-
-        vp_cv = g.new_vp("bool")
-        for v in g.vertices():
-            if all_cv[v] == 1:
-                vp_cv[v] = True
-                self.num_cv += 1
-        return vp_cv
-
-
-    def get_cv(self):
-        return self.cut_vertices
-
-
-    def get_num_cv(self):
-        return self.num_cv
-
-
-    def get_Bcomp(self):
-        return self.bctree_Bcomp
-
-
-    def get_Ccomp(self):
-        return self.bctree_Ccomp
