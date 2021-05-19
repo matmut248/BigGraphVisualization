@@ -52,3 +52,12 @@ class BCTree:
                 if cv[w] == 0:
                     self.gNode2bcNode[w] = new_bcomp_node       # w corrisponde a new_bcomp_node se non è un cv
 
+        for e in g.edges():
+            if bcomp2bc_nodes[bcomp[e]] is None:
+                new_bcomp_node = self.bctree.add_vertex()  # new_bcomp_node è una componente B del bctree
+                s = e.source()
+                t = e.target()
+                self.gNode2bcNode[s] = new_bcomp_node
+                self.gNode2bcNode[t] = new_bcomp_node
+                self.node2isBcomp[new_bcomp_node] = 1
+                self.num_Bcomp += 1
