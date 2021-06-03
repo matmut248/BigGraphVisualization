@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import timeit
 import random
 import cairo
+import json
 from memory_profiler import profile
 
 # il Core-CUtVertex Tree è una struttura ad albero che rappresenta l'evoluzione del block-cutvertex tree al variare
@@ -60,6 +61,8 @@ class CCTree:
     cctNode2parent = cct_graph.new_vp("int")                    # puntatore al padre del livello precedente
     cctNode2children = cct_graph.new_vp("vector<int>")          # puntatore ai figli del livello successivo      ????
 
+    cctNode2internalSize = cct_graph.new_vp("int")      #indica a quanti archi di G corrisponde un nodo di cct
+
     # cctEdge2sameDepth è una mappa binaria che ci dice se un arco del cctree collega due nodi
     # dello stesso livello (=1) o di livelli di coreness diversi (=0)
     cctEdge2sameDepth = cct_graph.new_ep("int")
@@ -94,6 +97,19 @@ class CCTree:
             #time = timeit.default_timer() - start
             #print("livello "+str(k)+" del cctree pronto in " + str(time))
             k += 1
+        self.cct_graph.vp["cctNode2depth"] = self.cctNode2depth
+        self.cct_graph.vp["cctNode2typeOfNode"] = self.cctNode2typeOfNode
+        self.cct_graph.vp["cctNode2parent"] = self.cctNode2parent
+        self.cct_graph.ep["cctEdge2sameDepth"] = self.cctEdge2sameDepth
+        self.cct_graph.vp["cctNode2internalSize"] = self.cctNode2internalSize
+        max_d = self.cct_graph.new_gp("int",val=self.maxDepth)
+        nodes_in_layer = self.cct_graph.new_gp("vector<int>", val=self.num_nodes_in_layer)
+        numCV = self.cct_graph.new_gp("vector<int>", val=self.num_compC)
+        numB = self.cct_graph.new_gp("vector<int>", val=self.num_compB)
+        self.cct_graph.gp["maxDepth"] = max_d
+        self.cct_graph.gp["nodesInLayer"] = nodes_in_layer
+        self.cct_graph.gp["numCV"] = numCV
+        self.cct_graph.gp["numCompB"] = numB
 
     def init_cctree(self, g, k):
         start = timeit.default_timer()
@@ -187,10 +203,12 @@ class CCTree:
                 self.gEdge2cctMaxDepthNode[e] = new_bcomp_node
                 self.gNode2cctMaxDepthNode[e.source()] = new_bcomp_node
                 self.gNode2cctMaxDepthNode[e.target()] = new_bcomp_node
+                self.cctNode2internalSize[new_bcomp_node] += 1
                 bcomp2bc_nodes[bcomp[e]] = new_bcomp_node
             else:
                 temp = self.cct_graph.vertex(bcomp2bc_nodes[bcomp[e]])
                 self.cctNode2depth[temp] = k
+                self.cctNode2internalSize[temp] += 1
                 self.gEdge2cctMaxDepthNode[e] = temp
                 if cv[e.source()] == 0:
                     self.gNode2cctMaxDepthNode[e.source()] = temp
@@ -344,6 +362,10 @@ class CCTree:
         plt.legend()
         plt.show()
 
+    def to_xml(self):
+        print(self.cct_graph.list_properties())
+        self.cct_graph.save("graph_tool/src/js/data/graph.xml",fmt="xml")
+
 
 def run():
     G = gt.Graph()
@@ -361,10 +383,10 @@ def run():
          (31, 39), (32, 39), (33, 39), (34, 40), (35, 40), (36, 40)
          ])
     G.clear()
-    G = gt.load_graph("graph_tool/gml/amazon.gml")
+    G = gt.load_graph("graph_tool/gml/p1.gml")
     gp_name = G.new_gp("string")
     G.gp["name"] = gp_name
-    G.gp["name"] = "amazon"
+    G.gp["name"] = "p1"
     print("letto")
     gt.remove_self_loops(G)
     start = timeit.default_timer()
@@ -375,5 +397,6 @@ def run():
     #cc.plot_distibution_compB()
     print("cctree pronto in " + str(time))
     #cc.draw_cctree()
+    #cc.to_xml()
 
 run()
