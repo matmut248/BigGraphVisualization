@@ -1,0 +1,14 @@
+
+====================== ANALISI DEL GRAFO cpanDistribution ======================
+
+numero di archi: 5016	numero di vertici: 2724
+	- Tasso di decrescita del numero di componenti biconnesse: -75.364%
+	- Tasso di decrescita del numero di vertici di taglio: -70.256%
+
+| LIV. CORENESS |			|# COMPONENTI CONNESSE|			|# BLOCCHI|			|# CUT-VERTEX|			|# NUOVI CV|			|# BLOCCHI 1 EDGE|
+
+		1							1							1102						38						0						5
+		2							1							46						11						0						0
+		3							1							2						1						0						0
+		4							1							1						0						0						0
+		5							1							1						0						0						0
