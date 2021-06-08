@@ -3,11 +3,15 @@
 <head>
     <script src="lib/pixi.min.js"></script>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
     <title>BigGraphVisualization</title>
 </head>
 <body>
-    <xml id="cctree" src="data/graph.xml" ></xml>
-    <div id="display"/>
+    <div id="bar">
+        Core Cut-Vertex Forest
+        <button id="reset" onclick="reset()">Reset Zoom</button>
+    </div>
+    <div id="display" onwheel="event_handler_zoom(event)"/>
     <script src="app.js"></script>
 </body>
 </html>
