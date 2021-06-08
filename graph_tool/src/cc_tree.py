@@ -62,6 +62,7 @@ class CCTree:
     cctNode2children = cct_graph.new_vp("vector<int>")          # puntatore ai figli del livello successivo      ????
 
     cctNode2internalSize = cct_graph.new_vp("int")      #indica a quanti archi di G corrisponde un nodo di cct
+    cctNode2width = cct_graph.new_vp("vector<int>")             #indica la width necessaria per visualizzare il nodo
 
     # cctEdge2sameDepth è una mappa binaria che ci dice se un arco del cctree collega due nodi
     # dello stesso livello (=1) o di livelli di coreness diversi (=0)
@@ -80,11 +81,11 @@ class CCTree:
         self.initial_g = g.copy()
         self.adj_matrix_g = gt.adjacency(self.initial_g)
         kval = gt.kcore_decomposition(g)
+        self.maxDepth = max(kval.a)
         k = 1
         while True:
             kg = bga.k_core(g, kval, k)
             if kg.num_vertices() == 0:
-                self.maxDepth = k-1
                 break
             #start = timeit.default_timer()
             self.init_cctree(kg, k)
@@ -97,6 +98,12 @@ class CCTree:
             #time = timeit.default_timer() - start
             #print("livello "+str(k)+" del cctree pronto in " + str(time))
             k += 1
+        print("calcolo width")
+        start = timeit.default_timer()
+        #self.viusalization_width();
+        time = timeit.default_timer() - start
+        print("fine calcolo width in " +str(time))
+
         self.cct_graph.vp["cctNode2depth"] = self.cctNode2depth
         self.cct_graph.vp["cctNode2typeOfNode"] = self.cctNode2typeOfNode
         self.cct_graph.vp["cctNode2parent"] = self.cctNode2parent
@@ -126,6 +133,8 @@ class CCTree:
         for temp in g_cv.vertices():                        #temp è un cv del grafo iniziale
 
             v = self.cct_graph.add_vertex()                 #v è un cv del cctree
+            self.cctNode2children[v] = []
+            self.cctNode2width[v] = [0,0]
             self.cctNode2depth[v] = k
             self.num_nodes_in_layer[k] += 1
             self.num_compC[k] += 1
@@ -136,6 +145,7 @@ class CCTree:
                     temp_edge = self.cct_graph.add_edge(parent,v)
                     self.cctEdge2sameDepth[temp_edge] = 0
                     self.cctNode2parent[v] = parent
+                    self.cctNode2children[parent].append(v)
                 if self.cctNode2typeOfNode[parent] == 0:
                     self.num_new_compC[k] += 1
 
@@ -152,6 +162,8 @@ class CCTree:
 
                 if bcomp2bc_nodes[bcomp[e]] is None:            #se non ho già visitato la bcomp
                     new_bcomp_node = self.cct_graph.add_vertex()   #new_bcomp_node è una componente B del bctree
+                    self.cctNode2children[new_bcomp_node] = []
+                    self.cctNode2width[new_bcomp_node] = [0, 0]
                     self.cctNode2depth[new_bcomp_node] = k
                     self.num_nodes_in_layer[k] += 1
                     self.num_compB[k] += 1
@@ -165,6 +177,7 @@ class CCTree:
                             temp_edge = self.cct_graph.add_edge(parent, new_bcomp_node)
                             self.cctEdge2sameDepth[temp_edge] = 0
                             self.cctNode2parent[new_bcomp_node] = parent
+                            self.cctNode2children[parent].append(new_bcomp_node)
 
                     self.gEdge2cctMaxDepthNode[e] = new_bcomp_node
 
@@ -190,6 +203,8 @@ class CCTree:
 
             if bcomp2bc_nodes[bcomp[e]] is None:
                 new_bcomp_node = self.cct_graph.add_vertex()
+                self.cctNode2children[new_bcomp_node] = []
+                self.cctNode2width[new_bcomp_node] = [0, 0]
                 self.num_nodes_in_layer[k] += 1
                 self.num_compB[k] += 1
                 if k != 1:
@@ -198,6 +213,7 @@ class CCTree:
                         temp_edge = self.cct_graph.add_edge(parent, new_bcomp_node)
                         self.cctEdge2sameDepth[temp_edge] = 0
                         self.cctNode2parent[new_bcomp_node] = parent
+                        self.cctNode2children[parent].append(new_bcomp_node)
 
                 self.cctNode2depth[new_bcomp_node] = k
                 self.gEdge2cctMaxDepthNode[e] = new_bcomp_node
@@ -205,6 +221,7 @@ class CCTree:
                 self.gNode2cctMaxDepthNode[e.target()] = new_bcomp_node
                 self.cctNode2internalSize[new_bcomp_node] += 1
                 bcomp2bc_nodes[bcomp[e]] = new_bcomp_node
+
             else:
                 temp = self.cct_graph.vertex(bcomp2bc_nodes[bcomp[e]])
                 self.cctNode2depth[temp] = k
@@ -216,6 +233,20 @@ class CCTree:
                     self.gNode2cctMaxDepthNode[e.target()] = temp
         time = timeit.default_timer() - start
         print("seconda parte pronto in " + str(time))
+
+    def viusalization_width(self):
+        for v in self.cct_graph.vertices():
+            if not self.cctNode2children[v]:        # v è una foglia
+                curr_node = v
+                while self.cctNode2depth[curr_node] != 1:
+                    parent = self.cctNode2parent[curr_node]
+                    if self.cctNode2typeOfNode[v] == 1:
+                        self.cctNode2width[parent][0] += 1
+                    else:
+                        self.cctNode2width[parent][1] += 1
+                    curr_node = parent
+        self.cct_graph.vp["cctNode2width"] = self.cctNode2width
+
 
     def size(self):
         size = self.cct_graph.new_vp("int")
@@ -239,7 +270,6 @@ class CCTree:
 
     def vertices_pos(self):
         pos = self.cct_graph.new_vp("vector<float>")
-        distance_bw_layers = 30.0
         i = 0
         for v in self.cct_graph.vertices():
             # 600/self.num_nodes_in_layer[self.cctNode2depth[v]] è lo step
@@ -343,7 +373,7 @@ class CCTree:
                 "\t- Tasso di decrescita del numero di vertici di taglio: " + str(round(growth_rate_compC, 3)) + "%\n")
 
             # variazione delle componenti biconnesse e dei vertici di taglio
-            temp = "\n| LIV. CORENESS |\t\t\t"+"|# COMPONENTI CONNESSE|\t\t\t"+"|# BLOCCHI|\t\t\t"+"|# CUT-VERTEX|\t\t\t" + "|# NUOVI CV|\t\t\t"+"|# BLOCCHI TRIVIALI|\n\n"
+            temp = "\n| LIV. CORENESS |\t\t\t"+"|# COMPONENTI CONNESSE|\t\t\t"+"|# BLOCCHI|\t\t\t"+"|# CUT-VERTEX|\t\t\t" + "|# NUOVI CV|\t\t\t"+"|# BLOCCHI 1 EDGE|\n\n"
             file.write(temp)
             for k in range (1,self.maxDepth+1):
                 temp = "\t\t"+str(k)+"\t\t\t\t\t\t\t"+str(self.num_comp_conn[k])+"\t\t\t\t\t\t\t"+str(self.num_compB[k])+"\t\t\t\t\t\t"+str(self.num_compC[k])+\
@@ -382,21 +412,24 @@ def run():
          (31, 32), (31, 33), (32, 33), (34, 35), (35, 36), (34, 36), (37, 31), (37, 35), (38, 32), (38, 36),
          (31, 39), (32, 39), (33, 39), (34, 40), (35, 40), (36, 40)
          ])
-    G.clear()
-    G = gt.load_graph("graph_tool/gml/p1.gml")
+    #G.clear()
+    #G = gt.load_graph("graph_tool/gml/amazon.gml")
     gp_name = G.new_gp("string")
     G.gp["name"] = gp_name
-    G.gp["name"] = "p1"
+    G.gp["name"] = "amazon"
     print("letto")
     gt.remove_self_loops(G)
     start = timeit.default_timer()
     cc = CCTree(G)
 
     time = timeit.default_timer() - start
-    cc.statistic()
+    #cc.statistic()
     #cc.plot_distibution_compB()
     print("cctree pronto in " + str(time))
     #cc.draw_cctree()
-    #cc.to_xml()
+    cc.to_xml()
+    #for v in cc.cct_graph.vertices():
+       # print("nodo " + str(v) + " -> " + str(cc.cctNode2width[v]))
+
 
 run()
