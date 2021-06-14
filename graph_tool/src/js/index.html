@@ -9,9 +9,13 @@
 <body>
     <div id="bar">
         Core Cut-Vertex Forest
+        <button id="edge_hide" onclick="hide_edges()">Hide Edges</button>
         <button id="reset" onclick="reset()">Reset Zoom</button>
+        <select id="lastCore" onclick="coreness_filtering()"></select>
+        <select id="firstCore" onclick="coreness_filtering()"></select>
+        <label for="firstCore">Coreness Levels:</label>
     </div>
-    <div id="display" onwheel="event_handler_zoom(event)"/>
+    <div id="display" onwheel="zoom(event)"/>
     <script src="app.js"></script>
 </body>
 </html>
