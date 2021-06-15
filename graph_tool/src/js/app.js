@@ -26,6 +26,9 @@ var archi = []
 var cvTocv = []
 var hidden_edges = true;
 var vertical_layer_space = 0
+var current_first_layer = 1
+var zoomX = width
+var zoomY = height
 
 /*  APP SETTINGS    */
 let app = new PIXI.Application({
@@ -214,6 +217,7 @@ function draw_graph(){
             last_node_added = [x, 2*cv_radius];
             last_child_added[this.nodes_parent[i]] = [x,2*cv_radius]
             new_node = new Node(i, x, y - cv_radius, cv_radius*2,  cv_radius*2, this.nodes_depth[i], 1, this.nodes_parent[i], this.nodes_width[i])
+            new_node.draw()
             this.nodi.push(new_node)
         }
         else{                                       // sto disegnando una componente B
@@ -221,6 +225,7 @@ function draw_graph(){
             last_node_added = [x, bcomp_width];
             last_child_added[this.nodes_parent[i]] = [x, bcomp_width]
             new_node = new Node(i, x, y - bcomp_height/2, bcomp_width,  bcomp_height, this.nodes_depth[i], 0, this.nodes_parent[i], this.nodes_width[i])
+            new_node.draw()
             this.nodi.push(new_node)
         }
 
@@ -236,6 +241,7 @@ function draw_graph(){
             for(var j = 1; j <= dash_factor; j++){
                 if(draw == true){
                     newCvToCv = new CvToCv(x_temp,y_temp,3,segment,0.5, this.nodes_depth[this.nodes_parent[i]])
+                    newCvToCv.draw()
                     this.cvTocv.push(newCvToCv)
                     draw = false;
                 }
@@ -256,6 +262,7 @@ function draw_graph(){
         y1 = nodes_dimension[s][1] + cv_radius
         x2 = nodes_dimension[t][0] + nodes_dimension[t][2]/2
         new_edge = new Edge(s, t, x1, y1, x2-x1, Math.min(vertical_layer_space - bcomp_height,40), 0, nodi[s].getDepth())
+        new_edge.draw()
         this.nodi[s].addEdge(new_edge)
         this.nodi[t].addEdge(new_edge)
         this.archi.push(new_edge)
@@ -276,8 +283,9 @@ function zoom(event){
     var factor = (1 + direction * 0.1);
     app.stage.scale.x *= factor;
     app.stage.scale.y *= factor;
-    app.stage.hitArea.width /= factor;
-    app.stage.hitArea.height /= factor;
+    zoomX /= factor
+    zoomY /= factor
+    app.stage.hitArea = new PIXI.Rectangle(0, 0, zoomX ,zoomY);
 }
 
 function DragNDrop() {
@@ -300,6 +308,8 @@ function DragNDrop() {
       var pos = moveData.data.global;
       var dx = pos.x - prevX;
       var dy = pos.y - prevY;
+
+
 
       stage.position.x += dx;
       stage.position.y += dy;
@@ -389,7 +399,9 @@ function coreness_filtering(){
                 cvTocv[i].setAlpha(1)
             }
         }
-        app.stage.position.y += (selected_first - 1) * vertical_layer_space
+        if(current_first_layer != selected_first)
+            app.stage.position.y += (selected_first - current_first_layer) * vertical_layer_space
+        current_first_layer = selected_first
     }
 }
 
@@ -405,10 +417,11 @@ class Edge extends PIXI.Sprite{
         this.height = height
         this.alpha = alpha
         this.depth = depth
-        app.stage.addChild(this);
+
     }
     setAlpha(a){ this.alpha = a; }
     getDepth(){ return this.depth; }
+    draw(){ app.stage.addChild(this); }
 }
 
 class Node extends PIXI.Sprite{
@@ -431,8 +444,9 @@ class Node extends PIXI.Sprite{
         this.leaf = leaf
         this.interactive = true
         this.edges = []
-        app.stage.addChild(this)
     }
+
+    draw(){ app.stage.addChild(this); }
 
     /*Event Handler*/
     pointerdown = function(e){
@@ -487,9 +501,9 @@ class CvToCv extends PIXI.Sprite{
         this.height = height
         this.alpha = alpha
         this.depth = depth
-        app.stage.addChild(this);
     }
     setAlpha(a){ this.alpha = a; }
     getDepth(){ return this.depth; }
+    draw(){ app.stage.addChild(this); }
 }
 
