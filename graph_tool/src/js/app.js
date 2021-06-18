@@ -1,10 +1,9 @@
-
 var nodes;                              // nodi del cctree
 var nodes_depth;                        // profondità dei nodi del cctree
 var nodes_parent;                       // parent dei nodi del cctree (se layer = 1, parent = -1)
 var nodes_type;                         // tipo dei nodi del cctree (se cv = 1, se comp B = 0)
-var nodes_internal_size;                // quantità di archi di g contenuti nel nodo del cctree     DA TOGLIERE
-var nodes_width;
+var nodes_internal_size;                // quantità di nodi di g contenuti nel nodo del cctree     DA TOGLIERE?
+var nodes_width;                        // array che indica la quantità e il tipo di foglie nel sottoalbero di un nodo
 var edges_intra_layer;                  // archi del cctree tra nodi dello stesso livello di coreness
 var edges_between_layer;                // archi del cctree tra nodi di diverso livello di coreness
 var num_nodes;                          // numero di nodi del cctree
@@ -19,16 +18,15 @@ var texture_compB
 var texture_sameCV
 var texture_CV
 var texture_arc
-var prevX = 0
-var prevY = 0
-var nodi = []
-var archi = []
-var cvTocv = []
+var graphics_nodes = []
+var graphics_arcs = []
+var graphics_cvTocv = []
 var hidden_edges = true;
 var vertical_layer_space = 0
 var current_first_layer = 1
-var zoomX = width
-var zoomY = height
+var prevX = 0
+var prevY = 0
+
 
 /*  APP SETTINGS    */
 let app = new PIXI.Application({
@@ -60,11 +58,57 @@ function setup(){
             load_texture();
             draw_graph();
             DragNDrop();
+            //update();
         }
     };
     xhttp.open("GET", "data/stanford.xml", true);
     xhttp.send();
 
+}
+
+function isContained(obj){
+        rect = new PIXI.Rectangle(0,0,width,height)
+        bb = obj.getBounds()
+        return rect.contains(bb.x,bb.y) ||( bb.x < 0 && bb.y >= 0 && bb.y < height)
+/*
+        obj_bbox = [obj.getX(), obj.getY(), obj.getX() + obj.getWidth(), obj.getY() + obj.getHeight()]
+
+        container_bbox = [app.stage.position.x, app.stage.position.y, -app.stage.position.x+width, app.stage.position.y+height]
+
+
+        if(obj_bbox[0] >= container_bbox[0] && obj_bbox[0] <= container_bbox[2]){
+            if(obj_bbox[1] > container_bbox[3] || obj_bbox[3] < container_bbox[1])
+                return false;
+        }
+        if(obj_bbox[0] < container_bbox[0]){
+            if(obj_bbox[2] < container_bbox[0] || obj_bbox[3] < container_bbox[1])
+                    return false;
+        }
+        if(obj_bbox[0] > container_bbox[2])
+            return false;
+
+        return true;*/
+}
+
+function update () {
+    for(var i in graphics_nodes){
+        if(!isContained(graphics_nodes[i]))
+            graphics_nodes[i].renderable = false
+        else
+            graphics_nodes[i].renderable = true
+    }
+    for(var i in graphics_arcs){
+        if(!isContained(graphics_arcs[i]))
+            graphics_arcs[i].renderable = false
+        else
+            graphics_arcs[i].renderable = true
+    }
+    for(var i in graphics_cvTocv){
+        if(!isContained(graphics_cvTocv[i]))
+            graphics_cvTocv[i].renderable = false
+        else
+            graphics_cvTocv[i].renderable = true
+    }
 }
 
 /*  LETTURA DEI DATI DA XML */
@@ -218,7 +262,7 @@ function draw_graph(){
             last_child_added[this.nodes_parent[i]] = [x,2*cv_radius]
             new_node = new Node(i, x, y - cv_radius, cv_radius*2,  cv_radius*2, this.nodes_depth[i], 1, this.nodes_parent[i], this.nodes_width[i])
             new_node.draw()
-            this.nodi.push(new_node)
+            this.graphics_nodes.push(new_node)
         }
         else{                                       // sto disegnando una componente B
             nodes_dimension[i] = [x, y, bcomp_width];
@@ -226,7 +270,7 @@ function draw_graph(){
             last_child_added[this.nodes_parent[i]] = [x, bcomp_width]
             new_node = new Node(i, x, y - bcomp_height/2, bcomp_width,  bcomp_height, this.nodes_depth[i], 0, this.nodes_parent[i], this.nodes_width[i])
             new_node.draw()
-            this.nodi.push(new_node)
+            this.graphics_nodes.push(new_node)
         }
 
         // linee tratteggiate tra cv corrispondenti in livelli di coreness diversi
@@ -242,7 +286,7 @@ function draw_graph(){
                 if(draw == true){
                     newCvToCv = new CvToCv(x_temp,y_temp,3,segment,0.5, this.nodes_depth[this.nodes_parent[i]])
                     newCvToCv.draw()
-                    this.cvTocv.push(newCvToCv)
+                    this.graphics_cvTocv.push(newCvToCv)
                     draw = false;
                 }
                 else{
@@ -261,11 +305,11 @@ function draw_graph(){
         x1 = nodes_dimension[s][0] + cv_radius
         y1 = nodes_dimension[s][1] + cv_radius
         x2 = nodes_dimension[t][0] + nodes_dimension[t][2]/2
-        new_edge = new Edge(s, t, x1, y1, x2-x1, Math.min(vertical_layer_space - bcomp_height,40), 0, nodi[s].getDepth())
+        new_edge = new Edge(s, t, x1, y1, x2-x1, Math.min(vertical_layer_space - bcomp_height,40), 0, graphics_nodes[s].getDepth())
         new_edge.draw()
-        this.nodi[s].addEdge(new_edge)
-        this.nodi[t].addEdge(new_edge)
-        this.archi.push(new_edge)
+        this.graphics_nodes[s].addEdge(new_edge)
+        this.graphics_nodes[t].addEdge(new_edge)
+        this.graphics_arcs.push(new_edge)
     }
 
     app.renderer.render(app.stage);
@@ -281,18 +325,27 @@ function zoom(event){
     }
     direction = isZoomIn ? 1 : -1;
     var factor = (1 + direction * 0.1);
+    app.stage.pivot.x = 0
+    app.stage.pivot.y = 0
     app.stage.scale.x *= factor;
     app.stage.scale.y *= factor;
-    zoomX /= factor
-    zoomY /= factor
-    app.stage.hitArea = new PIXI.Rectangle(0, 0, zoomX ,zoomY);
+
+    app.stage.hitArea.width /= factor
+    app.stage.hitArea.width += app.stage.position.x
+    app.stage.hitArea.height /= factor
+    app.stage.hitArea.height += app.stage.position.y
+    app.stage.hitArea.x -= app.stage.position.x
+    app.stage.hitArea.y -= app.stage.position.y
+    app.stage.pivot.x = 0
+    app.stage.pivot.y = 0
+
+    //update()
 }
 
 function DragNDrop() {
     var stage = app.stage;
 
-    var isDragging = false,
-    prevX, prevY;
+    var isDragging = false
 
     stage.pointerdown = function (moveData) {
       var pos = moveData.data.global;
@@ -314,19 +367,22 @@ function DragNDrop() {
       stage.position.x += dx;
       stage.position.y += dy;
       prevX = pos.x; prevY = pos.y;
-      stage.hitArea.x -= dx;
-      stage.hitArea.y -= dy;
+
+      app.stage.hitArea.x -= dx / app.stage.scale.x;
+      app.stage.hitArea.y -= dy / app.stage.scale.y;
+
+      //update()
     };
 
     stage.pointerup = function (moveDate) {
       isDragging = false;
-
     };
 }
 
 function reset(){
     app.stage.setTransform()
     app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width/app.renderer.resolution, app.renderer.height/app.renderer.resolution);
+    //update()
 }
 
 function hide_edges(){
@@ -335,20 +391,17 @@ function hide_edges(){
     selected_first = firstCoreLV.options[firstCoreLV.selectedIndex].value
     selected_last = lastCoreLV.options[lastCoreLV.selectedIndex].value
     if(!hidden_edges){
-        this.archi.forEach(edge => edge.setAlpha(0))
-
+        this.graphics_arcs.forEach(edge => edge.setAlpha(0))
         hidden_edges = true
-        console.log("bellaaa")
     }
     else{
-        for(var i in archi){
-            if(archi[i].getDepth() >= selected_first && archi[i].getDepth() <= selected_last){
-                archi[i].setAlpha(0.3)
+        for(var i in graphics_arcs){
+            if(graphics_arcs[i].getDepth() >= selected_first && graphics_arcs[i].getDepth() <= selected_last){
+                graphics_arcs[i].setAlpha(0.3)
             }
         }
-        //this.archi.forEach(edge => edge.setAlpha(0.3))
+        //this.graphics_arcs.forEach(edge => edge.setAlpha(0.3))
         hidden_edges = false
-        console.log("ciaoo")
     }
 }
 
@@ -375,32 +428,34 @@ function coreness_filtering(){
     selected_first = firstCoreLV.options[firstCoreLV.selectedIndex].value
     selected_last = lastCoreLV.options[lastCoreLV.selectedIndex].value
     if(selected_first <= selected_last){
-        for(var i in nodi){
-            if(nodi[i].getDepth() < selected_first || nodi[i].getDepth() > selected_last){
-                nodi[i].setAlpha(0)
+        for(var i in graphics_nodes){
+            if(graphics_nodes[i].getDepth() < selected_first || graphics_nodes[i].getDepth() > selected_last){
+                graphics_nodes[i].setAlpha(0)
             }
             else{
-                nodi[i].setAlpha(1)
+                graphics_nodes[i].setAlpha(1)
             }
         }
-        for(var i in archi){
-            if(archi[i].getDepth() < selected_first || archi[i].getDepth() > selected_last){
-                archi[i].setAlpha(0)
+        for(var i in graphics_arcs){
+            if(graphics_arcs[i].getDepth() < selected_first || graphics_arcs[i].getDepth() > selected_last){
+                graphics_arcs[i].setAlpha(0)
             }
             else if(!hidden_edges){
-                archi[i].setAlpha(0.3)
+                graphics_arcs[i].setAlpha(0.3)
             }
         }
-        for(var i in cvTocv){
-            if(cvTocv[i].getDepth() < selected_first || cvTocv[i].getDepth() >= selected_last){
-                cvTocv[i].setAlpha(0)
+        for(var i in graphics_cvTocv){
+            if(graphics_cvTocv[i].getDepth() < selected_first || graphics_cvTocv[i].getDepth() >= selected_last){
+                graphics_cvTocv[i].setAlpha(0)
             }
             else{
-                cvTocv[i].setAlpha(1)
+                graphics_cvTocv[i].setAlpha(0.5)
             }
         }
-        if(current_first_layer != selected_first)
+        if(current_first_layer != selected_first){
             app.stage.position.y += (selected_first - current_first_layer) * vertical_layer_space
+            //app.stage.hitArea.y -= (selected_first - current_first_layer) * vertical_layer_space
+        }
         current_first_layer = selected_first
     }
 }
@@ -419,9 +474,23 @@ class Edge extends PIXI.Sprite{
         this.depth = depth
 
     }
+    getSource(){ return this.source; }
+    getTarget(){ return this.target; }
+
     setAlpha(a){ this.alpha = a; }
     getDepth(){ return this.depth; }
     draw(){ app.stage.addChild(this); }
+    getX(){ return this.x }
+    setX(x){ this.x = x }
+
+    getY(){ return this.y }
+    setY(y){ this.y = y }
+
+    getWidth(){ return this.width }
+    setWidth(w){this.width = w }
+
+    getHeight(){ return this.height }
+    setHeight(h){ this.height = h }
 }
 
 class Node extends PIXI.Sprite{
@@ -452,6 +521,11 @@ class Node extends PIXI.Sprite{
     pointerdown = function(e){
         console.log("hai cliccato il nodo "+this.id+" in posizione ( "+this.x+", "+this.y+")")
         console.log("questo nodo ha "+this.edges.length+" archi")
+        console.log("questo nodo ha "+this.x+" x e "+this.y+" y" )
+        console.log("questo nodo ha "+this.width+" width")
+        console.log("questo nodo ha "+this.height+" height")
+        console.log("questo nodo ha "+this.alpha+" alpha")
+        app.renderer.render(this)
         this.edges.forEach(edge => edge.setAlpha(0.3))
         hidden_edges = false
     }
@@ -505,5 +579,16 @@ class CvToCv extends PIXI.Sprite{
     setAlpha(a){ this.alpha = a; }
     getDepth(){ return this.depth; }
     draw(){ app.stage.addChild(this); }
+    getX(){ return this.x }
+    setX(x){ this.x = x }
+
+    getY(){ return this.y }
+    setY(y){ this.y = y }
+
+    getWidth(){ return this.width }
+    setWidth(w){this.width = w }
+
+    getHeight(){ return this.height }
+    setHeight(h){ this.height = h }
 }
 
