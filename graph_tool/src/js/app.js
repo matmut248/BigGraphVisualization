@@ -23,7 +23,6 @@ var graphics_arcs = []
 var graphics_cvTocv = []
 var hidden_edges = true;
 var vertical_layer_space = 0
-var current_first_layer = 1
 var prevX = 0
 var prevY = 0
 
@@ -58,7 +57,7 @@ function setup(){
             load_texture();
             draw_graph();
             DragNDrop();
-            //update();
+            update();
         }
     };
     xhttp.open("GET", "data/stanford.xml", true);
@@ -93,21 +92,21 @@ function isContained(obj){
 function update () {
     for(var i in graphics_nodes){
         if(!isContained(graphics_nodes[i]))
-            graphics_nodes[i].renderable = false
+            graphics_nodes[i].visible = false
         else
-            graphics_nodes[i].renderable = true
+            graphics_nodes[i].visible = true
     }
     for(var i in graphics_arcs){
         if(!isContained(graphics_arcs[i]))
-            graphics_arcs[i].renderable = false
+            graphics_arcs[i].visible = false
         else
-            graphics_arcs[i].renderable = true
+            graphics_arcs[i].visible = true
     }
     for(var i in graphics_cvTocv){
         if(!isContained(graphics_cvTocv[i]))
-            graphics_cvTocv[i].renderable = false
+            graphics_cvTocv[i].visible = false
         else
-            graphics_cvTocv[i].renderable = true
+            graphics_cvTocv[i].visible = true
     }
 }
 
@@ -339,7 +338,7 @@ function zoom(event){
     app.stage.pivot.x = 0
     app.stage.pivot.y = 0
 
-    //update()
+    update()
 }
 
 function DragNDrop() {
@@ -371,7 +370,7 @@ function DragNDrop() {
       app.stage.hitArea.x -= dx / app.stage.scale.x;
       app.stage.hitArea.y -= dy / app.stage.scale.y;
 
-      //update()
+      update()
     };
 
     stage.pointerup = function (moveDate) {
@@ -382,7 +381,7 @@ function DragNDrop() {
 function reset(){
     app.stage.setTransform()
     app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width/app.renderer.resolution, app.renderer.height/app.renderer.resolution);
-    //update()
+    update()
 }
 
 function hide_edges(){
@@ -423,6 +422,7 @@ function coreness_filtering_init(){
 }
 
 function coreness_filtering(){
+    reset()
     firstCoreLV = document.getElementById("firstCore")
     lastCoreLV = document.getElementById("lastCore")
     selected_first = firstCoreLV.options[firstCoreLV.selectedIndex].value
@@ -452,11 +452,9 @@ function coreness_filtering(){
                 graphics_cvTocv[i].setAlpha(0.5)
             }
         }
-        if(current_first_layer != selected_first){
-            app.stage.position.y += (selected_first - current_first_layer) * vertical_layer_space
-            //app.stage.hitArea.y -= (selected_first - current_first_layer) * vertical_layer_space
-        }
-        current_first_layer = selected_first
+        app.stage.position.y += (selected_first - 1) * vertical_layer_space
+        app.stage.hitArea.y -= (selected_first - 1) * vertical_layer_space
+        update()
     }
 }
 
