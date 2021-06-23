@@ -1,6 +1,7 @@
 var nodes;                              // nodi del cctree
 var nodes_depth;                        // profondità dei nodi del cctree
 var nodes_parent;                       // parent dei nodi del cctree (se layer = 1, parent = -1)
+var nodes_children = [];
 var nodes_type;                         // tipo dei nodi del cctree (se cv = 1, se comp B = 0)
 var nodes_internal_size;                // quantità di nodi di g contenuti nel nodo del cctree     DA TOGLIERE?
 var nodes_width;                        // array che indica la quantità e il tipo di foglie nel sottoalbero di un nodo
@@ -15,6 +16,10 @@ var maxDepth;                           // profondità massima del cctree
 var nodes_in_layer;                     // numero di nodi per ogni livello di profondità
 var width = window.innerWidth;
 var height = window.innerHeight * 0.95;
+var min_bcomp_width = 5;
+var cv_radius = 3;                                      // raggio dei cv
+var margin = 5;                                         //margine tra i nodi disegnati
+const foo = function(i){ return nodes_internal_size[i] / 100}
 var texture_compB
 var texture_sameCV
 var texture_CV
@@ -147,6 +152,18 @@ function init_data(xml){
     this.nodes_in_layer = xmlDoc.getElementsByTagName("data")[1].textContent.split(",").map(x=>+x);
     this.num_CV = xmlDoc.getElementsByTagName("data")[2].textContent.split(",").map(x=>+x);
     this.num_comp_B = xmlDoc.getElementsByTagName("data")[3].textContent.split(",").map(x=>+x);
+
+    children_init()
+}
+
+function children_init(){
+    for(var i in nodes){
+        nodes_children.push([])
+        if(nodes_depth[i] > 1){
+            parent = nodes_parent[i]
+            nodes_children[parent].push(i)
+        }
+    }
 }
 
 /*  CARICAMENTO DELLE TEXTURE*/
@@ -184,13 +201,27 @@ function load_texture(){
 
 }
 
+function width_calculator(i){
+
+
+    /*int_size = nodes_internal_size[index]
+    leaf_size = (this.nodes_width[index][0] * 2 * cv_radius) + (this.nodes_width[index][1] * min_bcomp_width) + (margin * (this.nodes_width[index][0] +this.nodes_width[index][1] - 1))
+    result = int_size / 100
+    return Math.max(result + min_bcomp_width, min_bcomp_width + leaf_size)*/
+
+    if(nodes_children[i].length == 0)
+        return Math.max(min_bcomp_width, foo(i))
+    size = 0
+    for(var j in nodes_children[i])
+        size = size + width_calculator(nodes_children[i][j]) + margin
+    return size
+
+}
+
 /*  VISUALIZZAZIONE DEL GRAFO   */
 function draw_graph(){
-    var margin = 5;                                         //margine tra i nodi disegnati
-    var cv_radius = 3;                                      // raggio dei cv
     var bcomp_height = 10;                                   // lunghezza delle componenti biconnesse
     var bcomp_width = 0;                                    // larghezza delle componenti biconnesse
-    var min_bcomp_width = 5;
     vertical_layer_space = Math.max(height / (maxDepth+1), 40);       // segmentazione verticale del canvas
     var current_depth = 0;                                  // livello di coreness corrente
     var nodes_dimension = new Array();                      // posizione dei nodi del cctree nel canvas [x,y,width]
@@ -216,12 +247,13 @@ function draw_graph(){
         y =  vertical_layer_space * (- k) + height                      //se considero un spazio minimo in verticale tra i livelli
 
 
-        if(this.nodes_width[i][0] != 0 || this.nodes_width[i][1] != 0){     //se il nodo corrente ha foglie nel sottoalbero
+        /*if(this.nodes_width[i][0] != 0 || this.nodes_width[i][1] != 0){     //se il nodo corrente ha foglie nel sottoalbero
             bcomp_width = (this.nodes_width[i][0] * 2 * cv_radius) + (this.nodes_width[i][1] * min_bcomp_width) + (margin * (this.nodes_width[i][0] +this.nodes_width[i][1] - 1))
         }
         else{                                                               //se il nodo corrente è una foglia
             bcomp_width = min_bcomp_width
-        }
+        }*/
+        bcomp_width = width_calculator(i)
 
         if(this.nodes_parent[i] == -1){                          // se sto sul primo layer
             /*x = (posizione del nodo disegnato in precedenza + larghezza nodo prec) * stesso_layer + piccolo margine*/
@@ -237,9 +269,6 @@ function draw_graph(){
                 x = (last_child_added[parent][0] + last_child_added[parent][1]) * same_layer + margin
             }
         }
-
-        //bcomp_width = min_bcomp_width
-        //x = (last_node_added[0] + last_node_added[1]) * same_layer + margin
 
         if(nodes_type[i] == 1){                     // sto disegnando un cv
             nodes_dimension[i] = [x, y, cv_radius];
@@ -317,11 +346,9 @@ function zoom(event){
     app.stage.scale.y *= factor;
 
     app.stage.hitArea.width /= factor
-    app.stage.hitArea.width += app.stage.position.x
     app.stage.hitArea.height /= factor
-    app.stage.hitArea.height += app.stage.position.y
-    app.stage.hitArea.x -= app.stage.position.x
-    app.stage.hitArea.y -= app.stage.position.y
+    app.stage.hitArea.x /= factor
+    app.stage.hitArea.y /= factor
     app.stage.pivot.x = 0
     app.stage.pivot.y = 0
 
@@ -558,7 +585,7 @@ class Node extends PIXI.Sprite{
         console.log("questo nodo ha "+this.width+" width")
         console.log("questo nodo ha "+this.height+" height")
         console.log("questo nodo ha "+this.alpha+" alpha")
-        console.log(this.cv2cv)
+        console.log("questo nodo ha "+this.int_size+" nodi interni")
         app.renderer.render(this)
         this.edges.forEach(edge => edge.setAlpha(0.3))
         hidden_edges = false
