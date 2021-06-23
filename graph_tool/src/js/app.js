@@ -4,6 +4,7 @@ var nodes_parent;                       // parent dei nodi del cctree (se layer 
 var nodes_type;                         // tipo dei nodi del cctree (se cv = 1, se comp B = 0)
 var nodes_internal_size;                // quantità di nodi di g contenuti nel nodo del cctree     DA TOGLIERE?
 var nodes_width;                        // array che indica la quantità e il tipo di foglie nel sottoalbero di un nodo
+var max_internal_size = 0;
 var edges_intra_layer;                  // archi del cctree tra nodi dello stesso livello di coreness
 var edges_between_layer;                // archi del cctree tra nodi di diverso livello di coreness
 var num_nodes;                          // numero di nodi del cctree
@@ -54,6 +55,7 @@ function setup(){
         if (this.readyState == 4 && this.status == 200) {
             init_data(this);
             coreness_filtering_init();
+            nodes_filtering_init();
             load_texture();
             draw_graph();
             DragNDrop();
@@ -69,24 +71,6 @@ function isContained(obj){
         rect = new PIXI.Rectangle(0,0,width,height)
         bb = obj.getBounds()
         return rect.contains(bb.x,bb.y) ||( bb.x < 0 && bb.y >= 0 && bb.y < height)
-/*
-        obj_bbox = [obj.getX(), obj.getY(), obj.getX() + obj.getWidth(), obj.getY() + obj.getHeight()]
-
-        container_bbox = [app.stage.position.x, app.stage.position.y, -app.stage.position.x+width, app.stage.position.y+height]
-
-
-        if(obj_bbox[0] >= container_bbox[0] && obj_bbox[0] <= container_bbox[2]){
-            if(obj_bbox[1] > container_bbox[3] || obj_bbox[3] < container_bbox[1])
-                return false;
-        }
-        if(obj_bbox[0] < container_bbox[0]){
-            if(obj_bbox[2] < container_bbox[0] || obj_bbox[3] < container_bbox[1])
-                    return false;
-        }
-        if(obj_bbox[0] > container_bbox[2])
-            return false;
-
-        return true;*/
 }
 
 function update () {
@@ -134,6 +118,8 @@ function init_data(xml){
         this.nodes_depth.push(node_depth)
         this.nodes_internal_size.push(node_internal_size)
         //console.log(nodes_internal_size)
+        if(node_internal_size > max_internal_size)
+            max_internal_size = node_internal_size
 
         if(node_depth == 1){
             this.nodes_parent.push(-1)
@@ -259,7 +245,7 @@ function draw_graph(){
             nodes_dimension[i] = [x, y, cv_radius];
             last_node_added = [x, 2*cv_radius];
             last_child_added[this.nodes_parent[i]] = [x,2*cv_radius]
-            new_node = new Node(i, x, y - cv_radius, cv_radius*2,  cv_radius*2, this.nodes_depth[i], 1, this.nodes_parent[i], this.nodes_width[i])
+            new_node = new Node(i, x, y - cv_radius, cv_radius*2,  cv_radius*2, this.nodes_depth[i], 1, this.nodes_parent[i], this.nodes_width[i], this.nodes_internal_size[i])
             new_node.draw()
             this.graphics_nodes.push(new_node)
         }
@@ -267,7 +253,7 @@ function draw_graph(){
             nodes_dimension[i] = [x, y, bcomp_width];
             last_node_added = [x, bcomp_width];
             last_child_added[this.nodes_parent[i]] = [x, bcomp_width]
-            new_node = new Node(i, x, y - bcomp_height/2, bcomp_width,  bcomp_height, this.nodes_depth[i], 0, this.nodes_parent[i], this.nodes_width[i])
+            new_node = new Node(i, x, y - bcomp_height/2, bcomp_width,  bcomp_height, this.nodes_depth[i], 0, this.nodes_parent[i], this.nodes_width[i], this.nodes_internal_size[i])
             new_node.draw()
             this.graphics_nodes.push(new_node)
         }
@@ -285,6 +271,7 @@ function draw_graph(){
                 if(draw == true){
                     newCvToCv = new CvToCv(x_temp,y_temp,3,segment,0.5, this.nodes_depth[this.nodes_parent[i]])
                     newCvToCv.draw()
+                    this.graphics_nodes[i].addCv2Cv(newCvToCv)
                     this.graphics_cvTocv.push(newCvToCv)
                     draw = false;
                 }
@@ -458,6 +445,52 @@ function coreness_filtering(){
     }
 }
 
+function nodes_filtering_init(){
+    slide = document.getElementById("nodeFilter")
+    val = document.getElementById("slideValue")
+    slide.max = max_internal_size
+    val.value = slide.value
+}
+
+function nodes_filtering(event){
+    slide = document.getElementById("nodeFilter")
+    val = document.getElementById("slideValue")
+    if(event.srcElement == slide)
+        val.value = slide.value
+    if(event.srcElement == val)
+        slide.value = val.value
+    for(var i in graphics_nodes){
+        if(graphics_nodes[i].getType() == 0){
+            if(graphics_nodes[i].getIntSize() < slide.value){
+                graphics_nodes[i].setAlpha(0)
+            }
+            else{
+                graphics_nodes[i].setAlpha(1)
+            }
+        }
+        else{
+            toFilter = true
+            for(var j in graphics_nodes[i].edges){
+                e = graphics_nodes[i].edges[j]
+                toFilter = toFilter && graphics_nodes[e.getTarget()].getIntSize() < slide.value
+            if(toFilter){
+                graphics_nodes[i].setAlpha(0)
+                for(var k in graphics_nodes[i].cv2cv){
+                    graphics_nodes[i].cv2cv[k].setAlpha(0)
+                }
+            }
+            else{
+                graphics_nodes[i].setAlpha(1)
+                for(var k in graphics_nodes[i].cv2cv){
+                    graphics_nodes[i].cv2cv[k].setAlpha(0.5)
+                }
+            }
+            }
+        }
+
+    }
+}
+
 /*  CLASSI  */
 class Edge extends PIXI.Sprite{
     constructor(s, t, x, y, width, height, alpha, depth){
@@ -493,7 +526,7 @@ class Edge extends PIXI.Sprite{
 
 class Node extends PIXI.Sprite{
 
-    constructor(id, x, y, width, height, depth, type, parent, leaf){
+    constructor(id, x, y, width, height, depth, type, parent, leaf, internal_size){
         if(type == 1){
             super(texture_CV)
         }
@@ -509,8 +542,10 @@ class Node extends PIXI.Sprite{
         this.type = type
         this.parentNode = parent
         this.leaf = leaf
+        this.int_size = internal_size
         this.interactive = true
         this.edges = []
+        this.cv2cv = []
     }
 
     draw(){ app.stage.addChild(this); }
@@ -523,6 +558,7 @@ class Node extends PIXI.Sprite{
         console.log("questo nodo ha "+this.width+" width")
         console.log("questo nodo ha "+this.height+" height")
         console.log("questo nodo ha "+this.alpha+" alpha")
+        console.log(this.cv2cv)
         app.renderer.render(this)
         this.edges.forEach(edge => edge.setAlpha(0.3))
         hidden_edges = false
@@ -535,6 +571,8 @@ class Node extends PIXI.Sprite{
         new_edges = this.edges.splice(index,1)
         this.edges = new_edges
     }
+
+    addCv2Cv(c){ this.cv2cv.push(c) }
 
     /*  Getter and Setter   */
     getX(){ return this.x }
@@ -560,6 +598,8 @@ class Node extends PIXI.Sprite{
 
     getLeaf(){ return this.leaf }
     setLeaf(l){ this.leaf = l }
+
+    getIntSize(){ return this.int_size }
 
     setAlpha(a){ this.alpha = a; }
 }
