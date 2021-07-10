@@ -1,0 +1,29 @@
+
+====================== ANALISI DEL GRAFO amazon505_new ======================
+
+numero di archi: 3356824	numero di vertici: 410236
+	- Tasso di decrescita del numero di componenti biconnesse: -28.556%
+	- Tasso di decrescita del numero di vertici di taglio: -38.566%
+
+| LIV. CORENESS |			|# COMPONENTI CONNESSE|			|# BLOCCHI|			|# CUT-VERTEX|			|# NUOVI CV|			|# BLOCCHI 1 EDGE|
+
+		1							1							21662						19307						0						1455
+		2							1							12545						11837						0						901
+		3							1							840						836						2						116
+		4							3							719						714						29						119
+		5							4							233						229						13						52
+		6							9							225						216						11						48
+		7							6							173						167						16						44
+		8							9							187						178						21						49
+		9							14							163						149						10						41
+		10							23							195						171						34						47
+		11							51							254						202						69						62
+		12							198							637						438						333						134
+		13							795							1890						1063						885						374
+		14							1248							2263						949						568						375
+		15							1080							1547						422						170						180
+		16							782							909						119						18						47
+		17							382							403						19						0						7
+		18							212							215						3						0						1
+		19							60							60						0						0						0
+		20							26							26						0						0						0

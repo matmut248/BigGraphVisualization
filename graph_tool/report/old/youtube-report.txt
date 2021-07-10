@@ -1,0 +1,150 @@
+
+====================== ANALISI DEL 1 CORE ======================
+
+il grafo ha 1134890 nodi e 2987624 archi
+numero di componenti connesse: 1
+numero di componenti biconnesse: 673661
+numero di vertici di taglio: 223409
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 1134890
+	numero di archi: 2987624
+	numero di vertici di taglio: 223409
+	numero nodi del BC-Tree: 897070
+	numero blocchi (NODI B) del BC-Tree: 673661
+	numero vertici di taglio (NODI C) del BC-Tree: 223409
+
+====================== ANALISI DEL 2 CORE ======================
+
+il grafo ha 470164 nodi e 2322898 archi
+numero di componenti connesse: 1
+numero di componenti biconnesse: 8935
+numero di vertici di taglio: 8387
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 470164
+	numero di archi: 2322898
+	numero di vertici di taglio: 8387
+	numero nodi del BC-Tree: 17322
+	numero blocchi (NODI B) del BC-Tree: 8935
+	numero vertici di taglio (NODI C) del BC-Tree: 8387
+
+====================== ANALISI DEL 3 CORE ======================
+
+il grafo ha 268721 nodi e 1946353 archi
+numero di componenti connesse: 65
+numero di componenti biconnesse: 808
+numero di vertici di taglio: 732
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 268399
+	numero di archi: 1945732
+	numero di vertici di taglio: 731
+	numero nodi del BC-Tree: 1474
+	numero blocchi (NODI B) del BC-Tree: 743
+	numero vertici di taglio (NODI C) del BC-Tree: 731
+
+	------ analisi della componente connessa #32 ------
+	numero di nodi: 10
+	numero di archi: 20
+	numero di vertici di taglio: 1
+	numero nodi del BC-Tree: 3
+	numero blocchi (NODI B) del BC-Tree: 2
+	numero vertici di taglio (NODI C) del BC-Tree: 1
+
+====================== ANALISI DEL 4 CORE ======================
+
+il grafo ha 180424 nodi e 1695995 archi
+numero di componenti connesse: 22
+numero di componenti biconnesse: 132
+numero di vertici di taglio: 110
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 180283
+	numero di archi: 1695612
+	numero di vertici di taglio: 110
+	numero nodi del BC-Tree: 221
+	numero blocchi (NODI B) del BC-Tree: 111
+	numero vertici di taglio (NODI C) del BC-Tree: 110
+
+====================== ANALISI DEL 5 CORE ======================
+
+il grafo ha 132879 nodi e 1513729 archi
+numero di componenti connesse: 7
+numero di componenti biconnesse: 41
+numero di vertici di taglio: 34
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 132826
+	numero di archi: 1513547
+	numero di vertici di taglio: 34
+	numero nodi del BC-Tree: 69
+	numero blocchi (NODI B) del BC-Tree: 35
+	numero vertici di taglio (NODI C) del BC-Tree: 34
+
+====================== ANALISI DEL 6 CORE ======================
+
+il grafo ha 104436 nodi e 1376013 archi
+numero di componenti connesse: 5
+numero di componenti biconnesse: 11
+numero di vertici di taglio: 6
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 104397
+	numero di archi: 1375859
+	numero di vertici di taglio: 6
+	numero nodi del BC-Tree: 13
+	numero blocchi (NODI B) del BC-Tree: 7
+	numero vertici di taglio (NODI C) del BC-Tree: 6
+
+====================== ANALISI DEL 7 CORE ======================
+
+il grafo ha 85212 nodi e 1263401 archi
+numero di componenti connesse: 2
+numero di componenti biconnesse: 6
+numero di vertici di taglio: 4
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 85200
+	numero di archi: 1263344
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 9
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+====================== ANALISI DEL 8 CORE ======================
+
+il grafo ha 71244 nodi e 1167638 archi
+numero di componenti connesse: 3
+numero di componenti biconnesse: 5
+numero di vertici di taglio: 2
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 71206
+	numero di archi: 1167389
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+====================== ANALISI DEL 9 CORE ======================
+
+il grafo ha 60909 nodi e 1086347 archi
+numero di componenti connesse: 2
+numero di componenti biconnesse: 3
+numero di vertici di taglio: 1
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 60883
+	numero di archi: 1086155
+	numero di vertici di taglio: 1
+	numero nodi del BC-Tree: 3
+	numero blocchi (NODI B) del BC-Tree: 2
+	numero vertici di taglio (NODI C) del BC-Tree: 1
+
+====================== ANALISI DEL 10 CORE ======================
+
+il grafo ha 52671 nodi e 1013501 archi
+numero di componenti connesse: 2
+numero di componenti biconnesse: 2
+numero di vertici di taglio: 0

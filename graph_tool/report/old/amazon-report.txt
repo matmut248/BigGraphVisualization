@@ -1,0 +1,874 @@
+
+====================== ANALISI DEL 1 CORE ======================
+
+il grafo ha 334863 nodi e 925872 archi
+numero di componenti connesse: 1
+numero di componenti biconnesse: 35494
+numero di vertici di taglio: 28197
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 334863
+	numero di archi: 925872
+	numero di vertici di taglio: 28197
+	numero nodi del BC-Tree: 63691
+	numero blocchi (NODI B) del BC-Tree: 35494
+	numero vertici di taglio (NODI C) del BC-Tree: 28197
+
+====================== ANALISI DEL 2 CORE ======================
+
+il grafo ha 305892 nodi e 896901 archi
+numero di componenti connesse: 1
+numero di componenti biconnesse: 6523
+numero di vertici di taglio: 6272
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 305892
+	numero di archi: 896901
+	numero di vertici di taglio: 6272
+	numero nodi del BC-Tree: 12795
+	numero blocchi (NODI B) del BC-Tree: 6523
+	numero vertici di taglio (NODI C) del BC-Tree: 6272
+
+====================== ANALISI DEL 3 CORE ======================
+
+il grafo ha 255473 nodi e 802913 archi
+numero di componenti connesse: 421
+numero di componenti biconnesse: 3800
+numero di vertici di taglio: 3290
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 250759
+	numero di archi: 790270
+	numero di vertici di taglio: 3171
+	numero nodi del BC-Tree: 6427
+	numero blocchi (NODI B) del BC-Tree: 3256
+	numero vertici di taglio (NODI C) del BC-Tree: 3171
+
+	------ analisi della componente connessa #25 ------
+	numero di nodi: 219
+	numero di archi: 735
+	numero di vertici di taglio: 16
+	numero nodi del BC-Tree: 33
+	numero blocchi (NODI B) del BC-Tree: 17
+	numero vertici di taglio (NODI C) del BC-Tree: 16
+
+	------ analisi della componente connessa #34 ------
+	numero di nodi: 65
+	numero di archi: 179
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 10
+	numero blocchi (NODI B) del BC-Tree: 6
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #48 ------
+	numero di nodi: 27
+	numero di archi: 61
+	numero di vertici di taglio: 5
+	numero nodi del BC-Tree: 11
+	numero blocchi (NODI B) del BC-Tree: 6
+	numero vertici di taglio (NODI C) del BC-Tree: 5
+
+	------ analisi della componente connessa #80 ------
+	numero di nodi: 70
+	numero di archi: 197
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 9
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #101 ------
+	numero di nodi: 76
+	numero di archi: 180
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 9
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #104 ------
+	numero di nodi: 22
+	numero di archi: 51
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 10
+	numero blocchi (NODI B) del BC-Tree: 6
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+====================== ANALISI DEL 4 CORE ======================
+
+il grafo ha 169008 nodi e 572762 archi
+numero di componenti connesse: 1044
+numero di componenti biconnesse: 3335
+numero di vertici di taglio: 2218
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 157331
+	numero di archi: 538086
+	numero di vertici di taglio: 2036
+	numero nodi del BC-Tree: 4135
+	numero blocchi (NODI B) del BC-Tree: 2099
+	numero vertici di taglio (NODI C) del BC-Tree: 2036
+
+	------ analisi della componente connessa #15 ------
+	numero di nodi: 50
+	numero di archi: 137
+	numero di vertici di taglio: 9
+	numero nodi del BC-Tree: 20
+	numero blocchi (NODI B) del BC-Tree: 11
+	numero vertici di taglio (NODI C) del BC-Tree: 9
+
+	------ analisi della componente connessa #17 ------
+	numero di nodi: 26
+	numero di archi: 69
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 7
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #20 ------
+	numero di nodi: 38
+	numero di archi: 109
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 9
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #48 ------
+	numero di nodi: 51
+	numero di archi: 144
+	numero di vertici di taglio: 6
+	numero nodi del BC-Tree: 13
+	numero blocchi (NODI B) del BC-Tree: 7
+	numero vertici di taglio (NODI C) del BC-Tree: 6
+
+	------ analisi della componente connessa #124 ------
+	numero di nodi: 45
+	numero di archi: 132
+	numero di vertici di taglio: 7
+	numero nodi del BC-Tree: 16
+	numero blocchi (NODI B) del BC-Tree: 9
+	numero vertici di taglio (NODI C) del BC-Tree: 7
+
+	------ analisi della componente connessa #131 ------
+	numero di nodi: 22
+	numero di archi: 57
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 8
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #163 ------
+	numero di nodi: 45
+	numero di archi: 130
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 9
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #196 ------
+	numero di nodi: 31
+	numero di archi: 96
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 7
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #211 ------
+	numero di nodi: 36
+	numero di archi: 121
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 8
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #226 ------
+	numero di nodi: 55
+	numero di archi: 151
+	numero di vertici di taglio: 5
+	numero nodi del BC-Tree: 12
+	numero blocchi (NODI B) del BC-Tree: 7
+	numero vertici di taglio (NODI C) del BC-Tree: 5
+
+	------ analisi della componente connessa #227 ------
+	numero di nodi: 21
+	numero di archi: 49
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 9
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #230 ------
+	numero di nodi: 24
+	numero di archi: 69
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 7
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #235 ------
+	numero di nodi: 45
+	numero di archi: 160
+	numero di vertici di taglio: 5
+	numero nodi del BC-Tree: 13
+	numero blocchi (NODI B) del BC-Tree: 8
+	numero vertici di taglio (NODI C) del BC-Tree: 5
+
+	------ analisi della componente connessa #240 ------
+	numero di nodi: 38
+	numero di archi: 110
+	numero di vertici di taglio: 5
+	numero nodi del BC-Tree: 11
+	numero blocchi (NODI B) del BC-Tree: 6
+	numero vertici di taglio (NODI C) del BC-Tree: 5
+
+	------ analisi della componente connessa #241 ------
+	numero di nodi: 31
+	numero di archi: 103
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 8
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #336 ------
+	numero di nodi: 25
+	numero di archi: 70
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 7
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #482 ------
+	numero di nodi: 15
+	numero di archi: 32
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 9
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #759 ------
+	numero di nodi: 22
+	numero di archi: 57
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 8
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+====================== ANALISI DEL 5 CORE ======================
+
+il grafo ha 57499 nodi e 208384 archi
+numero di componenti connesse: 1652
+numero di componenti biconnesse: 2889
+numero di vertici di taglio: 1177
+
+	------ analisi della componente connessa #0 ------
+	numero di nodi: 36878
+	numero di archi: 139573
+	numero di vertici di taglio: 927
+	numero nodi del BC-Tree: 1903
+	numero blocchi (NODI B) del BC-Tree: 976
+	numero vertici di taglio (NODI C) del BC-Tree: 927
+
+	------ analisi della componente connessa #10 ------
+	numero di nodi: 17
+	numero di archi: 53
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #44 ------
+	numero di nodi: 55
+	numero di archi: 179
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #63 ------
+	numero di nodi: 32
+	numero di archi: 96
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #67 ------
+	numero di nodi: 22
+	numero di archi: 76
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #71 ------
+	numero di nodi: 35
+	numero di archi: 118
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 7
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #83 ------
+	numero di nodi: 42
+	numero di archi: 147
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 7
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #100 ------
+	numero di nodi: 40
+	numero di archi: 150
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #118 ------
+	numero di nodi: 57
+	numero di archi: 206
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #123 ------
+	numero di nodi: 21
+	numero di archi: 70
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #127 ------
+	numero di nodi: 54
+	numero di archi: 219
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #130 ------
+	numero di nodi: 28
+	numero di archi: 104
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #149 ------
+	numero di nodi: 145
+	numero di archi: 497
+	numero di vertici di taglio: 16
+	numero nodi del BC-Tree: 34
+	numero blocchi (NODI B) del BC-Tree: 18
+	numero vertici di taglio (NODI C) del BC-Tree: 16
+
+	------ analisi della componente connessa #157 ------
+	numero di nodi: 63
+	numero di archi: 196
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 11
+	numero blocchi (NODI B) del BC-Tree: 7
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #167 ------
+	numero di nodi: 89
+	numero di archi: 316
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 9
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #169 ------
+	numero di nodi: 30
+	numero di archi: 90
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 7
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #171 ------
+	numero di nodi: 37
+	numero di archi: 140
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #187 ------
+	numero di nodi: 41
+	numero di archi: 126
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 9
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #192 ------
+	numero di nodi: 153
+	numero di archi: 543
+	numero di vertici di taglio: 5
+	numero nodi del BC-Tree: 11
+	numero blocchi (NODI B) del BC-Tree: 6
+	numero vertici di taglio (NODI C) del BC-Tree: 5
+
+	------ analisi della componente connessa #214 ------
+	numero di nodi: 23
+	numero di archi: 83
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #215 ------
+	numero di nodi: 23
+	numero di archi: 71
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #228 ------
+	numero di nodi: 42
+	numero di archi: 125
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 8
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #229 ------
+	numero di nodi: 47
+	numero di archi: 154
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 8
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #234 ------
+	numero di nodi: 24
+	numero di archi: 86
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #251 ------
+	numero di nodi: 18
+	numero di archi: 61
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #256 ------
+	numero di nodi: 36
+	numero di archi: 119
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 7
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #262 ------
+	numero di nodi: 26
+	numero di archi: 88
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #266 ------
+	numero di nodi: 31
+	numero di archi: 95
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #281 ------
+	numero di nodi: 16
+	numero di archi: 48
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #287 ------
+	numero di nodi: 19
+	numero di archi: 61
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #289 ------
+	numero di nodi: 54
+	numero di archi: 174
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 10
+	numero blocchi (NODI B) del BC-Tree: 6
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #292 ------
+	numero di nodi: 58
+	numero di archi: 189
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 10
+	numero blocchi (NODI B) del BC-Tree: 6
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #327 ------
+	numero di nodi: 24
+	numero di archi: 71
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 7
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #335 ------
+	numero di nodi: 57
+	numero di archi: 191
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 7
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #337 ------
+	numero di nodi: 38
+	numero di archi: 129
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #350 ------
+	numero di nodi: 13
+	numero di archi: 35
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #361 ------
+	numero di nodi: 25
+	numero di archi: 75
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 6
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #372 ------
+	numero di nodi: 33
+	numero di archi: 103
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 7
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #387 ------
+	numero di nodi: 24
+	numero di archi: 73
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #404 ------
+	numero di nodi: 19
+	numero di archi: 61
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #420 ------
+	numero di nodi: 86
+	numero di archi: 334
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 8
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #444 ------
+	numero di nodi: 60
+	numero di archi: 196
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 9
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #446 ------
+	numero di nodi: 36
+	numero di archi: 128
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 8
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #453 ------
+	numero di nodi: 51
+	numero di archi: 180
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 9
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #458 ------
+	numero di nodi: 13
+	numero di archi: 35
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #459 ------
+	numero di nodi: 63
+	numero di archi: 240
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 7
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #470 ------
+	numero di nodi: 42
+	numero di archi: 149
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #504 ------
+	numero di nodi: 40
+	numero di archi: 150
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #531 ------
+	numero di nodi: 24
+	numero di archi: 88
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #541 ------
+	numero di nodi: 18
+	numero di archi: 58
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #582 ------
+	numero di nodi: 31
+	numero di archi: 103
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 8
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #593 ------
+	numero di nodi: 15
+	numero di archi: 45
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #644 ------
+	numero di nodi: 19
+	numero di archi: 62
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #650 ------
+	numero di nodi: 20
+	numero di archi: 64
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #662 ------
+	numero di nodi: 71
+	numero di archi: 236
+	numero di vertici di taglio: 5
+	numero nodi del BC-Tree: 11
+	numero blocchi (NODI B) del BC-Tree: 6
+	numero vertici di taglio (NODI C) del BC-Tree: 5
+
+	------ analisi della componente connessa #695 ------
+	numero di nodi: 16
+	numero di archi: 49
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #700 ------
+	numero di nodi: 41
+	numero di archi: 132
+	numero di vertici di taglio: 5
+	numero nodi del BC-Tree: 11
+	numero blocchi (NODI B) del BC-Tree: 6
+	numero vertici di taglio (NODI C) del BC-Tree: 5
+
+	------ analisi della componente connessa #711 ------
+	numero di nodi: 35
+	numero di archi: 139
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #748 ------
+	numero di nodi: 16
+	numero di archi: 47
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #755 ------
+	numero di nodi: 33
+	numero di archi: 119
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #770 ------
+	numero di nodi: 26
+	numero di archi: 89
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 6
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #801 ------
+	numero di nodi: 36
+	numero di archi: 149
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #802 ------
+	numero di nodi: 46
+	numero di archi: 154
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #879 ------
+	numero di nodi: 39
+	numero di archi: 164
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #908 ------
+	numero di nodi: 28
+	numero di archi: 92
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #940 ------
+	numero di nodi: 14
+	numero di archi: 39
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #953 ------
+	numero di nodi: 16
+	numero di archi: 47
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #1000 ------
+	numero di nodi: 14
+	numero di archi: 40
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #1007 ------
+	numero di nodi: 27
+	numero di archi: 78
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #1023 ------
+	numero di nodi: 27
+	numero di archi: 89
+	numero di vertici di taglio: 4
+	numero nodi del BC-Tree: 9
+	numero blocchi (NODI B) del BC-Tree: 5
+	numero vertici di taglio (NODI C) del BC-Tree: 4
+
+	------ analisi della componente connessa #1027 ------
+	numero di nodi: 22
+	numero di archi: 64
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #1039 ------
+	numero di nodi: 21
+	numero di archi: 68
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #1074 ------
+	numero di nodi: 19
+	numero di archi: 65
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #1217 ------
+	numero di nodi: 26
+	numero di archi: 85
+	numero di vertici di taglio: 3
+	numero nodi del BC-Tree: 7
+	numero blocchi (NODI B) del BC-Tree: 4
+	numero vertici di taglio (NODI C) del BC-Tree: 3
+
+	------ analisi della componente connessa #1268 ------
+	numero di nodi: 26
+	numero di archi: 87
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+	------ analisi della componente connessa #1309 ------
+	numero di nodi: 13
+	numero di archi: 35
+	numero di vertici di taglio: 2
+	numero nodi del BC-Tree: 5
+	numero blocchi (NODI B) del BC-Tree: 3
+	numero vertici di taglio (NODI C) del BC-Tree: 2
+
+====================== ANALISI DEL 6 CORE ======================
+
+il grafo ha 497 nodi e 1683 archi
+numero di componenti connesse: 55
+numero di componenti biconnesse: 55
+numero di vertici di taglio: 0

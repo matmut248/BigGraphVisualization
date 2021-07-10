@@ -1,0 +1,15 @@
+
+====================== ANALISI DEL GRAFO amazon_new ======================
+
+numero di archi: 925872	numero di vertici: 334863
+	- Tasso di decrescita del numero di componenti biconnesse: -65.983%
+	- Tasso di decrescita del numero di vertici di taglio: -47.02%
+
+| LIV. CORENESS |			|# COMPONENTI CONNESSE|			|# BLOCCHI|			|# CUT-VERTEX|			|# NUOVI CV|			|# BLOCCHI 1 EDGE|
+
+		1							1							35494						28197						0						6024
+		2							1							6523						6272						0						2429
+		3							421							3800						3290						887						1188
+		4							1044							3335						2218						1300						789
+		5							1652							2889						1177						978						408
+		6							55							55						0						0						0

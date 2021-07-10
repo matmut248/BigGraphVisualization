@@ -1,0 +1,12 @@
+
+====================== ANALISI DEL GRAFO prova ======================
+
+numero di archi: 66	numero di vertici: 42
+	- Tasso di decrescita del numero di componenti biconnesse: -8.374%
+	- Tasso di decrescita del numero di vertici di taglio: -14.501%
+
+| LIV. CORENESS |			|# COMPONENTI CONNESSE|			|# BLOCCHI|			|# CUT-VERTEX|			|# NUOVI CV|			|# BLOCCHI 1 EDGE|
+
+		1							4							13						8						0						4
+		2							4							11						6						0						4
+		3							4							10						5						1						3
