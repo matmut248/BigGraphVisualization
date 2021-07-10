@@ -5,9 +5,9 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'src'))
 import big_graph_analisys as bga
-import bc_tree as bc
+import cc_tree as cct
 
-
+@unittest.skip("")
 class ConnectivityTest(unittest.TestCase):
     def test_num_edge(self):
         g = gc.connected_simple_graph()
@@ -25,120 +25,66 @@ class ConnectivityTest(unittest.TestCase):
         self.assertEqual(len(hist1), 1)
         self.assertEqual(len(hist2), 2)
 
-class BCTreeTest(unittest.TestCase):
+@unittest.skip("")
+class CCTreeTest(unittest.TestCase):
 
-    g1 = gc.connected_simple_graph()
-    g2 = gc.graph_for_bc_testing()
-    g3 = gc.graph_for_bc_testing_2()
+    g = gt.load_graph("../gml/stanford.gml")
+    #g = gt.random_graph(3000000, lambda: randint(3,20), directed=False)
+    #print(g.num_edges())
+    #g.set_directed(False)
+    gt.remove_self_loops(g)
+    gt.remove_parallel_edges(g)
 
-    _, cv, _ = gt.label_biconnected_components(g1)
-    _, cv2, _ = gt.label_biconnected_components(g2)
-    _, cv3, _ = gt.label_biconnected_components(g3)
 
+    # un vertice di taglio appartiene almeno a due componenti biconnesse
     #@unittest.skip("")
-    def test_num_cv(self):
-        adj_matrix = gt.adjacency(self.g1)
-        bct = bc.BCTree(self.g1, adj_matrix)
-        self.assertEqual(bct.num_Ccomp, 1)
+    def test_cv_num_edges(self):
+        bcomp, cv, _ = gt.label_biconnected_components(self.g)  # componenti biconnesse
+        for v in self.g.vertices():
+            if cv[v] == 1:
+                edges = self.g.get_all_edges(v)
+                myset = set()
+                for temp in edges:
+                    e = self.g.edge(temp[0], temp[1])
+                    myset.add(bcomp[e])
+                self.assertGreaterEqual(len(myset), 2, msg="il nodo errato è " + str(v))
+        print("finito")
 
+    # un vertice normale appartiene ad una sola componente biconnessa
     #@unittest.skip("")
-    def test_num_nodes(self):
-        adj_matrix = gt.adjacency(self.g1)
-        bct = bc.BCTree(self.g1, adj_matrix)
-        self.assertEqual(bct.bctree.num_vertices(), 4)
+    def test_no_cv_lost(self):
+        bcomp, cv, _ = gt.label_biconnected_components(self.g)  # componenti biconnesse
+        for v in self.g.vertices():
+            if cv[v] == 0:
+                edges = self.g.get_all_edges(v)
+                myset = set()
+                if len(edges) > 0:
+                    for temp in edges:
+                        e = self.g.edge(temp[0], temp[1])
+                        myset.add(bcomp[e])
+                    self.assertEqual(len(myset), 1, msg="il nodo errato è " + str(v) + " con numero di bcomp = " + str(len(myset)))
+        print("finito")
 
-    #@unittest.skip("")
-    def test_num_edge(self):
-        adj_matrix = gt.adjacency(self.g1)
-        bct = bc.BCTree(self.g1, adj_matrix)
-        self.assertEqual(bct.bctree.num_edges(), 3)
+    # gli archi dei nuovi vertici di taglio devono essere connessi a blocchi che condividono lo stesso padre nel cctree
+    # quindi a livello visivo saranno inclusi nel blocco al livello n-1
+    # @unittest.skip("")
+    def test_cctree_same_parent(self):
+        cc = cct.CCTree(self.g)
+        parents = []
+        for v in cc.cct_graph.vertices():
+            if cc.cctNode2typeOfNode[v] == 1 and cc.cctNode2depth[v] > 1 and cc.cctNode2typeOfNode[cc.cctNode2parent[v]] == 0:
+                edges = cc.cct_graph.get_all_edges(v)
+                for e in edges:
+                    if e[1] != cc.cctNode2parent[v] and v != cc.cctNode2parent[e[1]]:
+                        parents.append(cc.cctNode2parent[e[1]])
+                self.assertEqual(parents.count(parents[0]), len(parents), msg=str(parents)+str(v))
+                parents.clear()
+        print("finito")
 
-    #@unittest.skip("")
-    def test_init_bctree(self):
-        adj_matrix = gt.adjacency(self.g1)
-        bct = bc.BCTree(self.g1, adj_matrix)
-        self.assertEqual(bct.bctree.num_edges(), 3)
-        self.assertEqual(bct.bctree.num_vertices(), 4)
-        self.assertEqual(bct.num_Bcomp, 3)
-        self.assertEqual(bct.num_Ccomp, 1)
-
-    #@unittest.skip("")
-    def test_bcomp_bctree(self):
-        adj_matrix = gt.adjacency(self.g2)
-        bct = bc.BCTree(self.g2, adj_matrix)
-        self.assertEqual(bct.bctree.num_edges(), 3)
-        self.assertEqual(bct.bctree.num_vertices(), 4)
-
-    #@unittest.skip("")
-    def test_bcomp_bctree_2(self):
-        adj_matrix = gt.adjacency(self.g3)
-        bct = bc.BCTree(self.g3, adj_matrix)
-        self.assertEqual(bct.bctree.num_edges(), 5)
-        self.assertEqual(bct.bctree.num_vertices(), 6)
-
-    #@unittest.skip("")
-    def test_gnode2bcnode(self):
-        g = gc.graph_for_bc_testing_3()
-        adj_matrix = gt.adjacency(g)
-        bct = bc.BCTree(g, adj_matrix)
-        self.assertEquals(bct.node2isCcomp[bct.gNode2bcNode[0]], 0)
-        self.assertEquals(bct.node2isCcomp[bct.gNode2bcNode[1]], 1)
-        self.assertEquals(bct.node2isCcomp[bct.gNode2bcNode[2]], 1)
-        self.assertEquals(bct.node2isCcomp[bct.gNode2bcNode[3]], 1)
-        self.assertEquals(bct.node2isCcomp[bct.gNode2bcNode[4]], 0)
-        self.assertEquals(bct.node2isBcomp[bct.gNode2bcNode[0]], 1)
-        self.assertEquals(bct.node2isBcomp[bct.gNode2bcNode[1]], 0)
-        self.assertEquals(bct.node2isBcomp[bct.gNode2bcNode[2]], 0)
-        self.assertEquals(bct.node2isBcomp[bct.gNode2bcNode[3]], 0)
-        self.assertEquals(bct.node2isBcomp[bct.gNode2bcNode[4]], 1)
-
-
-class CVmapTest(unittest.TestCase):
-
-    #@unittest.skip("")
-    def test_cv_map_2core(self):
-        # G è un grafo con 6 cv (da o a 5), ma solo 2 e 3 lo sono anche se k = 2
-        # con k = 3 non ho più nodi
-        G = gt.Graph()
-        G.set_directed(False)
-        G.add_vertex(10)
-        G.add_edge_list([(0, 1), (0, 2), (1, 2), (0, 6), (1, 9), (2, 3), (3, 4), (4, 5), (5, 3), (4, 7), (5, 8)])
-        cv_map, _ = bga.map_iterative(G)
-        self.assertListEqual(list(cv_map[0]),[0,1])
-        self.assertListEqual(list(cv_map[1]),[0,1])
-        self.assertListEqual(list(cv_map[2]),[0,2])
-        self.assertListEqual(list(cv_map[3]),[0,2])
-        self.assertListEqual(list(cv_map[4]),[0,1])
-        self.assertListEqual(list(cv_map[5]),[0,1])
-
-    def test_cv_map_3core(self):
-        # G è un grafo con 2 cv (0 e 4), fino a k=3
-        G = gt.Graph()
-        G.set_directed(False)
-        G.add_vertex(8)
-        G.add_edge_list([(0, 1), (0, 2), (0, 3), (1, 2), (3, 2), (1, 3), (4, 5),(4, 6),(4, 7),(5, 6),(6,7),(7,5),(0, 4),])
-        cv_map, _ = bga.map_iterative(G)
-        self.assertListEqual(list(cv_map[0]),[0,3])
-        self.assertListEqual(list(cv_map[1]),[])
-        self.assertListEqual(list(cv_map[2]),[])
-        self.assertListEqual(list(cv_map[3]),[])
-        self.assertListEqual(list(cv_map[4]),[0,3])
-        self.assertListEqual(list(cv_map[5]),[])
-        self.assertListEqual(list(cv_map[5]),[])
-
-    def test_core2comp_map_connected(self):
-        g = gc.connected_simple_graph()
-        _, core2comp_map = bga.map_iterative(g)
-        for v in g.iter_vertices():
-            self.assertEqual(core2comp_map[v],[0,0])
-
-    def test_core2comp_map_notConnected(self):
-        g = gc.not_connected_graph()
-        _, core2comp_map = bga.map_iterative(g)
-        self.assertEqual(core2comp_map[0],[0,0])
-        self.assertEqual(core2comp_map[1],[0,0])
-        self.assertEqual(core2comp_map[2],[1,1])
-        self.assertEqual(core2comp_map[3],[1,1])
+    #i vertici di taglio possono avere solo archi (del grafo originale) che appartengono a blocchi a loro connessi
+    @unittest.skip("")
+    def test_todo(self):
+        pass
 
 
 if __name__ == '__main__':
