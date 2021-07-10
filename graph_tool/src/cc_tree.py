@@ -38,18 +38,18 @@ from memory_profiler import profile
 class CCTree:
 
     maxDepth = 0
-    num_nodes_in_layer = [0,0]
-    num_compB = [0,0]                                          #numero di componenti B per ogni livello di coreness
-    num_compC = [0,0]                                          #numero di componenti C per ogni livello di coreness
+    num_nodes_in_layer = [0, 0]
+    num_compB = [0, 0]                                          #numero di componenti B per ogni livello di coreness
+    num_compC = [0, 0]                                          #numero di componenti C per ogni livello di coreness
 
     #una comp C è nuova se il parent è una comp B
-    num_new_compC = [0,0]                                      #numero di componenti C nuove rispetto al livello precedente di coreness
+    num_new_compC = [0, 0]                                      #numero di componenti C nuove rispetto al livello precedente di coreness
     #una componente B è triviale se contiene solo un arco
-    num_comp_trivial = [0,0]                                   #numero di componenti triviali
-    num_comp_conn = [0,0]                                 #numero di componenti connesse
+    num_comp_trivial = [0, 0]                                   #numero di componenti triviali
+    num_comp_conn = [0, 0]                                 #numero di componenti connesse
 
     initial_g = gt.Graph()                                  #il grafo iniziale
-    initial_g.set_directed(False)
+    #initial_g.set_directed(False)
     cct_graph = gt.Graph()                                  #il core-cutvertex tree
     cct_graph.set_directed(False)
 
@@ -78,6 +78,8 @@ class CCTree:
 
 
     def __init__(self, g):
+        gt.remove_self_loops(g)
+        gt.remove_parallel_edges(g)
         self.initial_g = g.copy()
         self.adj_matrix_g = gt.adjacency(self.initial_g)
         kval = gt.kcore_decomposition(g)
@@ -100,7 +102,7 @@ class CCTree:
             k += 1
         print("calcolo width")
         start = timeit.default_timer()
-        #self.viusalization_width();
+        self.viusalization_width()
         time = timeit.default_timer() - start
         print("fine calcolo width in " +str(time))
 
@@ -121,6 +123,7 @@ class CCTree:
     def init_cctree(self, g, k):
         start = timeit.default_timer()
         g.set_directed(False)
+        gt.remove_parallel_edges(g)
         bcomp, cv, _ = gt.label_biconnected_components(g)   # componenti biconnesse
         _, hist = gt.label_components(g)
         self.num_comp_conn[k] = len(hist)
@@ -130,7 +133,7 @@ class CCTree:
         for n_bcomp in bcomp.a:                             #inizializzo bcomp2bc_nodes
             bcomp2bc_nodes[n_bcomp] = None
 
-        for temp in g_cv.vertices():                        #temp è un cv del grafo iniziale
+        for temp in                        #temp è un cv del grafo iniziale
 
             v = self.cct_graph.add_vertex()                 #v è un cv del cctree
             self.cctNode2children[v] = []
@@ -151,15 +154,11 @@ class CCTree:
 
             self.gNode2cctMaxDepthNode[temp] = v          #temp corrisponde a v
 
-            adjs = self.adj_matrix_g[int(temp)].indices        #adiacenze del vertice di taglio v
+            adjs = g.get_all_edges(temp)        #adiacenze del vertice di taglio v
             #print("cv = "+str(temp)+"  adjs: "+str(adjs))
             for adj in adjs:
-                try:
-                    w = g.vertex(adj)                   # w è adiacente a temp nel grafo originale
-                    e = g.edge(temp,w)
-                except ValueError:
-                    continue
-
+                w = g.vertex(adj[1])
+                e = g.edge(temp, w)
                 if bcomp2bc_nodes[bcomp[e]] is None:            #se non ho già visitato la bcomp
                     new_bcomp_node = self.cct_graph.add_vertex()   #new_bcomp_node è una componente B del bctree
                     self.cctNode2children[new_bcomp_node] = []
@@ -247,7 +246,6 @@ class CCTree:
                     curr_node = parent
         self.cct_graph.vp["cctNode2width"] = self.cctNode2width
 
-
     def size(self):
         size = self.cct_graph.new_vp("int")
         for v in self.cct_graph.vertices():
@@ -296,7 +294,7 @@ class CCTree:
 
     def draw_cctree(self):
         gt.graph_draw(self.initial_g, vertex_text=self.initial_g.vertex_index)
-        gt.graph_draw(self.cct_graph, pos = self.vertices_pos(), vertex_text=self.cct_graph.vertex_index, vertex_fill_color=self.color(), vertex_size=self.size(),
+        gt.graph_draw(self.cct_graph, pos=self.vertices_pos(), vertex_text=self.cct_graph.vertex_index, vertex_fill_color=self.color(), vertex_size=self.size(),
                       vertex_font_size=10, vertex_font_weight=cairo.FONT_WEIGHT_BOLD,edge_dash_style=self.edge_style(), output_size=(1200,800),
                       #output="graph_tool/image/cctree_final",fmt="pdf"
                       )
@@ -322,9 +320,10 @@ class CCTree:
         else:
             cctree_path = []
             cctree_vertex = self.gNode2cctMaxDepthNode[v]
-            while self.cctNode2depth[cctree_vertex] > 0:
+            while self.cctNode2depth[cctree_vertex] > 1:
                 cctree_path.append(cctree_vertex)
                 cctree_vertex = self.cctNode2parent[cctree_vertex]
+            cctree_path.append(cctree_vertex)
             return cctree_path[::-1]
 
     def find_edge_in_cctree(self, s, t, k=None):
@@ -346,14 +345,16 @@ class CCTree:
         else:
             cctree_path = []
             cctree_vertex = self.gEdge2cctMaxDepthNode[e]
-            while self.cctNode2depth[cctree_vertex] > 0:
+
+            while self.cctNode2depth[cctree_vertex] > 1:
                 cctree_path.append(cctree_vertex)
                 cctree_vertex = self.cctNode2parent[cctree_vertex]
+            cctree_path.append(cctree_vertex)
             return cctree_path[::-1]
 
     def statistic(self):
 
-        with open("graph_tool/report/cctree_" + self.initial_g.gp["name"] + "_statistic.txt", "a+") as file:
+        with open("../report/cctree_" + self.initial_g.gp["name"] + "_statistic.txt", "a+") as file:
             file.write("\n====================== ANALISI DEL GRAFO " + str(self.initial_g.gp["name"]) + " ======================\n\n")
 
             file.write("numero di archi: "+str(self.initial_g.num_edges())+"\tnumero di vertici: "+str(self.initial_g.num_vertices())+"\n")
@@ -375,7 +376,7 @@ class CCTree:
             # variazione delle componenti biconnesse e dei vertici di taglio
             temp = "\n| LIV. CORENESS |\t\t\t"+"|# COMPONENTI CONNESSE|\t\t\t"+"|# BLOCCHI|\t\t\t"+"|# CUT-VERTEX|\t\t\t" + "|# NUOVI CV|\t\t\t"+"|# BLOCCHI 1 EDGE|\n\n"
             file.write(temp)
-            for k in range (1,self.maxDepth+1):
+            for k in range(1,self.maxDepth+1):
                 temp = "\t\t"+str(k)+"\t\t\t\t\t\t\t"+str(self.num_comp_conn[k])+"\t\t\t\t\t\t\t"+str(self.num_compB[k])+"\t\t\t\t\t\t"+str(self.num_compC[k])+\
                        "\t\t\t\t\t\t"+str(self.num_new_compC[k])+"\t\t\t\t\t\t"+str(self.num_comp_trivial[k])+"\n"
                 file.write(temp)
@@ -394,7 +395,7 @@ class CCTree:
 
     def to_xml(self):
         print(self.cct_graph.list_properties())
-        self.cct_graph.save("graph_tool/src/js/data/graph.xml",fmt="xml")
+        self.cct_graph.save("js/data/webGoogle_new.xml",fmt="xml")
 
 
 def run():
@@ -412,24 +413,27 @@ def run():
          (31, 32), (31, 33), (32, 33), (34, 35), (35, 36), (34, 36), (37, 31), (37, 35), (38, 32), (38, 36),
          (31, 39), (32, 39), (33, 39), (34, 40), (35, 40), (36, 40)
          ])
-    #G.clear()
-    #G = gt.load_graph("graph_tool/gml/amazon.gml")
+    G.clear()
+    G = gt.load_graph("../gml/webGoogle.gml")
     gp_name = G.new_gp("string")
     G.gp["name"] = gp_name
-    G.gp["name"] = "amazon"
+    G.gp["name"] = "webGoogle_new"
     print("letto")
     gt.remove_self_loops(G)
+    gt.remove_parallel_edges(G)
     start = timeit.default_timer()
     cc = CCTree(G)
+    gt.remove_parallel_edges(cc.cct_graph)
 
     time = timeit.default_timer() - start
     #cc.statistic()
     #cc.plot_distibution_compB()
     print("cctree pronto in " + str(time))
     #cc.draw_cctree()
-    cc.to_xml()
-    #for v in cc.cct_graph.vertices():
-       # print("nodo " + str(v) + " -> " + str(cc.cctNode2width[v]))
+    #cc.to_xml()
 
 
-run()
+    #print("nodo 102488 corrispondente al nodo di g: " + str(cc.) + " -> " + str(cc.cctNode2width[v]))
+    #return cc
+
+#run()
