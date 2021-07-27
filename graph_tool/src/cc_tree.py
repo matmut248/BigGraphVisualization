@@ -65,6 +65,10 @@ class CCTree:
     cctNode2internalSize = cct_graph.new_vp("int")      #indica a quanti archi di G corrisponde un nodo di cct
     cctNode2width = cct_graph.new_vp("vector<int>")             #indica la width necessaria per visualizzare il nodo
 
+    # indica a quale componente connessa corrisponde un nodo
+    # le componenti sono univoche nello stesso livello, si ripetono in livelli diversi
+    cctNode2connComp = cct_graph.new_vp("int")
+
     # cctEdge2sameDepth è una mappa binaria che ci dice se un arco del cctree collega due nodi
     # dello stesso livello (=1) o di livelli di coreness diversi (=0)
     cctEdge2sameDepth = cct_graph.new_ep("int")
@@ -114,6 +118,7 @@ class CCTree:
         self.cct_graph.vp["cctNode2parent"] = self.cctNode2parent
         self.cct_graph.ep["cctEdge2sameDepth"] = self.cctEdge2sameDepth
         self.cct_graph.vp["cctNode2internalSize"] = self.cctNode2internalSize
+        self.cct_graph.vp["cctNode2connComp"] = self.cctNode2connComp
         max_d = self.cct_graph.new_gp("int",val=self.maxDepth)
         nodes_in_layer = self.cct_graph.new_gp("vector<int>", val=self.num_nodes_in_layer)
         numCV = self.cct_graph.new_gp("vector<int>", val=self.num_compC)
@@ -141,7 +146,7 @@ class CCTree:
         g.set_directed(False)
         gt.remove_parallel_edges(g)
         bcomp, cv, _ = gt.label_biconnected_components(g)   # componenti biconnesse
-        _, hist = gt.label_components(g)
+        ccomp, hist = gt.label_components(g)
         self.num_comp_conn[k] = len(hist)
         g_cv = gt.GraphView(g, cv)                          # sottografo con solo i vertici di taglio
 
@@ -155,6 +160,7 @@ class CCTree:
             self.cctNode2children[v] = []
             self.cctNode2width[v] = [0,0]
             self.cctNode2depth[v] = k
+            self.cctNode2connComp[v] = ccomp[temp]
             self.num_nodes_in_layer[k] += 1
             self.num_compC[k] += 1
             self.cctNode2typeOfNode[v] = 1                  #v è un cut-vertex
@@ -180,6 +186,7 @@ class CCTree:
                     self.cctNode2children[new_bcomp_node] = []
                     self.cctNode2width[new_bcomp_node] = [0, 0]
                     self.cctNode2depth[new_bcomp_node] = k
+                    self.cctNode2connComp[new_bcomp_node] = ccomp[w]
                     self.num_nodes_in_layer[k] += 1
                     self.num_compB[k] += 1
                     bcomp2bc_nodes[bcomp[e]] = new_bcomp_node   # new_bcomp_node corrisponde a bcomp[e]
@@ -220,6 +227,7 @@ class CCTree:
                 new_bcomp_node = self.cct_graph.add_vertex()
                 self.cctNode2children[new_bcomp_node] = []
                 self.cctNode2width[new_bcomp_node] = [0, 0]
+                self.cctNode2connComp[new_bcomp_node] = ccomp[e.source()]
                 self.num_nodes_in_layer[k] += 1
                 self.num_compB[k] += 1
                 if k != 1:
@@ -487,7 +495,7 @@ class CCTree:
     # XML
     def to_xml(self):
         print(self.cct_graph.list_properties())
-        self.cct_graph.save("js/data/webGoogle_ordered.xml",fmt="xml")
+        self.cct_graph.save("js/data/stanford_ccomp.xml",fmt="xml")
 
 
 def run():
@@ -506,7 +514,7 @@ def run():
          (31, 39), (32, 39), (33, 39), (34, 40), (35, 40), (36, 40)
          ])
     G.clear()
-    G = gt.load_graph("../gml/webGoogle.gml")
+    G = gt.load_graph("../gml/stanford.gml")
     gp_name = G.new_gp("string")
     G.gp["name"] = gp_name
     G.gp["name"] = "webGoogle_ordered"

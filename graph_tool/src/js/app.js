@@ -1,4 +1,5 @@
 var nodes;                              // nodi del cctree
+var nodes_connComp;                    // componente connessa corrispondente nel grafo iniziale
 var nodes_depth;                        // profondità dei nodi del cctree
 var nodes_parent;                       // parent dei nodi del cctree (se layer = 1, parent = -1)
 var nodes_children = [];
@@ -14,6 +15,7 @@ var num_CV;                             // numero di cut-vertex del cctree
 var num_comp_B;                         // numero di componenti biconnesse del cctree
 var maxDepth;                           // profondità massima del cctree
 var nodes_in_layer;                     // numero di nodi per ogni livello di profondità
+var vertex_order                        // ordine dei vertici al primo livello
 var width = window.innerWidth;
 var height = window.innerHeight * 0.95;
 var min_bcomp_width = 5;
@@ -31,6 +33,8 @@ var hidden_edges = true;
 var vertical_layer_space = 0
 var prevX = 0
 var prevY = 0
+var edge_length_tot = 0
+var edge_length_max = 0
 
 
 /*  APP SETTINGS    */
@@ -51,6 +55,8 @@ app.loader.load(setup);
 app.stage.interactive = true;
 app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width/app.renderer.resolution, app.renderer.height/app.renderer.resolution);
 document.getElementById("display").appendChild(app.view);
+document.addEventListener('contextmenu', event => event.preventDefault());
+
 
 /*  SETUP   */
 function setup(){
@@ -65,9 +71,10 @@ function setup(){
             draw_graph();
             DragNDrop();
             update();
+            test_edges();
         }
     };
-    xhttp.open("GET", "data/stanford.xml", true);
+    xhttp.open("GET", "data/stanford_ccomp.xml", true);
     xhttp.send();
 
 }
@@ -105,6 +112,7 @@ function init_data(xml){
     nodes_xml = xmlDoc.getElementsByTagName("node");
     edges_xml = xmlDoc.getElementsByTagName("edge");
     this.nodes = new Array()
+    this.nodes_connComp = new Array()
     this.nodes_depth = new Array()
     this.nodes_parent = new Array()
     this.nodes_type = new Array()
@@ -114,11 +122,13 @@ function init_data(xml){
     this.nodes_width = new Array()
     for(var i = 0; i < nodes_xml.length; i++){
         node = parseInt(nodes_xml[i].id.substring(1))
-        node_depth = parseInt(nodes_xml[i].children[0].textContent)
-        node_internal_size = parseInt(nodes_xml[i].children[1].textContent)
-        node_parent = parseInt(nodes_xml[i].children[2].textContent)
-        node_type = parseInt(nodes_xml[i].children[3].textContent)
-        this.nodes_width.push(nodes_xml[i].children[4].textContent.split(",").map(x=>+x))
+        node_connComp = parseInt(nodes_xml[i].children[0].textContent)
+        node_depth = parseInt(nodes_xml[i].children[1].textContent)
+        node_internal_size = parseInt(nodes_xml[i].children[2].textContent)
+        node_parent = parseInt(nodes_xml[i].children[3].textContent)
+        node_type = parseInt(nodes_xml[i].children[4].textContent)
+        this.nodes_width.push(nodes_xml[i].children[5].textContent.split(",").map(x=>+x))
+        this.nodes_connComp.push(node_connComp)
         this.nodes.push(node)
         this.nodes_depth.push(node_depth)
         this.nodes_internal_size.push(node_internal_size)
@@ -152,6 +162,12 @@ function init_data(xml){
     this.nodes_in_layer = xmlDoc.getElementsByTagName("data")[1].textContent.split(",").map(x=>+x);
     this.num_CV = xmlDoc.getElementsByTagName("data")[2].textContent.split(",").map(x=>+x);
     this.num_comp_B = xmlDoc.getElementsByTagName("data")[3].textContent.split(",").map(x=>+x);
+    this.vertex_order = xmlDoc.getElementsByTagName("data")[4].textContent.split(",").map(x=>parseInt(x));
+    /*this.vertex_order = [...Array(this.nodes_in_layer[1]).keys()]
+    this.vertex_order[0] = 5
+    this.vertex_order[5] = 0
+    this.vertex_order[2] = 7
+    this.vertex_order[7] = 2*/
 
     children_init()
 }
@@ -203,12 +219,6 @@ function load_texture(){
 
 function width_calculator(i){
 
-
-    /*int_size = nodes_internal_size[index]
-    leaf_size = (this.nodes_width[index][0] * 2 * cv_radius) + (this.nodes_width[index][1] * min_bcomp_width) + (margin * (this.nodes_width[index][0] +this.nodes_width[index][1] - 1))
-    result = int_size / 100
-    return Math.max(result + min_bcomp_width, min_bcomp_width + leaf_size)*/
-
     if(nodes_children[i].length == 0)
         return Math.max(min_bcomp_width, foo(i))
     size = 0
@@ -223,14 +233,50 @@ function draw_graph(){
     var bcomp_height = 10;                                   // lunghezza delle componenti biconnesse
     var bcomp_width = 0;                                    // larghezza delle componenti biconnesse
     vertical_layer_space = Math.max(height / (maxDepth+1), 40);       // segmentazione verticale del canvas
-    var current_depth = 0;                                  // livello di coreness corrente
+    var current_depth = 1;                                  // livello di coreness corrente
     var nodes_dimension = new Array();                      // posizione dei nodi del cctree nel canvas [x,y,width]
     var sum_internal_size_first_layer = new Array();        //somma degli archi di g per k = 1
     var last_node_added = [0,0]                             //x e width dell'ultimo nodo aaggiunto
     var last_child_added = [0,0]
+    var last_cComp = this.nodes_connComp[this.vertex_order[0]]
+
+    this.vertex_order.forEach(v =>{
+        last_child_added[v] = []
+        y =  vertical_layer_space * (- 1) + height
+        bcomp_width = width_calculator(v)
+        /*if(last_cComp != this.nodes_connComp[v]){
+            margin = 30
+            last_cComp = this.nodes_connComp[v]
+        }
+        else{
+            margin = 5
+        }*/
+        x = (last_node_added[0] + last_node_added[1]) + margin
+        if(last_cComp != this.nodes_connComp[v]){
+            x += 25
+            last_cComp = this.nodes_connComp[v]
+        }
+
+        if(nodes_type[v] == 1){                     // sto disegnando un cv
+            nodes_dimension[v] = [x, y, cv_radius];
+            last_node_added = [x, 2*cv_radius];
+            new_node = new Node(v, x, y - cv_radius, cv_radius*2,  cv_radius*2, this.nodes_depth[v], 1, this.nodes_parent[v], this.nodes_width[v], this.nodes_internal_size[v])
+            new_node.draw()
+            this.graphics_nodes[v] = new_node
+        }
+        else{                                       // sto disegnando una componente B
+            nodes_dimension[v] = [x, y, bcomp_width];
+            last_node_added = [x, bcomp_width];
+            new_node = new Node(v, x, y - bcomp_height/2, bcomp_width,  bcomp_height, this.nodes_depth[v], 0, this.nodes_parent[v], this.nodes_width[v], this.nodes_internal_size[v])
+            new_node.draw()
+            this.graphics_nodes[v] = new_node
+
+        }
+    })
+
 
     /* DISEGNO DEI NODI*/
-    for(var i = 0; i < nodes.length; i++){
+    for(var i = this.nodes_in_layer[1]; i < nodes.length; i++){
 
         last_child_added[i] = []
         /*devo capire se sto nello stesso liv di coreness, quindi se sto disegnando il primo nodo della riga*/
@@ -276,7 +322,7 @@ function draw_graph(){
             last_child_added[this.nodes_parent[i]] = [x,2*cv_radius]
             new_node = new Node(i, x, y - cv_radius, cv_radius*2,  cv_radius*2, this.nodes_depth[i], 1, this.nodes_parent[i], this.nodes_width[i], this.nodes_internal_size[i])
             new_node.draw()
-            this.graphics_nodes.push(new_node)
+            this.graphics_nodes[i] = new_node
         }
         else{                                       // sto disegnando una componente B
             nodes_dimension[i] = [x, y, bcomp_width];
@@ -284,7 +330,7 @@ function draw_graph(){
             last_child_added[this.nodes_parent[i]] = [x, bcomp_width]
             new_node = new Node(i, x, y - bcomp_height/2, bcomp_width,  bcomp_height, this.nodes_depth[i], 0, this.nodes_parent[i], this.nodes_width[i], this.nodes_internal_size[i])
             new_node.draw()
-            this.graphics_nodes.push(new_node)
+            this.graphics_nodes[i] = new_node
         }
 
         // linee tratteggiate tra cv corrispondenti in livelli di coreness diversi
@@ -325,9 +371,14 @@ function draw_graph(){
         this.graphics_nodes[s].addEdge(new_edge)
         this.graphics_nodes[t].addEdge(new_edge)
         this.graphics_arcs.push(new_edge)
+        this.edge_length_tot += Math.abs(x2-x1)
+        if( x2-x1 > this.edge_length_max)
+            this.edge_length_max = x2-x1
     }
 
     app.renderer.render(app.stage);
+    console.log("lunghezza totale degli archi: " + this.edge_length_tot.toExponential(2) + " px")
+    console.log("lunghezza massima degli archi: " + this.edge_length_max.toExponential(2) + " px")
 }
 
 /*  INTERAZIONI */
@@ -518,6 +569,58 @@ function nodes_filtering(event){
     }
 }
 
+function nodes_to_move_recursive(node_id, list){
+    if(nodes_children[node_id].length == 0){
+        return
+    }
+    list.push(...nodes_children[node_id])
+   // console.log(list)
+    for(var j in nodes_children[node_id]){
+        nodes_to_move_recursive(nodes_children[node_id][j], list)
+        //console.log(list)
+    }
+    return
+}
+
+function focus_on_node(event, node){
+    console.log(event)
+    reset = document.getElementById("focusReset")
+    nodes_to_move = []
+    nodes_to_move_recursive(node.id, nodes_to_move)
+    for(var i in graphics_nodes){
+        graphics_nodes[i].setAlpha(0)
+    }
+    node.setAlpha(1)
+    for(var i in nodes_to_move){
+        graphics_nodes[nodes_to_move[i]].setAlpha(1)
+    }
+    dx = margin - node.x
+    dy = height - vertical_layer_space -node.y
+    app.stage.setTransform(dx,dy)
+    app.stage.hitArea.x -= dx
+    app.stage.hitArea.y -= dy
+
+    reset.style.visibility = "visible"
+    reset.addEventListener("click",resetFocus())
+
+    //console.log(nodes_to_move)
+    return false;
+}
+
+function resetFocus(){
+    for(var i in graphics_nodes)
+        graphics_nodes[i].setAlpha(1)
+    for(var i in graphics_arcs)
+        graphics_arcs[i].setAlpha(0)
+    for(var i in graphics_cvTocv)
+        graphics_cvTocv[i].setAlpha(0.5)
+
+    reset()
+
+    resetButton = document.getElementById("focusReset")
+    resetButton.style.visibility = "hidden"
+}
+
 /*  CLASSI  */
 class Edge extends PIXI.Sprite{
     constructor(s, t, x, y, width, height, alpha, depth){
@@ -578,7 +681,7 @@ class Node extends PIXI.Sprite{
     draw(){ app.stage.addChild(this); }
 
     /*Event Handler*/
-    pointerdown = function(e){
+    mousedown = function(e){
         console.log("hai cliccato il nodo "+this.id+" in posizione ( "+this.x+", "+this.y+")")
         console.log("questo nodo ha "+this.edges.length+" archi")
         console.log("questo nodo ha "+this.x+" x e "+this.y+" y" )
@@ -589,6 +692,10 @@ class Node extends PIXI.Sprite{
         app.renderer.render(this)
         this.edges.forEach(edge => edge.setAlpha(0.3))
         hidden_edges = false
+    }
+
+    rightclick = function(e){
+        focus_on_node(e,this);
     }
 
     /*edges*/
@@ -655,5 +762,18 @@ class CvToCv extends PIXI.Sprite{
 
     getHeight(){ return this.height }
     setHeight(h){ this.height = h }
+}
+
+function test_edges(){
+    counter = 0
+    for( var n in graphics_nodes){
+        if (graphics_nodes[n].type == 1){
+            edg = graphics_nodes[n].edges
+            if (edg.length < 2){
+                counter ++
+            }
+        }
+    }
+    console.log("ci sono "+counter+" cv con meno di due archi")
 }
 
