@@ -7,6 +7,7 @@ import timeit
 import random
 import cairo
 import json
+import sys
 from memory_profiler import profile
 
 # il Core-CUtVertex Tree è una struttura ad albero che rappresenta l'evoluzione del block-cutvertex tree al variare
@@ -75,9 +76,11 @@ class CCTree:
     gEdge2cctMaxDepthNode = initial_g.new_ep("int")             # la stessa cosa per gli archi
 
     #gEdgeVisited = initial_g.new_ep("int")                      # archi visitati durante la prima parte dell'algoritmo
+    g = gt.Graph()
 
 
     def __init__(self, g):
+        sys.setrecursionlimit(3000)
         gt.remove_self_loops(g)
         gt.remove_parallel_edges(g)
         self.initial_g = g.copy()
@@ -115,10 +118,23 @@ class CCTree:
         nodes_in_layer = self.cct_graph.new_gp("vector<int>", val=self.num_nodes_in_layer)
         numCV = self.cct_graph.new_gp("vector<int>", val=self.num_compC)
         numB = self.cct_graph.new_gp("vector<int>", val=self.num_compB)
+
+        #self.cct_graph.add_edge_list([[3,53],[7,55],[13,54]])
+        #self.cctNode2depth[53] = 1
+        #self.cctNode2depth[54] = 1
+        #self.cctNode2depth[55] = 1
+
+
+        start = timeit.default_timer()
+        vertex_order = self.cct_graph.new_gp("vector<int>", val=self.init_depth_search())
+        time = timeit.default_timer() - start
+        print("calcolo ordine dei vertici pronto in " + str(time))
+
         self.cct_graph.gp["maxDepth"] = max_d
         self.cct_graph.gp["nodesInLayer"] = nodes_in_layer
         self.cct_graph.gp["numCV"] = numCV
         self.cct_graph.gp["numCompB"] = numB
+        self.cct_graph.gp["vertex_order"] = vertex_order
 
     def init_cctree(self, g, k):
         start = timeit.default_timer()
@@ -133,7 +149,7 @@ class CCTree:
         for n_bcomp in bcomp.a:                             #inizializzo bcomp2bc_nodes
             bcomp2bc_nodes[n_bcomp] = None
 
-        for temp in                        #temp è un cv del grafo iniziale
+        for temp in g_cv.vertices():                       #temp è un cv del grafo iniziale
 
             v = self.cct_graph.add_vertex()                 #v è un cv del cctree
             self.cctNode2children[v] = []
@@ -233,6 +249,79 @@ class CCTree:
         time = timeit.default_timer() - start
         print("seconda parte pronto in " + str(time))
 
+    # ORDINAMENTO DEI NODI
+    def init_depth_search(self):
+        self.g = self.cct_graph.copy()
+        comp,_ = gt.label_components(self.g)
+        num_comp = max(comp.a)
+        ordered_nodes = []
+        visited = self.g.new_vp("bool")
+        self.g.vp["visited"] = visited
+        subtree_depth = self.g.new_vp("int")
+        self.g.vp["subtree_depth"] = subtree_depth
+        children = self.g.new_vp("vector<int>")
+        self.g.vp["children"] = children
+        parent = self.g.new_vp("int")
+        self.g.vp["parent"] = parent
+
+        edge_filter = self.g.new_ep("bool")
+        for e in self.g.edges():
+            if self.cctNode2depth[e.source()] == 1 and self.cctNode2depth[e.target()] == 1:
+                edge_filter[e] = True
+        self.g.set_edge_filter(edge_filter)
+
+        for i in range(0,num_comp + 1):
+            nodes_in_comp = self.g.new_vp("bool")
+            for v in self.g.vertices():
+                if comp[v] == i:
+                    nodes_in_comp[v] = True
+            self.g.set_vertex_filter(nodes_in_comp)
+            temp = []
+            nodes_lv1 = [v for v in self.g.vertices() if self.cctNode2depth[v] == 1]
+            root = self.root_selection(nodes_lv1)
+            self.subtree_depth_calculator(root)
+            visited = self.g.new_vp("bool")
+            self.g.vp["visited"] = visited
+            self.DFS(root, temp)
+            if len(temp) != 0:
+                ordered_nodes.extend(temp)
+            self.g.set_vertex_filter(None)
+
+        return ordered_nodes
+
+    def subtree_depth_calculator(self, v):
+        self.g.vp.visited[v] = True
+
+        children = [x for x in self.g.get_all_neighbors(v) if not self.g.vp.visited[x]]
+        self.g.vp.children[v] = children
+        if len(children) == 0:
+            self.g.vp.subtree_depth[v] = 1
+            return
+
+        for x in children:
+            self.subtree_depth_calculator(x)
+
+        self.g.vp.subtree_depth[v] = max([self.g.vp.subtree_depth[x] for x in children]) + 1
+
+    def DFS(self, v, ordered_list):
+        if not self.g.vp.visited[v]:
+            ordered_list.append(v)
+        self.g.vp.visited[v] = True
+
+        children = [x for x in self.g.get_all_neighbors(v) if not self.g.vp.visited[x]]
+        children.sort(key=lambda x: self.g.vp.subtree_depth[x])
+
+        for x in children:
+            self.DFS(x, ordered_list)
+
+    def root_selection(self, nodes):
+        root = nodes[0]
+        for v in nodes:
+            if self.cctNode2internalSize[v] > self.cctNode2internalSize[root]:
+                root = v
+        return int(root)
+
+    # VISUALIZZAZIONE
     def viusalization_width(self):
         for v in self.cct_graph.vertices():
             if not self.cctNode2children[v]:        # v è una foglia
@@ -293,14 +382,15 @@ class CCTree:
         return style
 
     def draw_cctree(self):
-        gt.graph_draw(self.initial_g, vertex_text=self.initial_g.vertex_index)
-        gt.graph_draw(self.cct_graph, pos=self.vertices_pos(), vertex_text=self.cct_graph.vertex_index, vertex_fill_color=self.color(), vertex_size=self.size(),
+        #gt.graph_draw(self.initial_g, vertex_text=self.initial_g.vertex_index)
+        gt.graph_draw(self.cct_graph, vertex_text=self.cct_graph.vertex_index, vertex_fill_color=self.color(),
                       vertex_font_size=10, vertex_font_weight=cairo.FONT_WEIGHT_BOLD,edge_dash_style=self.edge_style(), output_size=(1200,800),
                       #output="graph_tool/image/cctree_final",fmt="pdf"
                       )
         #gt.draw_hierarchy(gt.NestedBlockState(self.cct_graph), layout = self.cctNode2depth, vertex_text=self.cct_graph.vertex_index, vertex_shape=self.shape(), vertex_fill_color=self.color())
-        #gt.graphviz_draw(self.cct_graph, pos = self.vertices_pos(), vcmap=self.color(), layout="twopi")
+        #gt.graphviz_draw(self.cct_graph, pos = self.vertices_pos(), vcmap=self.color())
 
+    # ESPLORAZIONE
     def find_vertex_in_cctree(self,v,k=None):
         try:
             self.initial_g.vertex(v)
@@ -352,6 +442,7 @@ class CCTree:
             cctree_path.append(cctree_vertex)
             return cctree_path[::-1]
 
+    # STATISTICHE
     def statistic(self):
 
         with open("../report/cctree_" + self.initial_g.gp["name"] + "_statistic.txt", "a+") as file:
@@ -393,9 +484,10 @@ class CCTree:
         plt.legend()
         plt.show()
 
+    # XML
     def to_xml(self):
         print(self.cct_graph.list_properties())
-        self.cct_graph.save("js/data/webGoogle_new.xml",fmt="xml")
+        self.cct_graph.save("js/data/webGoogle_ordered.xml",fmt="xml")
 
 
 def run():
@@ -417,23 +509,18 @@ def run():
     G = gt.load_graph("../gml/webGoogle.gml")
     gp_name = G.new_gp("string")
     G.gp["name"] = gp_name
-    G.gp["name"] = "webGoogle_new"
+    G.gp["name"] = "webGoogle_ordered"
     print("letto")
     gt.remove_self_loops(G)
     gt.remove_parallel_edges(G)
+
     start = timeit.default_timer()
     cc = CCTree(G)
     gt.remove_parallel_edges(cc.cct_graph)
-
     time = timeit.default_timer() - start
-    #cc.statistic()
-    #cc.plot_distibution_compB()
     print("cctree pronto in " + str(time))
-    #cc.draw_cctree()
-    #cc.to_xml()
 
+    cc.to_xml()
+    #print("lista ordinata: "+str(cc.cct_graph.gp.vertex_order))
 
-    #print("nodo 102488 corrispondente al nodo di g: " + str(cc.) + " -> " + str(cc.cctNode2width[v]))
-    #return cc
-
-#run()
+run()
