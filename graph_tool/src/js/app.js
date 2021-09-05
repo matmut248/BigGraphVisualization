@@ -5,7 +5,7 @@ var nodes_parent;                       // parent dei nodi del cctree (se layer 
 var nodes_children = [];
 var nodes_type;                         // tipo dei nodi del cctree (se cv = 1, se comp B = 0)
 var nodes_internal_size;                // quantità di archi di g contenuti nel nodo del cctree
-var nodes_width;                        // array che indica la quantità e il tipo di foglie nel sottoalbero di un nodo
+var nodes_width;       //da togliere                 // array che indica la quantità e il tipo di foglie nel sottoalbero di un nodo
 var max_internal_size = 0;
 var edges_intra_layer;                  // archi del cctree tra nodi dello stesso livello di coreness
 var edges_between_layer;                // archi del cctree tra nodi di diverso livello di coreness
@@ -32,6 +32,7 @@ var graphics_arcs = []
 var graphics_cvTocv = []
 var graphics_links = []
 var graphics_rails = []
+var graphics_nodes_ccomp = []
 var hidden_edges = true;
 var vertical_layer_space = 0
 var prevX = 0
@@ -421,6 +422,45 @@ function draw_graph(){
     console.log("lunghezza massima degli archi: " + this.edge_length_max.toExponential(2) + " px")
 }
 
+function init_nodes(){
+
+    this.vertex_order.forEach(v =>{
+        k = this.nodes_depth[v]
+        var bcomp_height = 10;
+        //creo nuovo nodo
+        dimension = [0,0]
+        if(nodes_type[v] == 1){
+            dimension = [cv_radius*2,  cv_radius*2]
+        }
+        else{
+            bcomp_width = width_calculator(v)
+            dimension = [bcomp_width,  bcomp_height]
+        }
+        new_node = new Node(v, 0, 0, dimension[0], dimension[1], k, this.nodes_type[v], this.nodes_parent[v], this.nodes_width[v], this.nodes_internal_size[v])
+        this.graphics_nodes[v] = new_node
+
+        //creo nuovo nodoCCOmp se non l'ho già creato
+        new_ccomp = null
+        if(graphics_nodes_ccomp[nodes_connComp[v]] == null){
+            new_ccomp = new NodeCCOmp(nodes_connComp[v], 0, 0, 0, bcomp_height, nodes_depth[v])
+            this.graphics_nodes_ccomp[nodes_connComp[v]] = new_ccomp
+        }
+        else
+            new_ccomp = graphics_nodes_ccomp[nodes_connComp[v]]
+
+        //riferimenti ad altri nodi
+        new_ccomp.nodes_cctree.push(new_node)
+        new_ccomp.size = new_ccomp.size + this.nodes_internal_size[v]
+        new_node.node_ccomp = new_ccomp
+        if(k>=2){
+            parent = this.nodes_parent[new_node].node_ccomp
+            new_ccomp.parent = parent
+            parent.children.push(new_ccomp)
+        }
+
+    }
+}
+
 /*  INTERAZIONI */
 
 function zoom(event){
@@ -711,6 +751,7 @@ class Node extends PIXI.Sprite{
         this.cv2cv = []
         this.links = []
         this.rail = null
+        this.node_ccomp = null
     }
 
     draw(){ app.stage.addChild(this); }
@@ -772,6 +813,34 @@ class Node extends PIXI.Sprite{
     getIntSize(){ return this.int_size }
 
     setAlpha(a){ this.alpha = a; }
+}
+
+class NodeCComp extends PIXI.Sprite{
+    constructor(id, x, y, width, height, depth){
+        super(texture_compB)
+        this.id = id
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+        this.depth = depth
+        this.nodes_cctree = []
+        this.parent = null
+        this.children = []
+        this.expanded = false
+        this.size = 0
+    }
+
+    /* EVENT HANDLER */
+    mousedown = function(e){
+        if(expanded){
+            this.expanded = false
+        }
+        else{
+            this.expanded = true
+        }
+    }
+
 }
 
 class CvToCv extends PIXI.Sprite{
