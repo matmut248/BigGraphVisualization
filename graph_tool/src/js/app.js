@@ -20,9 +20,11 @@ var biggest_node                        // nodo più grande per ogni liv di k
 var width = window.innerWidth;
 var height = window.innerHeight * 0.95;
 var min_bcomp_width = 1;
+var min_ccomp_width = 5;
 var cv_radius = 3;                                      // raggio dei cv
 var margin = 5;                                         //margine tra i nodi disegnati
 const foo = function(i){ return nodes_internal_size[i] / 100}
+const foo_ccomp = function(v){ return Math.log2(v.size) + v.size/5000}
 var texture_compB
 var texture_sameCV
 var texture_CV
@@ -73,13 +75,16 @@ function setup(){
             coreness_filtering_init();
             nodes_filtering_init();
             load_texture();
-            draw_graph();
+            //draw_graph();
+            init_nodes();
+            draw();
+            console.log("ciao")
             DragNDrop();
             update();
             test_edges();
         }
     };
-    xhttp.open("GET", "data/stanford_all_ordered.xml", true);
+    xhttp.open("GET", "new_data/stanford.xml", true);
     xhttp.send();
 
 }
@@ -210,6 +215,11 @@ function load_texture(){
     rect.drawRect(0,0,32,32);
     rect.endFill();
 
+    let ccomp = new PIXI.Graphics();
+    rect.beginFill(0xcfa41f);
+    rect.drawRect(0,0,32,32);
+    rect.endFill();
+
     let circle = new PIXI.Graphics();
     circle.beginFill(0x3498db);
     circle.drawCircle(0,0,5);
@@ -234,6 +244,7 @@ function load_texture(){
     link.quadraticCurveTo(0, 16, -10, 20)
 
     texture_compB = app.renderer.generateTexture(rect)
+    texture_compC = app.renderer.generateTexture(ccomp)
     texture_CV = app.renderer.generateTexture(circle)
     texture_sameCV = app.renderer.generateTexture(line)
     texture_arc = app.renderer.generateTexture(arc)
@@ -241,6 +252,7 @@ function load_texture(){
     texture_link = app.renderer.generateTexture(link)
 
     PIXI.Texture.addToCache(texture_compB, "texture_compB")
+    PIXI.Texture.addToCache(texture_compC, "texture_compC")
     PIXI.Texture.addToCache(texture_CV, "texture_CV")
     PIXI.Texture.addToCache(texture_sameCV, "texture_sameCV")
     PIXI.Texture.addToCache(texture_arc, "texture_arc")
@@ -260,6 +272,15 @@ function width_calculator(i){
 
 }
 
+function width_calculator_ccomp(v){
+    if(v.children.length == 0)
+        return Math.max(min_ccomp_width, foo_ccomp(v))
+    size = 0
+    for(var j in v.children)
+        size = size + width_calculator_ccomp(j) + margin
+    return size
+}
+
 /*  VISUALIZZAZIONE DEL GRAFO   */
 function draw_graph(){
     biggest_node = biggest_node_init();
@@ -268,7 +289,6 @@ function draw_graph(){
     vertical_layer_space = Math.max(height / (maxDepth+1), 40);       // segmentazione verticale del canvas
     var current_depth = 1;                                  // livello di coreness corrente
     var nodes_dimension = new Array();                      // posizione dei nodi del cctree nel canvas [x,y,width]
-    var sum_internal_size_first_layer = new Array();        //somma degli archi di g per k = 1
     var last_node_added = [0,0]                             //x e width dell'ultimo nodo aaggiunto
     var last_child_added = [0,0]
     var last_cComp = this.nodes_connComp[this.vertex_order[0]]
@@ -422,8 +442,58 @@ function draw_graph(){
     console.log("lunghezza massima degli archi: " + this.edge_length_max.toExponential(2) + " px")
 }
 
-function init_nodes(){
+function draw(){
+    //biggest_node = biggest_node_init();
+    var bcomp_height = 10;                                   // lunghezza delle componenti biconnesse
+    var bcomp_width = 0;                                    // larghezza delle componenti biconnesse
+    vertical_layer_space = Math.max(height / (maxDepth+1), 40);       // segmentazione verticale del canvas
+    var current_depth = 1;                                  // livello di coreness corrente
+    var nodes_dimension = new Array();                      // posizione dei nodi del cctree nel canvas [x,y,width]
+    var last_node_added = [0,0]                             //x e width dell'ultimo nodo aaggiunto
+    var last_child_added = [0,0]
+    var last_cComp = this.nodes_connComp[this.vertex_order[0]]
 
+    this.graphics_nodes_ccomp.forEach(v =>{
+        last_child_added[v.id] = []
+        k = v.depth;                                // profondità del nodo corrente
+        same_layer = 1                                          // var binaria = 0 se ho cambiato layer, 1 altrimenti
+        if(current_depth != k){
+            last_node_added = [0,0]
+            same_layer = 0
+        }
+        current_depth = k;
+
+        y =  vertical_layer_space * (- k) + height
+        bcomp_width = width_calculator_ccomp(v)
+        //bcomp_width =5
+        x = (last_node_added[0] + last_node_added[1]) * same_layer + margin
+
+        if(k >= 2){
+            parent = v.parentNode.id
+            if(last_child_added[parent].length == 0)      // se sto disegnando il primo figlio del parent
+                x = nodes_dimension[parent][0]              // prendo le dimensioni del parent
+            else
+                x = (last_child_added[parent][0] + last_child_added[parent][1]) * same_layer + margin
+        }
+
+        if(k == 1)
+            x += 25
+
+        nodes_dimension[v.id] = [x, y, bcomp_width];
+        last_node_added = [x, bcomp_width];
+        last_child_added[v.parent.id] = [x,bcomp_width]
+        v.x = x
+        v.y = y
+        v.width = bcomp_width
+        //v.draw()
+        //app.stage.addChild(v)
+
+    })
+    app.renderer.render(app.stage);
+
+}
+
+function init_nodes(){
     this.vertex_order.forEach(v =>{
         k = this.nodes_depth[v]
         var bcomp_height = 10;
@@ -441,8 +511,8 @@ function init_nodes(){
 
         //creo nuovo nodoCCOmp se non l'ho già creato
         new_ccomp = null
-        if(graphics_nodes_ccomp[nodes_connComp[v]] == null){
-            new_ccomp = new NodeCCOmp(nodes_connComp[v], 0, 0, 0, bcomp_height, nodes_depth[v])
+            if(graphics_nodes_ccomp[nodes_connComp[v]] == null){
+            new_ccomp = new NodeCComp(nodes_connComp[v], 0, 0, 0, bcomp_height, nodes_depth[v])
             this.graphics_nodes_ccomp[nodes_connComp[v]] = new_ccomp
         }
         else
@@ -453,12 +523,17 @@ function init_nodes(){
         new_ccomp.size = new_ccomp.size + this.nodes_internal_size[v]
         new_node.node_ccomp = new_ccomp
         if(k>=2){
-            parent = this.nodes_parent[new_node].node_ccomp
-            new_ccomp.parent = parent
-            parent.children.push(new_ccomp)
+            parent = this.nodes_parent[new_node.id]
+            //console.log("parent:"+parent+" con tipo:"+typeof(parent))
+            parent_ccomp = graphics_nodes[parent].node_ccomp
+            //console.log("parent_ccomp:"+parent_ccomp.id+" con tipo:"+typeof(parent_ccomp))
+            new_ccomp.parentNode = parent_ccomp
+            parent_ccomp.childrenNode.push(new_ccomp)
         }
 
-    }
+        app.stage.addChild(new_ccomp)
+
+    })
 }
 
 /*  INTERAZIONI */
@@ -817,7 +892,8 @@ class Node extends PIXI.Sprite{
 
 class NodeCComp extends PIXI.Sprite{
     constructor(id, x, y, width, height, depth){
-        super(texture_compB)
+        super(texture_compC)
+
         this.id = id
         this.x = x
         this.y = y
@@ -825,15 +901,21 @@ class NodeCComp extends PIXI.Sprite{
         this.height = height
         this.depth = depth
         this.nodes_cctree = []
-        this.parent = null
-        this.children = []
+        this.parentNode = null
+        this.childrenNode = []
         this.expanded = false
         this.size = 0
+        this.interactive = true
     }
+
+    draw(){ app.stage.addChild(this); }
 
     /* EVENT HANDLER */
     mousedown = function(e){
-        if(expanded){
+        console.log("hai cliccato il nodo "+this.id+" in posizione ( "+this.x+", "+this.y+")")
+        console.log("con primo figlio: "+this.childrenNode[0].id+ "in posizione:" +this.childrenNode[0].x+" "+this.childrenNode[0].y)
+        console.log(this.expanded)
+        if(this.expanded){
             this.expanded = false
         }
         else{
