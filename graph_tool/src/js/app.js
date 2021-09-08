@@ -21,7 +21,7 @@ var width = window.innerWidth;
 var height = window.innerHeight * 0.95;
 var min_bcomp_width = 3;
 var min_ccomp_width = 5;
-var cv_radius = 3;                                      // raggio dei cv
+var cv_radius = 4;                                      // raggio dei cv
 var margin = 5;                                         //margine tra i nodi disegnati
 const foo = function(i){ return nodes_internal_size[i] / 100}
 const foo_ccomp = function(v){ return Math.log2(v.size) + v.size/5000}
@@ -64,8 +64,8 @@ app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width/app.renderer.res
 document.getElementById("display").appendChild(app.view);
 document.addEventListener('contextmenu', event => event.preventDefault());
 app.ticker.add(function(){
-    app.renderer.render(app.stage)
     update()
+    app.renderer.render(app.stage)
 })
 
 
@@ -84,7 +84,7 @@ function setup(){
             draw_graph();
             console.log("ciao")
             DragNDrop();
-            update();
+            //update();
             test_edges();
             test_nodes();
             test_nodes_ccomp();
@@ -119,6 +119,18 @@ function update () {
             graphics_cvTocv[i].visible = true
         else
             graphics_cvTocv[i].visible = false
+    }
+    for(var i in graphics_rails){
+        if(isContained(graphics_rails[i]) && graphics_nodes[graphics_rails[i].node].expanded)
+            graphics_rails[i].visible = true
+        else
+            graphics_rails[i].visible = false
+    }
+    for(var i in graphics_links){
+        if(isContained(graphics_links[i]) && graphics_nodes[graphics_links[i].node].expanded)
+            graphics_links[i].visible = true
+        else
+            graphics_links[i].visible = false
     }
 }
 
@@ -462,7 +474,7 @@ function draw_graph_old(){
 
 function draw_graph(){
     biggest_node = biggest_node_init();
-    //var bcomp_height = 10;                                   // lunghezza delle componenti biconnesse
+    var bcomp_height = 10;                                   // lunghezza delle componenti biconnesse
     //var bcomp_width = 0;                                    // larghezza delle componenti biconnesse
     //vertical_layer_space = Math.max(height / (maxDepth+1), 40);       // segmentazione verticale del canvas
     //var current_depth = 1;                                  // livello di coreness corrente
@@ -472,6 +484,7 @@ function draw_graph(){
     var last_node_added = null
     var last_child_of_parent = []
 
+    /* DISEGNO DEI NODI*/
     this.vertex_order.forEach(n =>{
         v = graphics_nodes[n]
         if(last_child_of_parent[v.parentNode] == null)
@@ -504,7 +517,118 @@ function draw_graph(){
         if(v.depth > 1)
             last_child_of_parent[v.parentNode] = [x, v.width]
         last_node_added = v
+
+        /*LINEE TRATTEGGIATE*/
+        if(this.nodes_parent[n] != -1 && this.nodes_type[this.nodes_parent[n]] == 1){
+            p_ypos = nodes_dimension[nodes_parent[n]][1] - cv_radius
+            dash_factor = 20;
+            draw = true;
+            x_temp = nodes_dimension[n][0] + cv_radius/2
+            y_temp = nodes_dimension[n][1] + cv_radius
+            segment = (p_ypos - y_temp) / dash_factor
+
+            for(var j = 1; j <= dash_factor; j++){
+                if(draw == true){
+                    newCvToCv = new CvToCv(x_temp,y_temp,3,segment,0.5, this.nodes_depth[this.nodes_parent[n]])
+                    newCvToCv.alpha = 0
+                    newCvToCv.visible = false
+                    newCvToCv.nodes.push(n)
+                    newCvToCv.nodes.push(this.nodes_parent[n])
+                    newCvToCv.draw()
+                    this.graphics_nodes[n].addCv2Cv(newCvToCv)
+                    this.graphics_cvTocv.push(newCvToCv)
+                    draw = false;
+                }
+                else{
+                    draw = true
+                }
+                y_temp += segment
+            }
+        }
+
     })
+
+    /* DISEGNO DEGLI ARCHI*/
+    for(var i = 0; i < this.edges_intra_layer.length; i++){
+        s = edges_intra_layer[i][0]
+        t = edges_intra_layer[i][1]
+        x1 = nodes_dimension[s][0] + cv_radius
+        y1 = nodes_dimension[s][1] + cv_radius
+        x2 = nodes_dimension[t][0] + nodes_dimension[t][2]/2
+        if(t == biggest_node[nodes_depth[t]]){
+            continue
+        }
+        else{
+            new_edge = new Edge(s, t, x1, y1, x2-x1, Math.min(vertical_layer_space - bcomp_height,40), 0, graphics_nodes[s].getDepth())
+            new_edge.visible = false
+            new_edge.draw()
+            this.graphics_nodes[s].addEdge(new_edge)
+            this.graphics_nodes[t].addEdge(new_edge)
+            this.graphics_arcs.push(new_edge)
+            this.edge_length_tot += Math.abs(x2-x1)
+            if( x2-x1 > this.edge_length_max)
+                this.edge_length_max = x2-x1
+        }
+
+    }
+
+    /* DISEGNO DEI BINARI*/
+    biggest_node.shift()
+    for(var i in biggest_node){
+        current_node = biggest_node[i]
+        d = graphics_nodes[current_node].getDepth()
+        current_edges = this.edges_intra_layer.filter(edge => edge[1] == current_node)
+        if(current_edges.length == 0)
+            continue
+        x = nodes_dimension[current_node][0] + nodes_dimension[current_node][2] / 2
+        y = nodes_dimension[current_node][1] + bcomp_height / 2
+        h = vertical_layer_space / 2
+        w = 10
+        new_link = new Link(x, y, w, h, 0, d)
+        new_link.visible = false
+        new_link.reverse()
+        graphics_nodes[current_node].addLink(new_link)
+        new_link.node = current_node
+        app.stage.addChild(new_link)
+        this.graphics_links.push(new_link)
+        min_pos = nodes_dimension[current_node][0] + nodes_dimension[current_node][2] / 2
+        max_pos = nodes_dimension[current_node][0] + nodes_dimension[current_node][2] / 2
+        current_edges.forEach(edge =>{
+            // DISEGNARE LINK QUI E CALCOLARE MIN E MAX, CIOÈ DIMENSIONI BINARIO
+            new_link = new PIXI.Sprite(texture_link)
+            x = nodes_dimension[edge[0]][0] + cv_radius - 10
+            y = nodes_dimension[edge[0]][1] + cv_radius + 2
+            h = vertical_layer_space / 2
+            w = 10
+            new_link = new Link(x, y, w, h, 0, d)
+            new_link.visible = false
+            graphics_nodes[current_node].addLink(new_link)
+            graphics_nodes[edge[0]].addLink(new_link)
+            new_link.node = edge[0]
+            app.stage.addChild(new_link)
+            this.graphics_links.push(new_link)
+            if(nodes_dimension[edge[0]][0] < min_pos)
+                min_pos = nodes_dimension[edge[0]][0]
+            if(nodes_dimension[edge[0]][0] > max_pos)
+                max_pos = nodes_dimension[edge[0]][0]
+        })
+        //DISEGNARE BINARIO
+        x = min_pos
+        y = nodes_dimension[current_node][1] + bcomp_height / 2 + vertical_layer_space / 2
+        h = 1
+        w = max_pos - min_pos
+        new_rail = new Rail(x, y, w, h, 0, d)
+        new_rail.visible = false
+        graphics_nodes[current_node].addRail(new_rail)
+        new_rail.node = current_node
+        app.stage.addChild(new_rail)
+        this.graphics_rails.push(new_rail)
+
+        this.edge_length_tot += w
+        if( w > this.edge_length_max)
+                this.edge_length_max = w
+    }
+
 
     app.renderer.render(app.stage)
 }
@@ -630,7 +754,6 @@ function zoom(event){
     app.stage.pivot.x = 0
     app.stage.pivot.y = 0
 
-    update()
 }
 
 function DragNDrop() {
@@ -662,7 +785,6 @@ function DragNDrop() {
       app.stage.hitArea.x -= dx / app.stage.scale.x;
       app.stage.hitArea.y -= dy / app.stage.scale.y;
 
-      update()
     };
 
     stage.pointerup = function (moveDate) {
@@ -676,7 +798,6 @@ function DragNDrop() {
 function reset(){
     app.stage.setTransform()
     app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width/app.renderer.resolution, app.renderer.height/app.renderer.resolution);
-    update()
 }
 
 function hide_edges(){
@@ -761,7 +882,6 @@ function coreness_filtering(){
         }
         app.stage.position.y += (selected_first - 1) * vertical_layer_space
         app.stage.hitArea.y -= (selected_first - 1) * vertical_layer_space
-        update()
     }
 }
 
@@ -816,9 +936,17 @@ function expand_node(v){
     w = v.width
     num_ccomp = v.id
     v.visible = false
-    for(var i in v.nodes_cctree)
+    for(var i in v.nodes_cctree){
         v.nodes_cctree[i].expanded = true
         v.nodes_cctree[i].visible = true
+    }
+    for(var i in graphics_cvTocv){
+        first = graphics_nodes[graphics_cvTocv[i].nodes[0]]
+        last = graphics_nodes[graphics_cvTocv[i].nodes[1]]
+        if(first.expanded && last.expanded)
+            graphics_cvTocv[i].setAlpha(0.5)
+    }
+
     app.renderer.render(app.stage)
     console.log("espansione in corso")
 }
@@ -865,6 +993,7 @@ class Link extends PIXI.Sprite{
         this.height = h
         this.alpha = a
         this.depth = d
+        this.node = null
     }
     setAlpha(a){ this.alpha = a; }
     getDepth(){ return this.depth; }
@@ -880,6 +1009,7 @@ class Rail extends PIXI.Sprite{
         this.height = h
         this.alpha = a
         this.depth = d
+        this.node = null
     }
     setAlpha(a){ this.alpha = a; }
     getDepth(){ return this.depth; }
