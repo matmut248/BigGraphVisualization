@@ -935,7 +935,27 @@ function expand_node(v){
     k = v.depth
     w = v.width
     num_ccomp = v.id
+
+    recursive_replace_upper_nodes(v)
+    enlarge_lower_nodes(v)
+    shift_right_brother(v)
+
+
+    app.renderer.render(app.stage)
+    console.log("espansione in corso")
+}
+
+function recursive_replace_upper_nodes(v){
+    replace_nodes(v)
+    for(var i in v.childrenNode)
+        if(!v.childrenNode[i].expanded)
+            recursive_replace_upper_nodes(v.childrenNode[i])
+
+}
+
+function replace_nodes(v){
     v.visible = false
+    v.expanded = true
     for(var i in v.nodes_cctree){
         v.nodes_cctree[i].expanded = true
         v.nodes_cctree[i].visible = true
@@ -947,10 +967,77 @@ function expand_node(v){
             graphics_cvTocv[i].setAlpha(0.5)
     }
 
-    app.renderer.render(app.stage)
-    console.log("espansione in corso")
+    //shift_right_brother(v)
 }
 
+function shift(v, delta){
+    w = v.width
+    h = v.height
+    v.setTransform(v.x + delta, v.y)
+    v.width = w
+    v.height = h
+    for(var j in v.nodes_cctree){
+        current = v.nodes_cctree[j]
+        w = current.width
+        h = current.height
+        /*if(current.parentNode.x > current.x + delta)
+            delta = delta + (current.parentNode.x - current.x + delta)      ///?????*/
+        current.setTransform(current.x + delta, current.y)
+        current.width = w
+        current.height = h
+    }
+}
+
+function shift_right_brother(v, delta=null, original_w = v.width){
+    //calcolo la dimensione totale dei nodi espansi da v
+    //console.log(delta)
+    if(delta == null){
+        dim_X = v.nodes_cctree.map(c => c.x)
+        dim_W = v.nodes_cctree.map(c => c.width)
+        min_child_x = Math.min(...dim_X)
+        max_child_x = Math.max(...dim_X) + dim_W[dim_X.indexOf(Math.max(...dim_X))]
+        delta = (max_child_x - min_child_x) - v.width
+    }
+
+
+    if(delta > 0 && v.parentNode != null){
+
+        right_brothers = v.parentNode.childrenNode.filter(c => c.x >= v.x+original_w+margin) // non prende nessuno
+        for(var i in right_brothers){
+            shift(right_brothers[i], delta)
+            shift_upper_nodes(right_brothers[i], delta)
+        }
+
+    }
+}
+
+function shift_upper_nodes(v, delta){
+    for(var i in v.childrenNode){
+        shift(v.childrenNode[i], delta)
+        shift_upper_nodes(v.childrenNode[i], delta)
+    }
+}
+
+function enlarge_lower_nodes(v){
+    dim_X = v.nodes_cctree.map(c => c.x)
+    dim_W = v.nodes_cctree.map(c => c.width)
+    min_child_x = Math.min(...dim_X)
+    max_child_x = Math.max(...dim_X) + dim_W[dim_X.indexOf(Math.max(...dim_X))]
+    if(v.parentNode != null){
+        delta = max_child_x - min_child_x -  v.parentNode.width
+        if(delta > 0)
+            recursive_enlarge_lower_nodes(v.parentNode, delta)
+    }
+}
+
+function recursive_enlarge_lower_nodes(v, delta){
+    original_w = v.width
+    v.width = v.width + delta
+    shift_right_brother(v, delta, original_w)
+    if(v.parentNode != null)
+        recursive_enlarge_lower_nodes(v.parentNode, delta)
+
+}
 /*  CLASSI  */
 class Edge extends PIXI.Sprite{
     constructor(s, t, x, y, width, height, alpha, depth){
