@@ -487,8 +487,8 @@ function draw_graph(){
     /* DISEGNO DEI NODI*/
     this.vertex_order.forEach(n =>{
         v = graphics_nodes[n]
-        if(last_child_of_parent[v.parentNode] == null)
-            last_child_of_parent[v.parentNode] = [0,0]
+        if(v.parentNode != null && last_child_of_parent[v.parentNode.id] == null)
+            last_child_of_parent[v.parentNode.id] = [0,0]
         ccomp = v.node_ccomp.id
         parent_x = 0
         if(v.depth > 1)
@@ -498,8 +498,8 @@ function draw_graph(){
             x = parent_x
         else if(last_node_added == null || last_node_added.node_ccomp.id != ccomp)
             x = graphics_nodes_ccomp[ccomp].x
-        else if(last_node_added.parentNode != v.parentNode)
-            x = Math.max(parent_x, last_child_of_parent[v.parentNode][0] + last_child_of_parent[v.parentNode][1] + margin)
+        else if(v.parentNode != null && last_node_added.parentNode.id != v.parentNode.id)
+            x = Math.max(parent_x, last_child_of_parent[v.parentNode.id][0] + last_child_of_parent[v.parentNode.id][1] + margin)
         else
             x = last_child_added[ccomp][0] + last_child_added[ccomp][1] + margin
 
@@ -515,7 +515,7 @@ function draw_graph(){
         v.x = x
         v.y = graphics_nodes_ccomp[ccomp].y
         if(v.depth > 1)
-            last_child_of_parent[v.parentNode] = [x, v.width]
+            last_child_of_parent[v.parentNode.id] = [x, v.width]
         last_node_added = v
 
         /*LINEE TRATTEGGIATE*/
@@ -698,9 +698,13 @@ function init_nodes(){
             bcomp_width = width_calculator(v)
             dimension = [bcomp_width,  bcomp_height]
         }
-        new_node = new Node(v, 0, 0, dimension[0], dimension[1], k, this.nodes_type[v], this.nodes_parent[v], this.nodes_width[v], this.nodes_internal_size[v])
+        new_node = new Node(v, 0, 0, dimension[0], dimension[1], k, this.nodes_type[v], this.nodes_width[v], this.nodes_internal_size[v])
         new_node.visible = false
         new_node.expanded = false
+        if(this.nodes_parent[v] != -1){
+            new_node.parentNode = this.graphics_nodes[this.nodes_parent[v]]
+            new_node.parentNode.childrenNode.push(new_node)
+        }
         this.graphics_nodes[v] = new_node
 
         //creo nuovo nodoCCOmp se non l'ho già creato
@@ -932,9 +936,6 @@ function nodes_filtering(event){
 }
 
 function expand_node(v){
-    k = v.depth
-    w = v.width
-    num_ccomp = v.id
 
     recursive_replace_upper_nodes(v)
     enlarge_lower_nodes(v)
@@ -1104,7 +1105,7 @@ class Rail extends PIXI.Sprite{
 
 class Node extends PIXI.Sprite{
 
-    constructor(id, x, y, width, height, depth, type, parent, leaf, internal_size){
+    constructor(id, x, y, width, height, depth, type, leaf, internal_size){
         if(type == 1){
             super(texture_CV)
         }
@@ -1118,7 +1119,6 @@ class Node extends PIXI.Sprite{
         this.height = height
         this.depth = depth
         this.type = type
-        this.parentNode = parent
         this.leaf = leaf
         this.int_size = internal_size
         this.interactive = true
@@ -1128,6 +1128,8 @@ class Node extends PIXI.Sprite{
         this.rail = null
         this.node_ccomp = null
         this.expanded = false
+        this.parentNode = null
+        this.childrenNode = []
     }
 
     draw(){ app.stage.addChild(this); }
@@ -1269,9 +1271,8 @@ function test_nodes(){
     for(var i in graphics_nodes){
         counter = 0
         v = graphics_nodes[i]
-        parent = graphics_nodes[v.parentNode]
         if(v.depth > 1){
-            if(v.int_size > parent.int_size)
+            if(v.int_size > v.parentNode.int_size)
                 counter ++
         }
     }
