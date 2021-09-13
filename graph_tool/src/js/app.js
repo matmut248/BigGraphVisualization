@@ -937,24 +937,28 @@ function nodes_filtering(event){
 
 function expand_node(v){
 
-    recursive_replace_upper_nodes(v)
-    enlarge_lower_nodes(v)
-    shift_right_brother(v)
+    replace(v)
+    delta = delta_calculator(v)
+    shift_right_brother(v,delta)
+    recursive_replace(v)
+    enlarge(v, delta)
 
 
-    app.renderer.render(app.stage)
-    console.log("espansione in corso")
+    //app.renderer.render(app.stage)
 }
 
-function recursive_replace_upper_nodes(v){
-    replace_nodes(v)
-    for(var i in v.childrenNode)
-        if(!v.childrenNode[i].expanded)
-            recursive_replace_upper_nodes(v.childrenNode[i])
+function delta_calculator(v){
+    dim_X = v.nodes_cctree.map(c => c.x)
+    dim_W = v.nodes_cctree.map(c => c.width)
+    min_child_x = Math.min(...dim_X)
+    max_child_x = Math.max(...dim_X) + dim_W[dim_X.indexOf(Math.max(...dim_X))]
+    delta = (max_child_x - min_child_x) - v.width
 
+    return delta
 }
 
-function replace_nodes(v){
+/*replace(v) rimpiazza il nodo_Ccomp cliccato con i suoi nodi_cctree*/
+function replace(v){
     v.visible = false
     v.expanded = true
     for(var i in v.nodes_cctree){
@@ -967,78 +971,92 @@ function replace_nodes(v){
         if(first.expanded && last.expanded)
             graphics_cvTocv[i].setAlpha(0.5)
     }
-
-    //shift_right_brother(v)
 }
 
-function shift(v, delta){
+/*calcola i fratelli destri del nodo cliccato v e chiama shift*/
+function shift_right_brother(v, delta){
+    if(v.parentNode != null)
+        right_brothers = v.parentNode.childrenNode.filter(c => c.x > v.x)
+    else
+        right_brothers = graphics_nodes_ccomp.filter(c => c.depth == 1 && c.x > v.x)
+
+    shift(right_brothers, delta)
+    shift_children(right_brothers, delta)
+
+}
+
+/*permette di shiftare un'intera colonna (i nodi superiori(figli) nella visualizzazione)*/
+function shift_children(collection, delta){
+    collection.forEach(v =>{
+        shift(v.childrenNode,delta)
+        shift_children(v.childrenNode, delta)
+    })
+}
+
+/*shifta i nodi_ccomp in una collezione di un valore delta
+ si occupa solo dei nodi non espansi, quindi quelli sotto e a destra di quello cliccato*/
+function shift(collection, delta){
+    collection.forEach(n =>{
+        w = n.width
+        h = n.height
+        initial_x = n.x
+        n.setTransform(n.x + delta, n.y)
+        n.width = w
+        n.height = h
+        n.nodes_cctree.forEach(c =>{
+            w = c.width
+            h = c.height
+            c.setTransform(c.x + delta, c.y)
+            c.width = w
+            c.height = h
+        })
+    })
+}
+
+/*shifta un nodo_ccomp posizionandolo sul parent
+ si occupa solo dei nodi espansi, quindi quelli sopra quello cliccato*/
+function shift_expanded(v){
     w = v.width
     h = v.height
-    v.setTransform(v.x + delta, v.y)
+    initial_x = v.x
+    v.setTransform(v.parentNode.x, v.y)
     v.width = w
     v.height = h
-    for(var j in v.nodes_cctree){
-        current = v.nodes_cctree[j]
-        w = current.width
-        h = current.height
-        /*if(current.parentNode.x > current.x + delta)
-            delta = delta + (current.parentNode.x - current.x + delta)      ///?????*/
-        current.setTransform(current.x + delta, current.y)
-        current.width = w
-        current.height = h
-    }
-}
-
-function shift_right_brother(v, delta=null, original_w = v.width){
-    //calcolo la dimensione totale dei nodi espansi da v
-    //console.log(delta)
-    if(delta == null){
-        dim_X = v.nodes_cctree.map(c => c.x)
-        dim_W = v.nodes_cctree.map(c => c.width)
-        min_child_x = Math.min(...dim_X)
-        max_child_x = Math.max(...dim_X) + dim_W[dim_X.indexOf(Math.max(...dim_X))]
-        delta = (max_child_x - min_child_x) - v.width
-    }
-
-
-    if(delta > 0 && v.parentNode != null){
-
-        right_brothers = v.parentNode.childrenNode.filter(c => c.x >= v.x+original_w+margin) // non prende nessuno
-        for(var i in right_brothers){
-            shift(right_brothers[i], delta)
-            shift_upper_nodes(right_brothers[i], delta)
+    v.nodes_cctree.forEach((c, i) =>{
+        w = c.width
+        h = c.height
+        if(c.parentNode.childrenNode.length == 1)
+            c.setTransform(c.parentNode.x, c.y)
+        else{
+            dim_X = c.parentNode.childrenNode.map(c => c.x)
+            min_child_x = Math.min(...dim_X)
+            c.setTransform(c.x + c.parentNode.x - min_child_x, c.y)
         }
 
-    }
+        c.width = w
+        c.height = h
+    })
 }
 
-function shift_upper_nodes(v, delta){
-    for(var i in v.childrenNode){
-        shift(v.childrenNode[i], delta)
-        shift_upper_nodes(v.childrenNode[i], delta)
-    }
+/*rimpiazza ricorsivamente tutti i nodi sopra quello cliccato e li posiziona sul parent*/
+function recursive_replace(v){
+    v.childrenNode.forEach(c =>{
+        if(c.expanded == false){
+            replace(c)
+            shift_expanded(c)
+            recursive_replace(c)
+        }
+    })
 }
 
-function enlarge_lower_nodes(v){
-    dim_X = v.nodes_cctree.map(c => c.x)
-    dim_W = v.nodes_cctree.map(c => c.width)
-    min_child_x = Math.min(...dim_X)
-    max_child_x = Math.max(...dim_X) + dim_W[dim_X.indexOf(Math.max(...dim_X))]
+function enlarge(v, delta){
     if(v.parentNode != null){
-        delta = max_child_x - min_child_x -  v.parentNode.width
-        if(delta > 0)
-            recursive_enlarge_lower_nodes(v.parentNode, delta)
+        v.parentNode.width = v.parentNode.width + delta
+        shift_right_brother(v.parentNode, delta)
+        enlarge(v.parentNode, delta)
     }
 }
 
-function recursive_enlarge_lower_nodes(v, delta){
-    original_w = v.width
-    v.width = v.width + delta
-    shift_right_brother(v, delta, original_w)
-    if(v.parentNode != null)
-        recursive_enlarge_lower_nodes(v.parentNode, delta)
-
-}
 /*  CLASSI  */
 class Edge extends PIXI.Sprite{
     constructor(s, t, x, y, width, height, alpha, depth){
