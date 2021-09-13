@@ -765,18 +765,18 @@ function DragNDrop() {
 
     var isDragging = false
 
-    stage.pointerdown = function (moveData) {
-      var pos = moveData.data.global;
+    app.renderer.plugins.interaction.on("mousedown", event => {
+      var pos = event.data.global;
       console.log(pos)
       prevX = pos.x; prevY = pos.y;
       isDragging = true;
-    };
+    });
 
-    stage.pointermove = function (moveData) {
+    app.renderer.plugins.interaction.on("mousemove", event => {
       if (!isDragging) {
         return;
       }
-      var pos = moveData.data.global;
+      var pos = event.data.global;
       var dx = pos.x - prevX;
       var dy = pos.y - prevY;
 
@@ -789,14 +789,14 @@ function DragNDrop() {
       app.stage.hitArea.x -= dx / app.stage.scale.x;
       app.stage.hitArea.y -= dy / app.stage.scale.y;
 
-    };
+    });
 
-    stage.pointerup = function (moveDate) {
+    app.renderer.plugins.interaction.on("mouseup", event =>{
       isDragging = false;
-    };
-    stage. pointerupoutside = function (moveDate) {
+    });
+    app.renderer.plugins.interaction.on("mouseupoutside", event =>{
       isDragging = false;
-    };
+    });
 }
 
 function reset(){
@@ -935,6 +935,7 @@ function nodes_filtering(event){
     }
 }
 
+/* ALGORITMO DI ESPANSIONE*/
 function expand_node(v){
 
     replace(v)
@@ -943,8 +944,7 @@ function expand_node(v){
     recursive_replace(v)
     enlarge(v, delta)
 
-
-    //app.renderer.render(app.stage)
+    app.renderer.render(app.stage)
 }
 
 function delta_calculator(v){
@@ -1057,6 +1057,11 @@ function enlarge(v, delta){
     }
 }
 
+/* ALGORITMO DI COMPRESSIONE*/
+function compress_node(n){
+
+}
+
 /*  CLASSI  */
 class Edge extends PIXI.Sprite{
     constructor(s, t, x, y, width, height, alpha, depth){
@@ -1156,15 +1161,20 @@ class Node extends PIXI.Sprite{
     mousedown = function(e){
         console.log("hai cliccato il nodo "+this.id+" in posizione ( "+this.x+", "+this.y+")")
         console.log("questo nodo ha "+(this.edges.length + this.links.length)+" archi")
-        console.log("questo nodo ha "+this.x+" x e "+this.y+" y" )
+        console.log("questo nodo ha parent "+this.parentNode.id)
+        console.log("questo nodo ha "+this.childrenNode.length+" figli")
         console.log("questo nodo ha "+this.width+" width")
         console.log("questo nodo ha "+this.height+" height")
-        console.log("questo nodo ha "+this.alpha+" alpha")
+        console.log("questo nodo ha profondità "+this.depth)
         console.log("questo nodo ha "+this.int_size+" archi interni")
         console.log("questo nodo appartiene alla comp conn #"+nodes_connComp[this.id])
-        app.renderer.render(this)
+        //app.renderer.render(this)
         this.edges.forEach(edge => edge.setAlpha(0.3))
         hidden_edges = false
+    }
+
+    rightclick = function(){
+        compress_node(this)
     }
 
     /*edges*/
@@ -1231,8 +1241,8 @@ class NodeCComp extends PIXI.Sprite{
     draw(){ app.stage.addChild(this); }
 
     /* EVENT HANDLER */
-    mousedown = function(e){
-        console.log("hai cliccato il nodo "+this.id+" in posizione ( "+this.x+", "+this.y+")")
+    rightclick = function(e){
+        console.log("espansione in corso della componente connessa # "+this.id+" in posizione ( "+this.x+", "+this.y+")")
         if(this.expanded){
             this.expanded = false
         }
@@ -1240,6 +1250,18 @@ class NodeCComp extends PIXI.Sprite{
             this.expanded = true
             expand_node(this)
         }
+    }
+
+    mousedown = function(e){
+        console.log("hai cliccato la componente connessa # "+this.id+" in posizione ( "+this.x+", "+this.y+")")
+        console.log("questo nodo ha parent "+this.parentNode.id)
+        console.log("questo nodo ha "+this.childrenNode.length +" figli")
+        console.log("questo nodo ha "+this.width+" width")
+        console.log("questo nodo ha "+this.height+" height")
+        console.log("questo nodo ha profondità "+this.depth)
+        console.log("questo nodo ha "+this.size+" archi interni")
+        console.log("questo nodo contiene "+this.nodes_cctree.length+" nodi del cctree")
+
     }
 
 }
