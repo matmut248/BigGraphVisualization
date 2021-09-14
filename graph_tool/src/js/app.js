@@ -60,7 +60,6 @@ PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 //PIXI.settings.ROUND_PIXELS = true;
 app.loader.load(setup);
 app.stage.interactive = true;
-app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width/app.renderer.resolution, app.renderer.height/app.renderer.resolution);
 document.getElementById("display").appendChild(app.view);
 document.addEventListener('contextmenu', event => event.preventDefault());
 app.ticker.add(function(){
@@ -677,6 +676,7 @@ function draw(){
         v.x = x
         v.y = y
         v.width = bcomp_width
+        v.original_w = bcomp_width
         //v.draw()
         //app.stage.addChild(v)
 
@@ -738,6 +738,7 @@ function init_nodes(){
 /*  INTERAZIONI */
 
 function zoom(event){
+
     if (event.deltaY < 0){
         isZoomIn = false;
     }
@@ -750,13 +751,6 @@ function zoom(event){
     app.stage.pivot.y = 0
     app.stage.scale.x *= factor;
     app.stage.scale.y *= factor;
-
-    app.stage.hitArea.width /= factor
-    app.stage.hitArea.height /= factor
-    app.stage.hitArea.x /= factor
-    app.stage.hitArea.y /= factor
-    app.stage.pivot.x = 0
-    app.stage.pivot.y = 0
 
 }
 
@@ -786,9 +780,6 @@ function DragNDrop() {
       stage.position.y += dy;
       prevX = pos.x; prevY = pos.y;
 
-      app.stage.hitArea.x -= dx / app.stage.scale.x;
-      app.stage.hitArea.y -= dy / app.stage.scale.y;
-
     });
 
     app.renderer.plugins.interaction.on("mouseup", event =>{
@@ -800,8 +791,8 @@ function DragNDrop() {
 }
 
 function reset(){
-    app.stage.setTransform()
-    app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width/app.renderer.resolution, app.renderer.height/app.renderer.resolution);
+    //reset zoom e d&d
+    app.stage.setTransform();
 }
 
 function hide_edges(){
@@ -885,7 +876,6 @@ function coreness_filtering(){
             }
         }
         app.stage.position.y += (selected_first - 1) * vertical_layer_space
-        app.stage.hitArea.y -= (selected_first - 1) * vertical_layer_space
     }
 }
 
@@ -935,19 +925,19 @@ function nodes_filtering(event){
     }
 }
 
-/* ALGORITMO DI ESPANSIONE*/
+/*  ALGORITMO DI ESPANSIONE */
 function expand_node(v){
 
     replace(v)
-    delta = delta_calculator(v)
+    delta = delta_expand_calculator(v)
     shift_right_brother(v,delta)
     recursive_replace(v)
-    enlarge(v, delta)
+    change_lower_nodes(v, delta)
 
     app.renderer.render(app.stage)
 }
 
-function delta_calculator(v){
+function delta_expand_calculator(v){
     dim_X = v.nodes_cctree.map(c => c.x)
     dim_W = v.nodes_cctree.map(c => c.width)
     min_child_x = Math.min(...dim_X)
@@ -959,18 +949,20 @@ function delta_calculator(v){
 
 /*replace(v) rimpiazza il nodo_Ccomp cliccato con i suoi nodi_cctree*/
 function replace(v){
-    v.visible = false
-    v.expanded = true
-    for(var i in v.nodes_cctree){
-        v.nodes_cctree[i].expanded = true
-        v.nodes_cctree[i].visible = true
-    }
-    for(var i in graphics_cvTocv){
-        first = graphics_nodes[graphics_cvTocv[i].nodes[0]]
-        last = graphics_nodes[graphics_cvTocv[i].nodes[1]]
-        if(first.expanded && last.expanded)
-            graphics_cvTocv[i].setAlpha(0.5)
-    }
+        v.visible = false
+        v.expanded = true
+        v.interactive = false
+        for(var i in v.nodes_cctree){
+            v.nodes_cctree[i].expanded = true
+            v.nodes_cctree[i].visible = true
+            v.nodes_cctree[i].interactive = true
+        }
+        for(var i in graphics_cvTocv){
+            first = graphics_nodes[graphics_cvTocv[i].nodes[0]]
+            last = graphics_nodes[graphics_cvTocv[i].nodes[1]]
+            if(first.expanded && last.expanded)
+                graphics_cvTocv[i].setAlpha(0.5)
+        }
 }
 
 /*calcola i fratelli destri del nodo cliccato v e chiama shift*/
@@ -1019,10 +1011,17 @@ function shift_expanded(v){
     w = v.width
     h = v.height
     initial_x = v.x
-    v.setTransform(v.parentNode.x, v.y)
+    if(v.parentNode.childrenNode.length == 1)
+        v.setTransform(v.parentNode.x, v.y)
+    else{
+        dim_X = v.parentNode.childrenNode.map(c => c.x)
+        min_child_x = Math.min(...dim_X)
+        v.setTransform(v.x + v.parentNode.x - min_child_x, v.y)
+    }
+
     v.width = w
     v.height = h
-    v.nodes_cctree.forEach((c, i) =>{
+    v.nodes_cctree.forEach(c =>{
         w = c.width
         h = c.height
         if(c.parentNode.childrenNode.length == 1)
@@ -1049,17 +1048,92 @@ function recursive_replace(v){
     })
 }
 
-function enlarge(v, delta){
-    if(v.parentNode != null){
+function change_lower_nodes(v, delta){
+    if(v.parentNode != null && v.parentNode.expanded == false){
         v.parentNode.width = v.parentNode.width + delta
         shift_right_brother(v.parentNode, delta)
-        enlarge(v.parentNode, delta)
+        //if(v.parentNode.expanded == false)
+        change_lower_nodes(v.parentNode, delta)
     }
 }
 
-/* ALGORITMO DI COMPRESSIONE*/
-function compress_node(n){
+/*  ALGORITMO DI COMPRESSIONE   */
+function compress_node(v){
+    replace_with_ccomp(v.node_ccomp)
+    delta = delta_compress_calculator(v)
+    shift_right_brother(v.node_ccomp,delta)
+    recursive_replace_with_ccomp(v.node_ccomp)
+    change_lower_nodes(v.node_ccomp, delta)
 
+    app.renderer.render(app.stage)
+}
+
+function delta_compress_calculator(v){
+    dim_X = v.node_ccomp.nodes_cctree.map(c => c.x)
+    dim_W = v.node_ccomp.nodes_cctree.map(c => c.width)
+    min_child_x = Math.min(...dim_X)
+    max_child_x = Math.max(...dim_X) + dim_W[dim_X.indexOf(Math.max(...dim_X))]
+    delta = v.node_ccomp.width - (max_child_x - min_child_x)
+
+    return delta
+}
+
+function replace_with_ccomp(v){
+    v.visible = true
+    v.expanded = false
+    v.interactive = true
+    for(var i in v.nodes_cctree){
+        current = v.nodes_cctree[i]
+        current.visible = false
+        current.expanded = false
+        current.interactive = false
+    }
+    for(var i in graphics_cvTocv){
+        first = graphics_nodes[graphics_cvTocv[i].nodes[0]]
+        last = graphics_nodes[graphics_cvTocv[i].nodes[1]]
+        if(first.expanded == false || last.expanded == false)
+            graphics_cvTocv[i].setAlpha(0)
+    }
+}
+
+function recursive_replace_with_ccomp(v){
+    v.childrenNode.forEach(c => {
+        if(c.expanded == true){
+            replace_with_ccomp(c)
+            shift_compress(c)
+            recursive_replace_with_ccomp(c)
+        }
+    })
+}
+
+function shift_compress(v){
+    w = v.width
+    h = v.height
+    initial_x = v.x
+    if(v.parentNode.childrenNode.length == 1)
+        v.setTransform(v.parentNode.x, v.y)
+    else{
+        dim_X = v.parentNode.childrenNode.map(c => c.x)
+        min_child_x = Math.min(...dim_X)
+        v.setTransform(v.x + v.parentNode.x - min_child_x, v.y)
+    }
+
+    v.width = w
+    v.height = h
+    v.nodes_cctree.forEach(c =>{
+        w = c.width
+        h = c.height
+        if(v.nodes_cctree.length == 1)
+            c.setTransform(v.x, c.y)
+        else{
+            dim_X = v.nodes_cctree.map(c => c.x)
+            min_child_x = Math.min(...dim_X)
+            c.setTransform(c.x + v.x - min_child_x, c.y)
+        }
+
+        c.width = w
+        c.height = h
+    })
 }
 
 /*  CLASSI  */
@@ -1144,7 +1218,7 @@ class Node extends PIXI.Sprite{
         this.type = type
         this.leaf = leaf
         this.int_size = internal_size
-        this.interactive = true
+        this.interactive = false
         this.edges = []
         this.cv2cv = []
         this.links = []
@@ -1236,6 +1310,7 @@ class NodeCComp extends PIXI.Sprite{
         this.expanded = false
         this.size = 0
         this.interactive = true
+        this.original_w = 0
     }
 
     draw(){ app.stage.addChild(this); }
@@ -1254,7 +1329,8 @@ class NodeCComp extends PIXI.Sprite{
 
     mousedown = function(e){
         console.log("hai cliccato la componente connessa # "+this.id+" in posizione ( "+this.x+", "+this.y+")")
-        console.log("questo nodo ha parent "+this.parentNode.id)
+        if(this.parentNode != null)
+            console.log("questo nodo ha parent "+this.parentNode.id)
         console.log("questo nodo ha "+this.childrenNode.length +" figli")
         console.log("questo nodo ha "+this.width+" width")
         console.log("questo nodo ha "+this.height+" height")
