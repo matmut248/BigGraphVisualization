@@ -82,12 +82,13 @@ function setup(){
             init_nodes();
             draw();
             draw_graph();
-            console.log("ciao")
             DragNDrop();
             //update();
             test_edges();
             test_nodes();
             test_nodes_ccomp();
+            console.log(app.stage.width)
+            console.log(app.renderer.width)
         }
     };
     xhttp.open("GET", "new_data/stanford.xml", true);
@@ -109,8 +110,11 @@ function update () {
             graphics_nodes[i].visible = false
     }
     for(var i in graphics_arcs){
-        if(isContained(graphics_arcs[i]) && graphics_nodes[graphics_arcs[i].source].expanded)
+        if(isContained(graphics_arcs[i]) && graphics_nodes[graphics_arcs[i].source].expanded){
             graphics_arcs[i].visible = true
+            if(hidden_edges == false)
+                graphics_arcs[i].setAlpha(0.6)
+        }
         else
             graphics_arcs[i].visible = false
     }
@@ -121,14 +125,20 @@ function update () {
             graphics_cvTocv[i].visible = false
     }
     for(var i in graphics_rails){
-        if(isContained(graphics_rails[i]) && graphics_nodes[graphics_rails[i].node].expanded)
+        if(isContained(graphics_rails[i]) && graphics_nodes[graphics_rails[i].node].expanded){
             graphics_rails[i].visible = true
+            if(hidden_edges == false)
+                graphics_rails[i].setAlpha(1)
+        }
         else
             graphics_rails[i].visible = false
     }
     for(var i in graphics_links){
-        if(isContained(graphics_links[i]) && graphics_nodes[graphics_links[i].node].expanded)
+        if(isContained(graphics_links[i]) && graphics_nodes[graphics_links[i].node].expanded){
             graphics_links[i].visible = true
+            if(hidden_edges == false)
+                graphics_links[i].setAlpha(1)
+        }
         else
             graphics_links[i].visible = false
     }
@@ -305,7 +315,10 @@ function width_calculator_ccomp(v){
     size = 0
     for(var j in v.childrenNode)
         size = size + width_calculator_ccomp(v.childrenNode[j]) + margin
-    return size
+    if(v.childrenNode.length == 1 && v.size > v.childrenNode[0].size)
+        return size + margin
+    else
+        return size - margin
 }
 
 /*  VISUALIZZAZIONE DEL GRAFO   */
@@ -645,20 +658,24 @@ function reset(){
 }
 
 function hide_edges(){
+
+    hide_button = document.getElementById("edge_hide")
     firstCoreLV = document.getElementById("firstCore")
     lastCoreLV = document.getElementById("lastCore")
     selected_first = firstCoreLV.options[firstCoreLV.selectedIndex].value
     selected_last = lastCoreLV.options[lastCoreLV.selectedIndex].value
     if(!hidden_edges){
+        hide_button.innerHTML = "Show edges"
         this.graphics_arcs.forEach(edge => edge.setAlpha(0))
         this.graphics_links.forEach(link => link.setAlpha(0))
         this.graphics_rails.forEach(rail => rail.setAlpha(0))
         hidden_edges = true
     }
     else{
+        hide_button.innerHTML = "Hide edges"
         for(var i in graphics_arcs){
             if(graphics_arcs[i].visible && graphics_arcs[i].getDepth() >= selected_first && graphics_arcs[i].getDepth() <= selected_last){
-                graphics_arcs[i].setAlpha(0.8)
+                graphics_arcs[i].setAlpha(0.6)
             }
         }
         for(var i in graphics_links){
