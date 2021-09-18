@@ -19,11 +19,12 @@ var vertex_order                        // ordine dei vertici al primo livello
 var biggest_node                        // nodo più grande per ogni liv di k
 var width = window.innerWidth;
 var height = window.innerHeight * 0.95;
-var min_bcomp_width = 3;
+var min_bcomp_width = 5;
+var min_bcomp_1edge_w = 3;
 var min_ccomp_width = 5;
 var cv_radius = 4;                                      // raggio dei cv
-var margin = 5;                                         //margine tra i nodi disegnati
-const foo = function(i){ return nodes_internal_size[i] / 100}
+var margin = 8;                                         //margine tra i nodi disegnati
+const foo = function(i){ return nodes_internal_size[i] / 100 + 5}
 const foo_ccomp = function(v){ return Math.log2(v.size) + v.size/5000}
 var texture_compB
 var texture_sameCV
@@ -280,12 +281,21 @@ function load_texture(){
 
 function width_calculator(i){
 
+    if(nodes_type[i] == 1)
+        return 2 * cv_radius
+    if(nodes_internal_size[i] == 1)
+        return min_bcomp_1edge_w
     if(nodes_children[i].length == 0)
-        return Math.max(min_bcomp_width, foo(i))
+        return foo(i)//Math.max(min_bcomp_width, foo(i))
     size = 0
-    for(var j in nodes_children[i])
+    children_int_size = 0
+    for(var j in nodes_children[i]){
         size = size + width_calculator(nodes_children[i][j]) + margin
-    return size
+    }
+    if(nodes_children[i].length == 1 && nodes_internal_size[i] > nodes_internal_size[nodes_children[i][0]])
+        return size + margin
+    else
+        return size - margin
 
 }
 
@@ -299,178 +309,6 @@ function width_calculator_ccomp(v){
 }
 
 /*  VISUALIZZAZIONE DEL GRAFO   */
-function draw_graph_old(){
-    biggest_node = biggest_node_init();
-    var bcomp_height = 10;                                   // lunghezza delle componenti biconnesse
-    var bcomp_width = 0;                                    // larghezza delle componenti biconnesse
-    vertical_layer_space = Math.max(height / (maxDepth+1), 40);       // segmentazione verticale del canvas
-    var current_depth = 1;                                  // livello di coreness corrente
-    var nodes_dimension = new Array();                      // posizione dei nodi del cctree nel canvas [x,y,width]
-    var last_node_added = [0,0]                             //x e width dell'ultimo nodo aaggiunto
-    var last_child_added = [0,0]
-    var last_cComp = this.nodes_connComp[this.vertex_order[0]]
-
-    /* DISEGNO DEI NODI*/
-    this.vertex_order.forEach(v =>{
-        last_child_added[v] = []
-        k = this.nodes_depth[v];                                // profondità del nodo corrente
-        same_layer = 1                                          // var binaria = 0 se ho cambiato layer, 1 altrimenti
-        if(current_depth != k){
-            last_node_added = [0,0]
-            same_layer = 0
-        }
-        current_depth = k;
-
-        y =  vertical_layer_space * (- k) + height
-        bcomp_width = width_calculator(v)
-        x = (last_node_added[0] + last_node_added[1]) * same_layer + margin
-
-        if(k >= 2){
-            parent = this.nodes_parent[v]
-            if(last_child_added[parent].length == 0)      // se sto disegnando il primo figlio del parent
-                x = nodes_dimension[parent][0]              // prendo le dimensioni del parent
-            else
-                x = (last_child_added[parent][0] + last_child_added[parent][1]) * same_layer + margin
-        }
-
-        if(last_cComp != this.nodes_connComp[v] && k == 1){
-            x += 25
-            last_cComp = this.nodes_connComp[v]
-        }
-
-        if(nodes_type[v] == 1){                     // sto disegnando un cv
-            nodes_dimension[v] = [x, y, cv_radius];
-            last_node_added = [x, 2*cv_radius];
-            last_child_added[this.nodes_parent[v]] = [x,2*cv_radius]
-            new_node = new Node(v, x, y - cv_radius, cv_radius*2,  cv_radius*2, this.nodes_depth[v], 1, this.nodes_parent[v], this.nodes_width[v], this.nodes_internal_size[v])
-            new_node.alpha = 0
-            new_node.visible = false
-            new_node.draw()
-            this.graphics_nodes[v] = new_node
-        }
-        else{                                       // sto disegnando una componente B
-            nodes_dimension[v] = [x, y, bcomp_width];
-            last_node_added = [x, bcomp_width];
-            last_child_added[this.nodes_parent[v]] = [x, bcomp_width]
-            new_node = new Node(v, x, y - bcomp_height/2, bcomp_width,  bcomp_height, this.nodes_depth[v], 0, this.nodes_parent[v], this.nodes_width[v], this.nodes_internal_size[v])
-            new_node.alpha = 0
-            new_node.visible = false
-            new_node.draw()
-            this.graphics_nodes[v] = new_node
-        }
-
-        /*LINEE TRATTEGGIATE*/
-        if(this.nodes_parent[v] != -1 && this.nodes_type[this.nodes_parent[v]] == 1){
-            p_ypos = nodes_dimension[nodes_parent[v]][1] - cv_radius
-            dash_factor = 20;
-            draw = true;
-            x_temp = nodes_dimension[v][0] + cv_radius/2
-            y_temp = nodes_dimension[v][1] + cv_radius
-            segment = (p_ypos - y_temp) / dash_factor
-
-            for(var j = 1; j <= dash_factor; j++){
-                if(draw == true){
-                    newCvToCv = new CvToCv(x_temp,y_temp,3,segment,0.5, this.nodes_depth[this.nodes_parent[v]])
-                    newCvToCv.alpha = 0
-                    newCvToCv.visible = false
-                    newCvToCv.nodes.push(v)
-                    newCvToCv.nodes.push(this.nodes_parent[v])
-                    newCvToCv.draw()
-                    this.graphics_nodes[v].addCv2Cv(newCvToCv)
-                    this.graphics_cvTocv.push(newCvToCv)
-                    draw = false;
-                }
-                else{
-                    draw = true
-                }
-                y_temp += segment
-            }
-        }
-    })
-
-    /* DISEGNO DEGLI ARCHI*/
-    for(var i = 0; i < this.edges_intra_layer.length; i++){
-        s = edges_intra_layer[i][0]
-        t = edges_intra_layer[i][1]
-        x1 = nodes_dimension[s][0] + cv_radius
-        y1 = nodes_dimension[s][1] + cv_radius
-        x2 = nodes_dimension[t][0] + nodes_dimension[t][2]/2
-        if(t == biggest_node[nodes_depth[t]]){
-            continue
-        }
-        else{
-            new_edge = new Edge(s, t, x1, y1, x2-x1, Math.min(vertical_layer_space - bcomp_height,40), 0, graphics_nodes[s].getDepth())
-            new_edge.visible = false
-            new_edge.draw()
-            this.graphics_nodes[s].addEdge(new_edge)
-            this.graphics_nodes[t].addEdge(new_edge)
-            this.graphics_arcs.push(new_edge)
-            this.edge_length_tot += Math.abs(x2-x1)
-            if( x2-x1 > this.edge_length_max)
-                this.edge_length_max = x2-x1
-        }
-
-    }
-
-    /* DISEGNO DEI BINARI*/
-    biggest_node.shift()
-    for(var i in biggest_node){
-        current_node = biggest_node[i]
-        d = graphics_nodes[current_node].getDepth()
-        current_edges = this.edges_intra_layer.filter(edge => edge[1] == current_node)
-        if(current_edges.length == 0)
-            continue
-        x = nodes_dimension[current_node][0] + nodes_dimension[current_node][2] / 2
-        y = nodes_dimension[current_node][1] + bcomp_height / 2
-        h = vertical_layer_space / 2
-        w = 10
-        new_link = new Link(x, y, w, h, 0, d)
-        new_link.visible = false
-        new_link.reverse()
-        graphics_nodes[current_node].addLink(new_link)
-        app.stage.addChild(new_link)
-        this.graphics_links.push(new_link)
-        min_pos = nodes_dimension[current_node][0] + nodes_dimension[current_node][2] / 2
-        max_pos = nodes_dimension[current_node][0] + nodes_dimension[current_node][2] / 2
-        current_edges.forEach(edge =>{
-            // DISEGNARE LINK QUI E CALCOLARE MIN E MAX, CIOÈ DIMENSIONI BINARIO
-            new_link = new PIXI.Sprite(texture_link)
-            x = nodes_dimension[edge[0]][0] + cv_radius - 10
-            y = nodes_dimension[edge[0]][1] + cv_radius + 2
-            h = vertical_layer_space / 2
-            w = 10
-            new_link = new Link(x, y, w, h, 0, d)
-            new_link.visible = false
-            graphics_nodes[current_node].addLink(new_link)
-            graphics_nodes[edge[0]].addLink(new_link)
-            app.stage.addChild(new_link)
-            this.graphics_links.push(new_link)
-            if(nodes_dimension[edge[0]][0] < min_pos)
-                min_pos = nodes_dimension[edge[0]][0]
-            if(nodes_dimension[edge[0]][0] > max_pos)
-                max_pos = nodes_dimension[edge[0]][0]
-        })
-        //DISEGNARE BINARIO
-        x = min_pos
-        y = nodes_dimension[current_node][1] + bcomp_height / 2 + vertical_layer_space / 2
-        h = 1
-        w = max_pos - min_pos
-        new_rail = new Rail(x, y, w, h, 0, d)
-        new_rail.visible = false
-        graphics_nodes[current_node].addRail(new_rail)
-        app.stage.addChild(new_rail)
-        this.graphics_rails.push(new_rail)
-
-        this.edge_length_tot += w
-        if( w > this.edge_length_max)
-                this.edge_length_max = w
-    }
-
-    app.renderer.render(app.stage);
-    console.log("lunghezza totale degli archi: " + this.edge_length_tot.toExponential(2) + " px")
-    console.log("lunghezza massima degli archi: " + this.edge_length_max.toExponential(2) + " px")
-}
-
 function draw_graph(){
     biggest_node = biggest_node_init();
     var bcomp_height = 10;                                   // lunghezza delle componenti biconnesse
@@ -1111,6 +949,7 @@ function replace_with_ccomp(v){
     v.visible = true
     v.expanded = false
     v.interactive = true
+    v.width = v.original_w
     for(var i in v.nodes_cctree){
         current = v.nodes_cctree[i]
         current.visible = false
@@ -1129,8 +968,6 @@ function recursive_replace_with_ccomp(v){
     v.childrenNode.forEach(c => {
         if(c.expanded == true){
             replace_with_ccomp(c)
-            //delta = delta_compress_calculator(c)
-            //shift_right_brother(c,delta)
             shift_compress(c)
             recursive_replace_with_ccomp(c)
         }
@@ -1288,7 +1125,8 @@ class Node extends PIXI.Sprite{
     }
 
     rightclick = function(){
-        compress_node(this)
+        if(this.node_ccomp.parentNode.expanded == false)
+            compress_node(this)
     }
 
     /*edges*/
