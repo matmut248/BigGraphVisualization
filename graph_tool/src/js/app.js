@@ -486,6 +486,8 @@ function draw_graph(){
     /* DISEGNO DEI NODI*/
     this.vertex_order.forEach(n =>{
         v = graphics_nodes[n]
+        /*if(last_node_added != null && v.depth != last_node_added.depth)
+            last_node_added = null*/
         if(v.parentNode != null && last_child_of_parent[v.parentNode.id] == null)
             last_child_of_parent[v.parentNode.id] = [0,0]
         ccomp = v.node_ccomp.id
@@ -493,8 +495,10 @@ function draw_graph(){
         if(v.depth > 1)
             parent_x = nodes_dimension[this.nodes_parent[n]][0]
 
-        if(last_node_added != null && last_node_added.depth != v.depth)
+        if(last_node_added != null && last_node_added.depth != v.depth){
             x = parent_x
+        }
+
         else if(last_node_added == null || last_node_added.node_ccomp.id != ccomp)
             x = graphics_nodes_ccomp[ccomp].x
         else if(v.parentNode != null && last_node_added.parentNode.id != v.parentNode.id)
@@ -522,8 +526,8 @@ function draw_graph(){
             p_ypos = nodes_dimension[nodes_parent[n]][1] - cv_radius
             dash_factor = 20;
             draw = true;
-            x_temp = nodes_dimension[n][0] + cv_radius/2
-            y_temp = nodes_dimension[n][1] + cv_radius
+            x_temp = nodes_dimension[n][0] + cv_radius
+            y_temp = nodes_dimension[n][1] + 3 * cv_radius
             segment = (p_ypos - y_temp) / dash_factor
 
             for(var j = 1; j <= dash_factor; j++){
@@ -558,7 +562,7 @@ function draw_graph(){
             continue
         }
         else{
-            new_edge = new Edge(s, t, x1, y1, x2-x1, Math.min(vertical_layer_space - bcomp_height,40), 0, graphics_nodes[s].getDepth())
+            new_edge = new Edge(s, t, x1, y1, x2-x1, Math.min(vertical_layer_space - bcomp_height - 5,40), 0, graphics_nodes[s].getDepth())
             new_edge.visible = false
             new_edge.draw()
             this.graphics_nodes[s].addEdge(new_edge)
@@ -581,7 +585,7 @@ function draw_graph(){
             continue
         x = nodes_dimension[current_node][0] + nodes_dimension[current_node][2] / 2
         y = nodes_dimension[current_node][1] + bcomp_height / 2
-        h = vertical_layer_space / 2
+        h = vertical_layer_space / 2 + 7
         w = 10
         new_link = new Link(x, y, w, h, 0, d)
         new_link.visible = false
@@ -597,7 +601,7 @@ function draw_graph(){
             new_link = new PIXI.Sprite(texture_link)
             x = nodes_dimension[edge[0]][0] + cv_radius - 10
             y = nodes_dimension[edge[0]][1] + cv_radius + 2
-            h = vertical_layer_space / 2
+            h = vertical_layer_space / 2 + 7
             w = 10
             new_link = new Link(x, y, w, h, 0, d)
             new_link.visible = false
@@ -613,10 +617,17 @@ function draw_graph(){
         })
         //DISEGNARE BINARIO
         x = min_pos
-        y = nodes_dimension[current_node][1] + bcomp_height / 2 + vertical_layer_space / 2
+        y = nodes_dimension[current_node][1] + bcomp_height / 2 + vertical_layer_space / 2 + 7
         h = 1
         w = max_pos - min_pos
         new_rail = new Rail(x, y, w, h, 0, d)
+        new_rail.lineStyle(4, 0x444444, 2);
+        new_rail.moveTo(0,0)
+        new_rail.lineTo(w,0)
+        new_rail.x = x
+        new_rail.y = y
+        new_rail.width = w
+        new_rail.height = 1
         new_rail.visible = false
         graphics_nodes[current_node].addRail(new_rail)
         new_rail.node = current_node
@@ -809,7 +820,7 @@ function hide_edges(){
     else{
         for(var i in graphics_arcs){
             if(graphics_arcs[i].visible && graphics_arcs[i].getDepth() >= selected_first && graphics_arcs[i].getDepth() <= selected_last){
-                graphics_arcs[i].setAlpha(0.3)
+                graphics_arcs[i].setAlpha(0.8)
             }
         }
         for(var i in graphics_links){
@@ -925,6 +936,7 @@ function nodes_filtering(event){
     }
 }
 
+
 /*  ALGORITMO DI ESPANSIONE */
 function expand_node(v){
 
@@ -943,7 +955,6 @@ function delta_expand_calculator(v){
     min_child_x = Math.min(...dim_X)
     max_child_x = Math.max(...dim_X) + dim_W[dim_X.indexOf(Math.max(...dim_X))]
     delta = (max_child_x - min_child_x) - v.width
-
     return delta
 }
 
@@ -999,6 +1010,14 @@ function shift(collection, delta){
             w = c.width
             h = c.height
             c.setTransform(c.x + delta, c.y)
+            if(c.type == 1){
+                c.edges.forEach(e =>{
+                    e.x = c.x + cv_radius
+                })
+                c.cv2cv.forEach(cv => {
+                    cv.x = c.x + cv_radius/2
+                })
+            }
             c.width = w
             c.height = h
         })
@@ -1013,6 +1032,7 @@ function shift_expanded(v){
     initial_x = v.x
     if(v.parentNode.childrenNode.length == 1)
         v.setTransform(v.parentNode.x, v.y)
+
     else{
         dim_X = v.parentNode.childrenNode.map(c => c.x)
         min_child_x = Math.min(...dim_X)
@@ -1031,6 +1051,14 @@ function shift_expanded(v){
             min_child_x = Math.min(...dim_X)
             c.setTransform(c.x + c.parentNode.x - min_child_x, c.y)
         }
+        if(c.type == 1){
+            c.edges.forEach(e =>{
+                e.x = c.x + cv_radius
+            })
+            c.cv2cv.forEach(cv => {
+                cv.x = c.x + cv_radius/2
+            })
+        }
 
         c.width = w
         c.height = h
@@ -1040,11 +1068,11 @@ function shift_expanded(v){
 /*rimpiazza ricorsivamente tutti i nodi sopra quello cliccato e li posiziona sul parent*/
 function recursive_replace(v){
     v.childrenNode.forEach(c =>{
-        if(c.expanded == false){
+        //if(c.expanded == false){
             replace(c)
             shift_expanded(c)
             recursive_replace(c)
-        }
+        //}
     })
 }
 
@@ -1057,10 +1085,11 @@ function change_lower_nodes(v, delta){
     }
 }
 
+
 /*  ALGORITMO DI COMPRESSIONE   */
 function compress_node(v){
     replace_with_ccomp(v.node_ccomp)
-    delta = delta_compress_calculator(v)
+    delta = delta_compress_calculator(v.node_ccomp)
     shift_right_brother(v.node_ccomp,delta)
     recursive_replace_with_ccomp(v.node_ccomp)
     change_lower_nodes(v.node_ccomp, delta)
@@ -1069,11 +1098,11 @@ function compress_node(v){
 }
 
 function delta_compress_calculator(v){
-    dim_X = v.node_ccomp.nodes_cctree.map(c => c.x)
-    dim_W = v.node_ccomp.nodes_cctree.map(c => c.width)
+    dim_X = v.nodes_cctree.map(c => c.x)
+    dim_W = v.nodes_cctree.map(c => c.width)
     min_child_x = Math.min(...dim_X)
     max_child_x = Math.max(...dim_X) + dim_W[dim_X.indexOf(Math.max(...dim_X))]
-    delta = v.node_ccomp.width - (max_child_x - min_child_x)
+    delta = v.width - (max_child_x - min_child_x)
 
     return delta
 }
@@ -1100,6 +1129,8 @@ function recursive_replace_with_ccomp(v){
     v.childrenNode.forEach(c => {
         if(c.expanded == true){
             replace_with_ccomp(c)
+            //delta = delta_compress_calculator(c)
+            //shift_right_brother(c,delta)
             shift_compress(c)
             recursive_replace_with_ccomp(c)
         }
@@ -1129,6 +1160,14 @@ function shift_compress(v){
             dim_X = v.nodes_cctree.map(c => c.x)
             min_child_x = Math.min(...dim_X)
             c.setTransform(c.x + v.x - min_child_x, c.y)
+        }
+        if(c.type == 1){
+            c.edges.forEach(e =>{
+                e.x = c.x + cv_radius
+            })
+            c.cv2cv.forEach(cv => {
+                cv.x = c.x + cv_radius/2
+            })
         }
 
         c.width = w
@@ -1185,9 +1224,9 @@ class Link extends PIXI.Sprite{
     reverse(){this.scale.x = -1}
 }
 
-class Rail extends PIXI.Sprite{
+class Rail extends PIXI.Graphics{
     constructor(x, y, w, h, a, d){
-        super(texture_rail)
+        super()
         this.x = x
         this.y = y
         this.width = w
@@ -1235,7 +1274,8 @@ class Node extends PIXI.Sprite{
     mousedown = function(e){
         console.log("hai cliccato il nodo "+this.id+" in posizione ( "+this.x+", "+this.y+")")
         console.log("questo nodo ha "+(this.edges.length + this.links.length)+" archi")
-        console.log("questo nodo ha parent "+this.parentNode.id)
+        if(this.parentNode != null)
+            console.log("questo nodo ha parent "+this.parentNode.id)
         console.log("questo nodo ha "+this.childrenNode.length+" figli")
         console.log("questo nodo ha "+this.width+" width")
         console.log("questo nodo ha "+this.height+" height")
