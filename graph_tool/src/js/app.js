@@ -61,6 +61,10 @@ PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 //PIXI.settings.ROUND_PIXELS = true;
 app.loader.load(setup);
 app.stage.interactive = true;
+app.stage.pivot.x = margin
+app.stage.pivot.y = height
+app.stage.position.x += margin //- app.stage.position.x
+app.stage.position.y += height //- app.stage.position.y
 document.getElementById("display").appendChild(app.view);
 document.addEventListener('contextmenu', event => event.preventDefault());
 app.ticker.add(function(){
@@ -608,11 +612,12 @@ function zoom(event){
     }
     direction = isZoomIn ? 1 : -1;
     var factor = (1 + direction * 0.1);
-    app.stage.pivot.x = 0
-    app.stage.pivot.y = 0
+    //app.stage.pivot.x = margin
+    //app.stage.pivot.y = height
     app.stage.scale.x *= factor;
     app.stage.scale.y *= factor;
-
+    //app.stage.position.x += margin //- app.stage.position.x
+    //app.stage.position.y += height //- app.stage.position.y
 }
 
 function DragNDrop() {
