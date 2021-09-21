@@ -88,7 +88,6 @@ function setup(){
             test_nodes();
             test_nodes_ccomp();
             console.log(app.stage.width)
-            console.log(app.renderer.width)
         }
     };
     xhttp.open("GET", "new_data/stanford.xml", true);
@@ -303,7 +302,7 @@ function width_calculator(i){
         size = size + width_calculator(nodes_children[i][j]) + margin
     }
     if(nodes_children[i].length == 1 && nodes_internal_size[i] > nodes_internal_size[nodes_children[i][0]])
-        return size + margin
+        return size - margin + Math.log2((nodes_internal_size[i] - nodes_internal_size[nodes_children[i][0]]))
     else
         return size - margin
 
@@ -316,7 +315,7 @@ function width_calculator_ccomp(v){
     for(var j in v.childrenNode)
         size = size + width_calculator_ccomp(v.childrenNode[j]) + margin
     if(v.childrenNode.length == 1 && v.size > v.childrenNode[0].size)
-        return size + margin
+        return size - margin + Math.log2((v.size - v.childrenNode[0].size))
     else
         return size - margin
 }
@@ -1137,8 +1136,8 @@ class Node extends PIXI.Sprite{
         console.log("questo nodo ha "+this.int_size+" archi interni")
         console.log("questo nodo appartiene alla comp conn #"+nodes_connComp[this.id])
         //app.renderer.render(this)
-        this.edges.forEach(edge => edge.setAlpha(0.3))
-        hidden_edges = false
+        this.edges.forEach(edge => edge.setAlpha(0.6))
+        //hidden_edges = false
     }
 
     rightclick = function(){
